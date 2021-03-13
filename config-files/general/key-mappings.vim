@@ -57,8 +57,6 @@ inoremap <C-j> <C-\><C-N><C-w>j
 inoremap <C-k> <C-\><C-N><C-w>k
 inoremap <C-l> <C-\><C-N><C-w>l
 
-" Unmap Esc because it's needed for CLI-Tools like lazygit
-tnoremap <Esc> <Nop>
 " Leave terminal-insert-mode with Ctrl-t instead Esc
 tnoremap <C-t> <C-\><C-N>
 " Map Esc to just Esc because it's needed for CLI-Tools like lazygit
