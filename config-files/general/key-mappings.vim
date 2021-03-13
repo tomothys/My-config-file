@@ -56,7 +56,13 @@ inoremap <C-h> <C-\><C-N><C-w>h
 inoremap <C-j> <C-\><C-N><C-w>j
 inoremap <C-k> <C-\><C-N><C-w>k
 inoremap <C-l> <C-\><C-N><C-w>l
-tnoremap <Esc> <C-\><C-n>
+
+" Unmap Esc because it's needed for CLI-Tools like lazygit
+tnoremap <Esc> <Nop>
+" Leave terminal-insert-mode with Ctrl-t instead Esc
+tnoremap <C-t> <C-\><C-N>
+" Map Esc to just Esc because it's needed for CLI-Tools like lazygit
+tnoremap <Esc> <Esc>
 
 " Reselect after indentation in visual mode
 vnoremap > >gv
@@ -66,8 +72,3 @@ vnoremap <S-Tab> <gv
 
 " Always leave visual mode on first 'v' instead of double tapping 'v' for visual line
 vnoremap v <Esc>
-
-" Unmap Esc because it's needed for CLI-Tools like lazygit
-tnoremap <Esc> <Nop>
-" Leave terminal-insert-mode with Ctrl-t instead Esc
-tnoremap <C-t> <C-\><C-N>
