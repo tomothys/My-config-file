@@ -26,7 +26,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'brooth/far.vim' " Find and replace
     Plug 'kyazdani42/nvim-tree.lua' " File Explorer
     Plug 'sheerun/vim-polyglot' " Better Syntax Support
-    Plug 'kdheepak/lazygit.nvim'
     Plug 'airblade/vim-gitgutter'
     Plug 'rhysd/git-messenger.vim' " Open commits + messages in popup window
     Plug 'AndrewRadev/tagalong.vim' " Change closing html-tag when opening tag changed
