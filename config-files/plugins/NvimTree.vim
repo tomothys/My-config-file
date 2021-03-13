@@ -4,4 +4,14 @@ let g:nvim_tree_git_hl = 1                                          " Enable fil
 let g:nvim_tree_width = 40
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 
+let g:nvim_tree_icons = {
+            \ 'git': {
+            \   'unstaged': "柳",
+            \   'staged': "✓ ",
+            \   'unmerged': " ",
+            \   'renamed': "➜ ",
+            \   'untracked': " "
+            \   },
+            \ }
+
 nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
