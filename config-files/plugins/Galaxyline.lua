@@ -1,6 +1,7 @@
 local gl = require("galaxyline")
 local section = gl.section
 -- gl.short_line_list = {"NvimTree"}
+local gl_condition = require("galaxyline.condition")
 
 -- COLORS [BEGIN]
 local color = {
@@ -19,15 +20,6 @@ local color = {
 }
 -- COLORS [END]
 
--- FUNCTIONS [BEGIN]
-local buffer_not_empty = function()
-    if vim.fn.empty(vim.fn.expand("%:t")) ~= 1 then
-        return true
-    end
-    return false
-end
--- FUNCTIONS [END]
-
 -- LEFT [BEGIN]
 section.left[1] = {
     FirstElement = {
@@ -39,7 +31,7 @@ section.left[1] = {
 section.left[10] = {
     FileIcon = {
         provider = "FileIcon",
-        condition = buffer_not_empty,
+        condition = gl_condition.buffer_not_empty,
         highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, color.bg}
     }
 }
@@ -47,7 +39,7 @@ section.left[10] = {
 section.left[20] = {
     FileName = {
         provider = "FileName",
-        condition = buffer_not_empty,
+        condition = gl_condition.buffer_not_empty,
         separator = " ",
         separator_highlight = {"NONE", color.bg},
         highlight = {color.white, color.bg, "bold"}
@@ -75,22 +67,22 @@ section.right[5] = {
 section.right[6] = {
     DiffAdd = {
         provider = "DiffAdd",
-        icon = " ",
-        highlight = {color.green, color.bg}
+        icon = "    ",
+        highlight = {color.green, color.bg},
     }
 }
 section.right[7] = {
     DiffModified = {
         provider = "DiffModified",
         icon = "柳",
-        highlight = {color.yellow, color.bg}
+        highlight = {color.yellow, color.bg},
     }
 }
 section.right[8] = {
     DiffRemove = {
         provider = "DiffRemove",
         icon = " ",
-        highlight = {color.red, color.bg}
+        highlight = {color.red, color.bg},
     }
 }
 
@@ -99,17 +91,18 @@ section.right[21] = {
         provider = "LineColumn",
         separator = " ",
         separator_highlight = {"NONE", color.bg},
-        highlight = {color.gray, color.bg}
+        highlight = {color.gray, color.bg},
+        condition = gl_condition.hide_in_width
     }
 }
 
 section.right[25] = {
     DiagnosticError = {
         provider = "DiagnosticError",
-        separator = " ",
         icon = " ",
+        separator = " ",
+        separator_highlight = {"NONE", color.bg},
         highlight = {color.red, color.bg},
-        separator_highlight = {color.bg, color.bg}
     }
 }
 
@@ -118,7 +111,6 @@ section.right[29] = {
         provider = "DiagnosticWarn",
         icon = " ",
         highlight = {color.yellow, color.bg},
-        separator_highlight = {color.bg, color.bg}
     }
 }
 
@@ -127,25 +119,16 @@ section.right[33] = {
         provider = "DiagnosticInfo",
         icon = " ",
         highlight = {color.green, color.bg},
-        separator_highlight = {color.bg, color.bg}
     }
 }
 
-section.right[37] = {
+section.right[36] = {
     DiagnosticHint = {
         provider = "DiagnosticHint",
-        icon = " ",
+        icon = "  ",
         highlight = {color.red, color.bg},
-        separator_highlight = {color.bg, color.bg}
     }
 }
-
--- section.right[40] = {
---     LastElement = {
---         provider = function() return ' ' end,
---         highlight = {"NONE", color.bg}
---     }
--- }
 -- RIGHT [END]
 
 -- LEFT inactive [BEGIN]
@@ -159,6 +142,7 @@ section.short_line_left[1] = {
 section.short_line_left[10] = {
     SBufferType = {
         provider = "FileIcon",
+        condition = gl_condition.buffer_not_empty,
         highlight = {color.blue, color.bg, "bold"}
     }
 }
@@ -166,6 +150,7 @@ section.short_line_left[10] = {
 section.short_line_left[20] = {
     SFileName = {
         provider = "FileName",
+        condition = gl_condition.buffer_not_empty,
         highlight = {color.blue, color.bg}
     }
 }
@@ -175,6 +160,7 @@ section.short_line_left[20] = {
 section.short_line_right[1] = {
     SBufferIcon = {
         provider = "BufferIcon",
+        condition = gl_condition.buffer_not_empty,
         highlight = {color.blue, color.bg}
     }
 }
