@@ -14,9 +14,10 @@ local color = {
     orange = "#FF9900",
     purple = "#5d4d7a",
     magenta = "#d16d9e",
-    grey = "#c0c0c0",
+    grey = "#545454",
+    light_grey = "#7a7a7a",
     blue = "#569CD6",
-    red = "#F04123"
+    red = "#F04123",
 }
 -- COLORS [END]
 
@@ -24,7 +25,7 @@ local color = {
 section.left[1] = {
     FirstElement = {
         provider = function() return "▊ 👺  " end,
-        highlight = {color.red, color.bg, "bold"}
+        highlight = {color.red, color.bg, "bold"},
     }
 }
 
@@ -32,7 +33,7 @@ section.left[10] = {
     FileIcon = {
         provider = "FileIcon",
         condition = gl_condition.buffer_not_empty,
-        highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, color.bg}
+        highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, color.bg},
     }
 }
 
@@ -42,7 +43,7 @@ section.left[20] = {
         condition = gl_condition.buffer_not_empty,
         separator = " ",
         separator_highlight = {"NONE", color.bg},
-        highlight = {color.white, color.bg, "bold"}
+        highlight = {color.white, color.bg, "bold"},
     }
 }
 -- LEFT [END]
@@ -52,7 +53,7 @@ section.right[1] = {
     GitIcon = {
         provider = function() return " " end,
         condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {color.orange, color.bg}
+        highlight = {color.orange, color.bg},
     }
 }
 
@@ -60,25 +61,32 @@ section.right[5] = {
     GitBranch = {
         provider = "GitBranch",
         condition = require("galaxyline.provider_vcs").check_git_workspace,
-        highlight = {color.orange, color.bg, "bold"}
+        highlight = {color.orange, color.bg, "bold"},
     }
 }
 
-section.right[6] = {
+section.right[11] = {
+    GitBranchDiffWhitespace = {
+        provider = function() return "  " end,
+        highlight = {"none", color.bg},
+    }
+}
+
+section.right[12] = {
     DiffAdd = {
         provider = "DiffAdd",
-        icon = "    ",
+        icon = " ",
         highlight = {color.green, color.bg},
     }
 }
-section.right[7] = {
+section.right[13] = {
     DiffModified = {
         provider = "DiffModified",
         icon = "柳",
         highlight = {color.yellow, color.bg},
     }
 }
-section.right[8] = {
+section.right[14] = {
     DiffRemove = {
         provider = "DiffRemove",
         icon = " ",
@@ -86,27 +94,32 @@ section.right[8] = {
     }
 }
 
-section.right[21] = {
+section.right[15] = {
     LineInfo = {
         provider = "LineColumn",
+        highlight = {color.gray, color.bg},
+        condition = gl_condition.hide_in_width,
         separator = " ",
         separator_highlight = {"NONE", color.bg},
-        highlight = {color.gray, color.bg},
-        condition = gl_condition.hide_in_width
     }
 }
 
-section.right[25] = {
+section.right[18] = {
+    LineInfoDiagnosticsWhitespace = {
+        provider = function() return "  " end,
+        highlight = {"NONE", color.bg},
+    }
+}
+
+section.right[19] = {
     DiagnosticError = {
         provider = "DiagnosticError",
         icon = " ",
-        separator = " ",
-        separator_highlight = {"NONE", color.bg},
         highlight = {color.red, color.bg},
     }
 }
 
-section.right[29] = {
+section.right[20] = {
     DiagnosticWarn = {
         provider = "DiagnosticWarn",
         icon = " ",
@@ -114,7 +127,7 @@ section.right[29] = {
     }
 }
 
-section.right[33] = {
+section.right[21] = {
     DiagnosticInfo = {
         provider = "DiagnosticInfo",
         icon = " ",
@@ -122,11 +135,18 @@ section.right[33] = {
     }
 }
 
-section.right[36] = {
+section.right[22] = {
     DiagnosticHint = {
         provider = "DiagnosticHint",
         icon = "  ",
         highlight = {color.red, color.bg},
+    }
+}
+
+section.right[40] = {
+    LastElement = {
+        provider = function() return " ▊" end,
+        highlight = {color.red, color.bg, "bold"},
     }
 }
 -- RIGHT [END]
@@ -135,7 +155,7 @@ section.right[36] = {
 section.short_line_left[1] = {
     SFirstElement = {
         provider = function() return '▊ ' end,
-        highlight = {color.blue, color.bg}
+        highlight = {color.grey, color.bg, "bold"},
     }
 }
 
@@ -143,7 +163,7 @@ section.short_line_left[10] = {
     SBufferType = {
         provider = "FileIcon",
         condition = gl_condition.buffer_not_empty,
-        highlight = {color.blue, color.bg, "bold"}
+        highlight = {color.light_grey, color.bg, "bold"},
     }
 }
 
@@ -151,7 +171,7 @@ section.short_line_left[20] = {
     SFileName = {
         provider = "FileName",
         condition = gl_condition.buffer_not_empty,
-        highlight = {color.blue, color.bg}
+        highlight = {color.light_grey, color.bg},
     }
 }
 -- LEFT inactive [END]
@@ -161,14 +181,14 @@ section.short_line_right[1] = {
     SBufferIcon = {
         provider = "BufferIcon",
         condition = gl_condition.buffer_not_empty,
-        highlight = {color.blue, color.bg}
+        highlight = {color.grey, color.bg},
     }
 }
 
-section.short_line_right[5] = {
+section.short_line_right[40] = {
     SLastElement = {
-        provider = function() return " " end,
-        highlight = {color.blue, color.bg}
+        provider = function() return "  ▊" end,
+        highlight = {color.grey, color.bg, "bold"},
     }
 }
 -- RIGHT inactive [END]
