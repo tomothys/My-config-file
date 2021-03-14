@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 
     " List of Plugins
     Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
     Plug 'easymotion/vim-easymotion'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
