@@ -45,7 +45,8 @@ xnoremap <silent> K :move '<-2<CR>gv-gv
 xnoremap <silent> J :move '>+1<CR>gv-gv
 
 " tab completion
-inoremap <expr> <TAB> pumvisible() ? '<C-n>' : '<TAB>'
+inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
+inoremap <S-Tab> <C-O><<<C-O>^
 
 " Terminal window navigation
 tnoremap <C-h> <C-\><C-N><C-w>h
