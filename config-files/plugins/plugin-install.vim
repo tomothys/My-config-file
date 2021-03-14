@@ -30,8 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'rhysd/git-messenger.vim' " Open commits + messages in popup window
     Plug 'AndrewRadev/tagalong.vim' " Change closing html-tag when opening tag changed
     Plug 'alvan/vim-closetag' " Auto close html-tags
-    Plug 'glepnir/zephyr-nvim' " Nice colorscheme
-    Plug 'jremmen/vim-ripgrep'
+    Plug 'ChristianChiarulli/nvcode-color-schemes.vim' " Nice colorschemes
     Plug 'voldikss/vim-floaterm'
 
     " Telescope

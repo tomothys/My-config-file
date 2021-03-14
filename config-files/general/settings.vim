@@ -25,7 +25,7 @@ set number                          " Display line numbers
 set background=dark                 " Set background-color to dark
 set t_Co=256				        " Enable 256 color support
 set termguicolors
-color zephyr
+color nvcode
 set nobackup                        " Disable backup files
 set nowritebackup                   " Disable backup files
 set shortmess+=c                    " Don't pass messages to |ins-completion-menu|
