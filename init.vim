@@ -5,3 +5,4 @@ source ~/.config/nvim/config-files/plugins/plugin-configs.vim
 
 source ~/.config/nvim/config-files/general/settings.vim
 source ~/.config/nvim/config-files/general/functions.vim
+source ~/.config/nvim/config-files/general/colorscheme-overwrites.vim
