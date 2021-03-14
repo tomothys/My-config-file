@@ -15,6 +15,3 @@ let g:nvim_tree_icons = {
             \ }
 
 nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
-
-" If NvimTree doesn't refresh next time: Try this.
-" autocmd CursorHold,FocusLost * silent! :call NvimTreeRefresh
