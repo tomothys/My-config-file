@@ -8,7 +8,7 @@ set whichwrap+=<,>,[,],h,l		    " Allow specified keys to move to the previous/n
 set encoding=utf-8			        " Set displayed encoding
 set fileencoding=utf-8			    " The encoding written to file
 set cursorline                      " Highlight current line
-set cursorcolumn                    " Highlight current column
+"set cursorcolumn                    " Highlight current column
 set mouse=a				            " Enable mouse
 set splitbelow				        " Horizontal splits will open below
 set splitright				        " Vertical splits will open on the right
