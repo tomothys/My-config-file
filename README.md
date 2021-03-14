@@ -3,6 +3,5 @@
 # ToDos
 * Configure __which-keys__
 * Write own colorscheme based on NVCode to make highligh overwrites obsolete
-* Configure Zen Mode (Goyo)
 * Find a way to automatically install vim-plug and PlugInstall without it throwing hundreds and thousands of errors
 * Write a ReadMe
