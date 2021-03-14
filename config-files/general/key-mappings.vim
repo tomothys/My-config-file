@@ -70,3 +70,7 @@ vnoremap <S-Tab> <gv
 
 " Always leave visual mode on first 'v' instead of double tapping 'v' for visual line
 vnoremap v <Esc>
+
+" Toggle between absolute line numbers and relative line numbers
+nnoremap + :set rnu!<CR>
+vnoremap + <Esc>:set rnu!<CR>gv
