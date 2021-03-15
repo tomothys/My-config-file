@@ -6,7 +6,7 @@ inoremap jk <ESC>
 
 " Save and close files faster/easier
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q!<CR>
+nnoremap <silent> <Leader>q :q!<CR>
 
 " Map 'cut' to 'x' so I can use 'd' to delete w/o polluting a register
 nnoremap x "+d

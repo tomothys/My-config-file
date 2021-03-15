@@ -41,12 +41,11 @@ call plug#begin('~/.config/nvim/plugged')
 
     " Intellisense
     Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe'
+    Plug 'hrsh7th/nvim-compe' " Auto-completion
     Plug 'glepnir/lspsaga.nvim'
-    Plug 'onsails/lspkind-nvim'
+    Plug 'onsails/lspkind-nvim' " Adds pictograms to auto-completion pop-ups
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'mfussenegger/nvim-jdtls'
-    Plug 'mfussenegger/nvim-dap'
 
 call plug#end()
 
