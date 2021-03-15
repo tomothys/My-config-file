@@ -34,6 +34,7 @@ set timeoutlen=300                  " Time in milliseconds to wait for a mapped 
 set scrolloff=3                     " Number of lines to keep on edge of editor
 set foldmethod=indent               " Well.. as keyword states: Set foldmethod
 set foldlevel=100                   " Keep all folds open at first
+set completeopt=menuone,noselect    " Compe said to do so.. 👀
 
 augroup highlight_yank
     autocmd!
