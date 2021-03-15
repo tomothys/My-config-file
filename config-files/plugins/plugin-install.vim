@@ -32,6 +32,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'alvan/vim-closetag' " Auto close html-tags
     Plug 'ChristianChiarulli/nvcode-color-schemes.vim' " Nice colorschemes
     Plug 'voldikss/vim-floaterm'
+    Plug 'mhinz/vim-startify' " Startscreen
 
     " Telescope
     Plug 'nvim-lua/popup.nvim'
