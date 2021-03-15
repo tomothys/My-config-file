@@ -41,9 +41,13 @@ nnoremap <silent> <S-Right> :vertical resize -2<CR>
 " Remove highlighting after '/'-search
 nnoremap <silent> <Leader>h :nohl<CR>
 
-" Move text up and down in visual mode
-xnoremap <silent> K :move '<-2<CR>gv-gv
-xnoremap <silent> J :move '>+1<CR>gv-gv
+" Move line up and down
+inoremap <silent> <M-k> <C-O>:move -2<CR>
+inoremap <silent> <M-j> <C-O>:move +1<CR>
+nnoremap <silent> <M-k> :move -2<CR>
+nnoremap <silent> <M-j> :move +1<CR>
+xnoremap <silent> <M-k> :move '<-2<CR>gv-gv
+xnoremap <silent> <M-j> :move '>+1<CR>gv-gv
 
 " tab completion
 inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
