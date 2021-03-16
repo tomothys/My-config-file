@@ -14,5 +14,8 @@ let g:nvim_tree_icons = {
             \   },
             \ }
 
-let g:which_key_map.e = 'Toggle file tree'
+let g:which_key_map.e = 'Toggle Filetree'
 nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
+
+let g:which_key_map.r = 'Refresh Filetree'
+nnoremap <silent> <Leader>r :NvimTreeRefresh<CR>
