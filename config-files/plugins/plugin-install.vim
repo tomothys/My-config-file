@@ -33,6 +33,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ChristianChiarulli/nvcode-color-schemes.vim' " Nice colorschemes
     Plug 'voldikss/vim-floaterm'
     Plug 'mhinz/vim-startify' " Startscreen
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
     " Telescope
     Plug 'nvim-lua/popup.nvim'
