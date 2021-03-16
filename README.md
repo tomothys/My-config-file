@@ -2,6 +2,7 @@
 
 # ToDos
 * [x] Configure __which-keys__
+* [x] Add WhichKey Mappings for Git related stuff
 * [ ] Style LspSaga
 * [ ] Write a ReadMe
 * [ ] lua-fy my neovim configuration
