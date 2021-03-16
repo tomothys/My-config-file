@@ -25,4 +25,5 @@ function! Toggle_zen_mode()
     endif
 endfunction
 
+let g:which_key_map.z = 'Toggle zen mode'
 nnoremap <silent> <Leader>z :call Toggle_zen_mode()<CR>

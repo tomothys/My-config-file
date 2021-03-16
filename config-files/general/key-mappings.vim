@@ -4,11 +4,6 @@ nnoremap <Space> <Nop>
 " Exit insert mode
 inoremap jk <ESC>
 
-" Save and close files faster/easier
-nnoremap <Leader>w :w<CR>
-"nnoremap <silent> <Leader>q :q!<CR>
-nnoremap <silent> <Leader>q :bd!<CR>
-
 " Map 'cut' to 'x' so I can use 'd' to delete w/o polluting a register
 nnoremap x "+d
 nnoremap X "+D
@@ -37,9 +32,6 @@ nnoremap <silent> <S-Down> :resize +2<CR>
 nnoremap <silent> <S-Up> :resize -2<CR>
 nnoremap <silent> <S-Left> :vertical resize +2<CR>
 nnoremap <silent> <S-Right> :vertical resize -2<CR>
-
-" Remove highlighting after '/'-search
-nnoremap <silent> <Leader>h :nohl<CR>
 
 " Move line up and down
 inoremap <silent> <M-k> <C-O>:move -2<CR>
