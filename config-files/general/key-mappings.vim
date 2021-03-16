@@ -20,6 +20,7 @@ nnoremap p "+p
 " Don't touch the any register while deleting stuff
 nnoremap d "_d
 nnoremap D "_D
+vnoremap d "_d
 
 " Make moving between windows/panes smoother
 nnoremap <C-j> <C-w>j
