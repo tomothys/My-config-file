@@ -8,7 +8,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
     " List of Plugins
-    Plug 'tpope/vim-commentary'
+    Plug 'b3nj5m1n/kommentary'
     Plug 'tpope/vim-surround'
     Plug 'easymotion/vim-easymotion'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
