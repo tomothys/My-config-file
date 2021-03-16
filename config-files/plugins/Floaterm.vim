@@ -14,10 +14,12 @@ function! Toggle_terminal()
     execute "FloatermToggle"
 endfunction
 
-let g:which_key_map.t = { 'name': '+Terminal' }
-let g:which_key_map.t.t = 'Toggle terminal'
-nnoremap <silent> <Leader>tt :call Toggle_terminal()<CR>
-tnoremap <silent> <Leader>tt <C-\><C-n>:FloatermToggle<CR>
-let g:which_key_map.t.g = 'Lazygit'
-nnoremap <silent> <Leader>tg :call Open_lazygit()<CR>
-tnoremap <silent> <Leader>tk <C-\><C-n>:FloatermKill<CR>
+let g:which_key_map.t = 'Terminal'
+nnoremap <silent> <Leader>t :call Toggle_terminal()<CR>
+tnoremap <silent> <Leader>t <C-\><C-n>:FloatermToggle<CR>
+
+
+let g:which_key_map.g = { 'name': '+Git' }
+
+let g:which_key_map.g.g = 'Lazygit'
+nnoremap <silent> <Leader>gg :call Open_lazygit()<CR>
