@@ -11,7 +11,7 @@ let g:which_key_map.b.a = 'Close all buffer except current'
 nnoremap <silent> <Leader>ba :BufferCloseAllButCurrent<CR>
 
 " Jump to buffer
-let g:which_key_map.b.a = 'Jump to buffer'
+let g:which_key_map.b.b = 'Jump to buffer'
 nnoremap <silent> <Leader>bb :BufferPick<CR>
 
 " Sort buffers
