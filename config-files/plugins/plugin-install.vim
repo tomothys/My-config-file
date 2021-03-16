@@ -34,6 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'voldikss/vim-floaterm'
     Plug 'mhinz/vim-startify' " Startscreen
     Plug 'mhinz/vim-signify' " Shows VCS signs in the gutter
+    Plug 'airblade/vim-rooter'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
     " Telescope
