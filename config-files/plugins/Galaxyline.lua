@@ -94,7 +94,7 @@ section.right[14] = {
     }
 }
 
-section.right[15] = {
+--[[ section.right[15] = {
     LineInfo = {
         provider = "LineColumn",
         highlight = {color.gray, color.bg},
@@ -102,7 +102,7 @@ section.right[15] = {
         separator = " ",
         separator_highlight = {"NONE", color.bg},
     }
-}
+} ]]
 
 section.right[18] = {
     LineInfoDiagnosticsWhitespace = {
