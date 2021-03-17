@@ -6,6 +6,10 @@ nnoremap <silent> <S-Tab> :BufferLineCyclePrev<CR>
 
 let g:which_key_map.b = { 'name': '+Buffermenu' }
 
+" Jump to buffer
+let g:which_key_map.b.b = 'Jump to buffer'
+nnoremap <silent> <Leader>bb :BufferLinePick<CR>
+
 " Close buffers
 let g:which_key_map.b.d = 'Close buffer'
 nnoremap <silent> <Leader>bd :bd!<CR>
