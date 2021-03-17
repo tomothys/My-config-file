@@ -12,3 +12,6 @@ hi Search guibg=NONE guifg=NONE gui=bold
 highlight DiffAdd guifg=#608b4e guibg=NONE gui=bold
 highlight DiffChange guifg=#dcdcaa guibg=NONE gui=bold
 highlight DiffDelete guifg=#f04123 guibg=NONE gui=bold
+
+" Overwrite Error GUI and remove 'reverse'
+highlight Error guifg=#f04123 gui=bold,underline
