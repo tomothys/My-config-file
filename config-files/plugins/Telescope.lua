@@ -22,7 +22,7 @@ require('telescope').setup{
                 mirror = false,
             },
             vertical = {
-                mirror = false,
+                mirror = true,
             },
         },
         file_sorter =  require'telescope.sorters'.get_fuzzy_file,
