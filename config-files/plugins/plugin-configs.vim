@@ -2,7 +2,8 @@
 " First source WhichKeys because of the WhichKeys dictionary
 source ~/.config/nvim/config-files/plugins/WhichKeys.vim
 " ----------------------------------------------------------
-source ~/.config/nvim/config-files/plugins/Barbar.vim
+"source ~/.config/nvim/config-files/plugins/Barbar.vim
+source ~/.config/nvim/config-files/plugins/Bufferline.vim
 source ~/.config/nvim/config-files/plugins/Compe.vim
 source ~/.config/nvim/config-files/plugins/Easymotion.vim
 source ~/.config/nvim/config-files/plugins/FAR.vim

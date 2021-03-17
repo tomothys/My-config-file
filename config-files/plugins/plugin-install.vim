@@ -21,7 +21,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'liuchengxu/vim-which-key'
     Plug 'junegunn/goyo.vim' " Zen mode
     "Plug 'mattn/emmet-vim'
-    Plug 'romgrk/barbar.nvim' " Nice tabline
+    "Plug 'romgrk/barbar.nvim'
+    Plug 'akinsho/nvim-bufferline.lua' " Nice tabline for buffers
     Plug 'psliwka/vim-smoothie' " Smooth scrolling
     Plug 'brooth/far.vim' " Find and replace
     Plug 'kyazdani42/nvim-tree.lua' " File Explorer
