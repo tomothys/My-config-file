@@ -39,12 +39,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'jremmen/vim-ripgrep'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
     Plug 'junegunn/fzf.vim'
-
-    " Telescope
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-media-files.nvim'
+    Plug 'gfanto/fzf-lsp.nvim' " Use fzf to search for symbols
 
     " Intellisense
     Plug 'neovim/nvim-lspconfig'
