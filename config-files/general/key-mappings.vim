@@ -73,3 +73,6 @@ vnoremap v <Esc>
 " Toggle between absolute line numbers and relative line numbers
 nnoremap + :set rnu!<CR>
 vnoremap + <Esc>:set rnu!<CR>gv
+
+" I need a shortcut to revive my syntax-highlighting. Sad but true.
+nnoremap <silent> <C-l> :syntax sync fromstart<CR>
