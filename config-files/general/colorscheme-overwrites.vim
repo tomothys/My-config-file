@@ -5,7 +5,7 @@ color nvcode
 highlight FloatermBorder guibg=#1E1E1E guifg=#569CD6
 
 " Overwrite Search highlighting.
-" I wanna keep it but it's super ugly as it is rn
+" I wanna keep it but it's super ugly by default
 highlight Search guibg=NONE guifg=red
 
 " Overwrite Diff colors. I want the sign to be in color.
