@@ -36,6 +36,9 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'mhinz/vim-signify' " Shows VCS signs in the gutter
     Plug 'airblade/vim-rooter'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+    Plug 'jremmen/vim-ripgrep'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    Plug 'junegunn/fzf.vim'
 
     " Telescope
     Plug 'nvim-lua/popup.nvim'

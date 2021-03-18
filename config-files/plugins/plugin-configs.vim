@@ -6,6 +6,7 @@ source ~/.config/nvim/config-files/plugins/Bufferline.vim
 source ~/.config/nvim/config-files/plugins/Compe.vim
 source ~/.config/nvim/config-files/plugins/Easymotion.vim
 source ~/.config/nvim/config-files/plugins/FAR.vim
+source ~/.config/nvim/config-files/plugins/Fzf.vim
 source ~/.config/nvim/config-files/plugins/Floaterm.vim
 luafile ~/.config/nvim/config-files/plugins/Galaxyline.lua
 source ~/.config/nvim/config-files/plugins/Goyo.vim
