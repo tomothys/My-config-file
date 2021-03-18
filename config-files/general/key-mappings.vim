@@ -1,5 +1,4 @@
 let mapleader = ' '
-nnoremap <Space> <Nop>
 
 " Exit insert mode
 inoremap jk <ESC>
@@ -22,6 +21,10 @@ nnoremap d "_d
 nnoremap D "_D
 vnoremap d "_d
 
+" I need a shortcut to revive my syntax-highlighting. Sad but true.
+" Remap Ctrl+l because I'm using Ctrl+l to switch windows
+nnoremap <C-i> <C-l>
+
 " Make moving between windows/panes smoother
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -42,8 +45,7 @@ nnoremap <silent> <M-j> :move +1<CR>
 xnoremap <silent> <M-k> :move '<-2<CR>gv-gv
 xnoremap <silent> <M-j> :move '>+1<CR>gv-gv
 
-" tab completion
-inoremap <expr> <Tab> pumvisible() ? '<C-n>' : '<Tab>'
+" Unindent line in insert-mode
 inoremap <S-Tab> <C-O><<<C-O>^
 
 " Terminal window navigation
@@ -57,7 +59,7 @@ inoremap <C-k> <C-\><C-N><C-w>k
 inoremap <C-l> <C-\><C-N><C-w>l
 
 " Leave terminal-insert-mode with Ctrl-t instead Esc
-tnoremap <C-t> <C-\><C-N>
+tnoremap <C-e> <C-\><C-N>
 " Map Esc to just Esc because it's needed for CLI-Tools like lazygit
 tnoremap <Esc> <Esc>
 
@@ -74,5 +76,8 @@ vnoremap v <Esc>
 nnoremap + :set rnu!<CR>
 vnoremap + <Esc>:set rnu!<CR>gv
 
-" I need a shortcut to revive my syntax-highlighting. Sad but true.
-nnoremap <silent> <C-l> :syntax sync fromstart<CR>
+" Change search buttons for word under cursor
+" ' -> backward search
+" # -> forward search
+nnoremap ' #
+nnoremap # *
