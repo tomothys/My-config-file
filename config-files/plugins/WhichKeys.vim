@@ -14,3 +14,15 @@ nnoremap <silent> <Leader>q :q!<CR>
 
 let g:which_key_map.h = 'Remove search highlight'
 nnoremap <silent> <Leader>h :nohl<CR>
+
+
+function! SearchAndReplace()
+    call inputsave()
+    let l:search = input("Search (RegEx): ")
+    let l:replaceWith = input("Replace with (RegEx): ")
+    let l:options = input("RegEx Options: ")
+    execute "'<,'>s/" . l:search . "/" . l:replaceWith . "/" . l:options
+    call inputrestore()
+endfunction
+
+xnoremap s :<C-U>call SearchAndReplace()<CR>
