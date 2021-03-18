@@ -1,5 +1,4 @@
 syntax enable				        " Enable syntax highlighting
-autocmd BufEnter * syntax sync fromstart
 set iskeyword+=-			        " Treat dash separated words as a word text object
 set formatoptions-=cro			    " Stop newline continution of comments
 autocmd FileType * set formatoptions-=cro
