@@ -75,9 +75,3 @@ vnoremap v <Esc>
 " Toggle between absolute line numbers and relative line numbers
 nnoremap + :set rnu!<CR>
 vnoremap + <Esc>:set rnu!<CR>gv
-
-" Change search buttons for word under cursor
-" ' -> backward search
-" # -> forward search
-nnoremap ' #
-nnoremap # *
