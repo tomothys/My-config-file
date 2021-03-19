@@ -75,3 +75,6 @@ vnoremap v <Esc>
 " Toggle between absolute line numbers and relative line numbers
 nnoremap + :set rnu!<CR>
 vnoremap + <Esc>:set rnu!<CR>gv
+
+" Add very magic to search
+nnoremap / /\v
