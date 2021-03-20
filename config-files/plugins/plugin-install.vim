@@ -17,7 +17,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'kyazdani42/nvim-web-devicons' " Nice looking icons
     Plug 'ryanoasis/vim-devicons' " Nice looking icons
     Plug 'jiangmiao/auto-pairs'
-    Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+    " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
     Plug 'liuchengxu/vim-which-key'
     Plug 'junegunn/goyo.vim' " Zen mode
     "Plug 'mattn/emmet-vim'
