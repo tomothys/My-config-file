@@ -1,3 +1,5 @@
+local setKey = vim.api.nvim_set_keymap
+
 require'bufferline'.setup{
     options = {
         view = "default",
@@ -26,3 +28,31 @@ require'bufferline'.setup{
         sort_by = "",
     }
 }
+
+-- Make moving between buffers a nicer experience
+setKey('n', '<Tab>', ':BufferLineCycleNext<CR>', {silent = true})
+setKey('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', {silent = true})
+
+vim.cmd('let g:which_key_map.b = { "name": "+Buffermenu" }')
+
+-- Jump to buffer
+vim.cmd('let g:which_key_map.b.b = "Jump to buffer"')
+setKey('n', '<Leader>bb', ':BufferLinePick<CR>', {silent = true})
+
+-- Close buffers
+vim.cmd('let g:which_key_map.b.d = "Close buffers"')
+setKey('n', '<Leader>bd', ':bd!<CR>', {silent = true})
+
+-- Sort buffers
+vim.cmd('let g:which_key_map.b.o = { "name": "+order" }')
+vim.cmd('let g:which_key_map.b.o.l = "by language"')
+setKey('n', '<Leader>bol', ':BufferLineSortByExtension!<CR>', {silent = true})
+vim.cmd('let g:which_key_map.b.o.d = "by directory"')
+setKey('n', '<Leader>bod', ':BufferLineSortByDirectory!<CR>', {silent = true})
+
+-- Move buffers
+vim.cmd('let g:which_key_map.b.m = { "name": "+move" }')
+vim.cmd('let g:which_key_map.b.m.n = "to next tab position"')
+setKey('n', '<Leader>bmn', ':BufferLineMoveNext<CR>', {silent = true})
+vim.cmd('let g:which_key_map.b.m.p = "to previous tab position"')
+setKey('n', '<Leader>bmp', ':BufferLineMovePrev<CR>', {silent = true})
