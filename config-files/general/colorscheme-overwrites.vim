@@ -32,12 +32,15 @@ highlight BufferLineSeperator guibg=#363535
 highlight BufferLineSeperatorVisible guibg=#363535
 
 " Custom StatusLine highlights
-execute 'hi StatusLineTransparent guibg=' . s:getColor("Normal", "bg")
+execute 'hi StatusLineNC guibg=' . s:getColor("StatusLine", "bg")
+execute 'hi StatusLineNCEnd guifg=' . s:getColor("StatusLine", "bg")
 execute 'hi StatusLineFilePathHead guibg=' . s:getColor("StatusLine", "bg") . ' guifg=' . s:getColor("StatusLineNC", "fg")
+execute 'hi StatusLineTransparent guibg=' . s:getColor("Normal", "bg")
+hi StatusLineColorOneSeperatorTransparentBg guifg=#f04123
 hi StatusLineColorOne guibg=#f04123 guifg=white
-execute 'hi StatusLineSeperatorColorOne guibg=' . s:getColor("StatusLineNC", "fg") . ' guifg=#f04123'
+execute 'hi StatusLineColorOneSeperator guibg=' . s:getColor("StatusLineNC", "fg") . ' guifg=#f04123'
 execute 'hi StatusLineColorTwo guibg=' . s:getColor("StatusLineNC", "fg")
-execute 'hi StatusLineColorTwoSeperator guifg=' . s:getColor("StatusLineNC", "fg")
+execute 'hi StatusLineColorTwoSeperator guifg=' . s:getColor("StatusLineNC", "fg") . ' guibg=' . s:getColor("StatusLine", "bg")
+execute 'hi StatusLineColorTwoSeperatorTransparantBg guifg=' . s:getColor("StatusLineNC", "fg")
 execute 'hi StatusLineSubSeperator guibg=' . s:getColor("StatusLine", "bg") . ' guifg=' . s:getColor("StatusLineNC", "fg")
 execute 'hi StatusLineSubSeperatorTransparentBg guibg=' . s:getColor("Normal", "bg") . ' guifg=' . s:getColor("StatusLineNC", "fg")
-hi StatusLineSeperatorTransparentBg guifg=#f04123

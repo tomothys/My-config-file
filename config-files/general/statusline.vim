@@ -12,11 +12,11 @@ function g:StatusLine(isCurrentBuffer = v:false)
     if a:isCurrentBuffer
         " LEFT SIDE [BEGIN]
         " Add left seperator
-        setl statusline=%#StatusLineTransparent#\ %#StatusLineSeperatorTransparentBg#%{StatusLineSeperatorLeft}
+        setl statusline=%#StatusLineTransparent#\ %#StatusLineColorOneSeperatorTransparentBg#%{StatusLineSeperatorLeft}
         " Add emote
         setl statusline+=%#StatusLineColorOne#\ 👺\ 
         " Add right seperator
-        setl statusline+=%#StatusLineSeperatorColorOne#%{StatusLineSeperatorRight}
+        setl statusline+=%#StatusLineColorOneSeperator#%{StatusLineSeperatorRight}
         " Add right sub seperator
         setl statusline+=%#StatusLineSubSeperator#%{StatusLineSeperatorRight}%#StatusLine#\ 
 
@@ -40,21 +40,31 @@ function g:StatusLine(isCurrentBuffer = v:false)
         " Add left sub seperator
         setl statusline+=%#StatusLineSubSeperator#%{StatusLineSeperatorLeft}
         " Add left seperator
-        setl statusline+=%#StatusLineSeperatorColorOne#%{StatusLineSeperatorLeft}
+        setl statusline+=%#StatusLineColorOneSeperator#%{StatusLineSeperatorLeft}
         " Add current Git-Branch
         setl statusline+=%#StatusLineColorOne#\ %{GetCurrentBranch()}\ 
         " Add right seperator
-        setl statusline+=%#StatusLineSeperatorTransparentBg#%{StatusLineSeperatorRight}%#StatusLineTransparent#\ 
+        setl statusline+=%#StatusLineColorOneSeperatorTransparentBg#%{StatusLineSeperatorRight}%#StatusLineTransparent#\ 
         " RIGHT SIDE [END]
     else
+        " LEFT SIDE [BEGIN]
         " Add left seperator
-        setl statusline=%#StatusLineTransparent#\ %#StatusLineColorTwoSeperator#%{StatusLineSeperatorLeft}
+        setl statusline=%#StatusLineTransparent#\ %#StatusLineColorTwoSeperatorTransparantBg#%{StatusLineSeperatorLeft}
         " Add emote
         setl statusline+=%#StatusLineColorTwo#\ 👾\ 
         " Add right seperator
         setl statusline+=%#StatusLineColorTwoSeperator#%{StatusLineSeperatorRight}\ 
         " Add file name
         setl statusline+=%#StatusLineNC#%t
+        " LEFT SIDE [END]
+
+        " RIGHT SIDE [BEGIN]
+        " Switch to rightside
+        setl statusline+=%=
+        " Add right seperator
+        setl statusline+=%#StatusLineNCEnd#%{StatusLineSeperatorRight}\ 
+        " RIGHT SIDE [END]
+
     endif
 endfunction
 
