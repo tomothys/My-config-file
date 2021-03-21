@@ -13,5 +13,4 @@ source ~/.config/nvim/config-files/plugins/LspSaga.vim
 source ~/.config/nvim/config-files/plugins/NvimTree.vim
 source ~/.config/nvim/config-files/plugins/Ripgrep.vim
 source ~/.config/nvim/config-files/plugins/Rooter.vim
-source ~/.config/nvim/config-files/plugins/Signify.vim
 source ~/.config/nvim/config-files/plugins/Startify.vim
