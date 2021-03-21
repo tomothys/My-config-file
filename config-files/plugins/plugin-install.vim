@@ -17,13 +17,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'kyazdani42/nvim-web-devicons' " Nice looking icons
     Plug 'ryanoasis/vim-devicons' " Nice looking icons
     Plug 'jiangmiao/auto-pairs'
-    " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
     Plug 'liuchengxu/vim-which-key'
     Plug 'junegunn/goyo.vim' " Zen mode
     "Plug 'mattn/emmet-vim'
-    Plug 'akinsho/nvim-bufferline.lua' " Nice tabline for buffers
     Plug 'psliwka/vim-smoothie' " Smooth scrolling
-    Plug 'brooth/far.vim' " Find and replace
     Plug 'kyazdani42/nvim-tree.lua' " File Explorer
     Plug 'sheerun/vim-polyglot' " Better Syntax Support
     Plug 'airblade/vim-gitgutter'
@@ -33,13 +30,13 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'ChristianChiarulli/nvcode-color-schemes.vim' " Nice colorschemes
     Plug 'voldikss/vim-floaterm'
     Plug 'mhinz/vim-startify' " Startscreen
-    Plug 'mhinz/vim-signify' " Shows VCS signs in the gutter
     Plug 'airblade/vim-rooter'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'jremmen/vim-ripgrep'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
     Plug 'junegunn/fzf.vim'
     Plug 'gfanto/fzf-lsp.nvim' " Use fzf to search for symbols
+    Plug 'romgrk/barbar.nvim'
 
     " Intellisense
     Plug 'neovim/nvim-lspconfig'
