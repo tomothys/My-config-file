@@ -1,3 +1,5 @@
+local setKey = vim.api.nvim_set_keymap
+
 require'compe'.setup {
     enabled = true;
     autocomplete = true;
@@ -25,3 +27,7 @@ require'compe'.setup {
         treesitter = false;
     };
 }
+
+setKey('i', '<C-Space>', 'compe#complete()', { silent=true, expr=true })
+setKey('i', '<CR>', 'compe#confirm("<CR>")', { silent=true, expr=true })
+setKey('i', '<C-e>', 'compe#close("<C-e>")', { silent=true, expr=true })

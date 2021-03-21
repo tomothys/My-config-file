@@ -3,7 +3,7 @@
 source ~/.config/nvim/config-files/plugins/WhichKeys.vim
 " ----------------------------------------------------------
 luafile ~/.config/nvim/config-files/plugins/Bufferline.lua
-source ~/.config/nvim/config-files/plugins/Compe.vim
+luafile ~/.config/nvim/config-files/plugins/Compe.lua
 source ~/.config/nvim/config-files/plugins/Easymotion.vim
 source ~/.config/nvim/config-files/plugins/FAR.vim
 source ~/.config/nvim/config-files/plugins/Fzf.vim
