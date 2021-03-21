@@ -13,6 +13,8 @@ function! Toggle_zen_mode()
             execute "wincmd p"
         endif
 
+        " StatusLine somehow loses highlighting/styles. Just resourcing styles.
+        source ~/.config/nvim/config-files/general/colorscheme-overwrites.vim
     else
         let s:was_nvim_tree_open = bufexists("NvimTree")
 
