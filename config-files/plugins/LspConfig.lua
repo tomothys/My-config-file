@@ -1,6 +1,6 @@
-local lsp = require('lspconfig')
-local servers = { "html", "cssls", "tsserver", "jsonls", "vimls", "yamlls" }
+require'lspinstall'.setup() -- important
 
-for i = 1, table.getn(servers) do
-    lsp[servers[i]].setup{}
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
 end

@@ -45,6 +45,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'onsails/lspkind-nvim' " Adds pictograms to auto-completion pop-ups
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'mfussenegger/nvim-jdtls'
+    Plug 'kabouzeid/nvim-lspinstall'
 
 call plug#end()
 
