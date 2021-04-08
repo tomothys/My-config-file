@@ -4,7 +4,6 @@ source ~/.config/nvim/config-files/plugins/WhichKeys.vim
 " ----------------------------------------------------------
 source ~/.config/nvim/config-files/plugins/Barbar.vim
 luafile ~/.config/nvim/config-files/plugins/Compe.lua
-source ~/.config/nvim/config-files/plugins/Easymotion.vim
 source ~/.config/nvim/config-files/plugins/Fzf.vim
 source ~/.config/nvim/config-files/plugins/Floaterm.vim
 source ~/.config/nvim/config-files/plugins/Goyo.vim

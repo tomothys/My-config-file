@@ -10,7 +10,6 @@ call plug#begin('~/.config/nvim/plugged')
     " List of Plugins
     Plug 'b3nj5m1n/kommentary'
     Plug 'tpope/vim-surround'
-    Plug 'easymotion/vim-easymotion'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
     Plug 'p00f/nvim-ts-rainbow' " Rainbow parentheses
@@ -19,7 +18,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'jiangmiao/auto-pairs'
     Plug 'liuchengxu/vim-which-key'
     Plug 'junegunn/goyo.vim' " Zen mode
-    "Plug 'mattn/emmet-vim'
     Plug 'psliwka/vim-smoothie' " Smooth scrolling
     Plug 'kyazdani42/nvim-tree.lua' " File Explorer
     Plug 'sheerun/vim-polyglot' " Better Syntax Support
