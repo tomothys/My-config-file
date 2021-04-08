@@ -21,9 +21,13 @@ nnoremap d "_d
 nnoremap D "_D
 vnoremap d "_d
 
+nnoremap c "_c
+nnoremap C "_C
+vnoremap c "_c
+
 " I need a shortcut to revive my syntax-highlighting. Sad but true.
 " Remap Ctrl+l because I'm using Ctrl+l to switch windows
-nnoremap <C-i> <C-l>
+nnoremap <S-l> <C-l>
 
 " Make moving between windows/panes smoother
 nnoremap <C-j> <C-w>j
