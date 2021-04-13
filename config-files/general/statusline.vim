@@ -1,8 +1,8 @@
 " Seperator:    
 " Seperator:    
 
-let g:StatusLineSeperatorLeft=''
-let g:StatusLineSeperatorRight=''
+let g:StatusLineSeperatorLeft=''
+let g:StatusLineSeperatorRight=''
 
 function g:GetCurrentBranch()
     return system('git branch --show-current 2>/dev/null | tr -d "\n"')
