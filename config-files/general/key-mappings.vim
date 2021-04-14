@@ -80,5 +80,10 @@ vnoremap v <Esc>
 nnoremap + :set rnu!<CR>
 vnoremap + <Esc>:set rnu!<CR>gv
 
-" Add very magic to search
-nnoremap / /\v
+" Remap search and backward search
+nnoremap s /
+nnoremap S ?
+
+nnoremap <CR> :
+
+cnoremap <silent> <CR> <CR>:nohl<CR>

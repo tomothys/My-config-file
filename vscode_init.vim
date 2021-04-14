@@ -65,3 +65,6 @@ nnoremap <CR> :
 " Remap search and reverse-search
 nnoremap s /
 nnoremap S ?
+
+" Remove highlight on search end
+cnoremap <CR> <CR>:nohl<CR>
