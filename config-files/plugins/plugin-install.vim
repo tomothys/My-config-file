@@ -35,6 +35,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'gfanto/fzf-lsp.nvim' " Use fzf to search for symbols
     Plug 'romgrk/barbar.nvim'
+    Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
     " Intellisense
     Plug 'neovim/nvim-lspconfig'
