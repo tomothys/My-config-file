@@ -84,6 +84,7 @@ vnoremap + <Esc>:set rnu!<CR>gv
 nnoremap s /
 nnoremap S ?
 
+nnoremap o <CR>
 nnoremap <CR> :
 
 cnoremap <silent> <CR> <CR>:nohl<CR>
