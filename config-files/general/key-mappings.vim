@@ -84,7 +84,8 @@ vnoremap + <Esc>:set rnu!<CR>gv
 nnoremap s /
 nnoremap S ?
 
-nnoremap o <CR>
+" Map o to <CR> only in quick-fix lists
+nnoremap <expr> o &buftype ==# 'quickfix' ? '\<CR>' : 'o'
 nnoremap <CR> :
 
 cnoremap <silent> <CR> <CR>:nohl<CR>
