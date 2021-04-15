@@ -5,6 +5,7 @@ set iskeyword+=-
 set whichwrap+=<,>,[,],h,l
 set noshowmode
 set scrolloff=3
+set ignorecase
 
 " Keybindings
 " Map 'cut' to 'x' so I can use 'd' to delete w/o polluting a register
