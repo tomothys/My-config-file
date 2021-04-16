@@ -15,9 +15,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'p00f/nvim-ts-rainbow' " Rainbow parentheses
     Plug 'kyazdani42/nvim-web-devicons' " Nice looking icons
     Plug 'ryanoasis/vim-devicons' " Nice looking icons
-    Plug 'jiangmiao/auto-pairs'
     Plug 'liuchengxu/vim-which-key'
-    Plug 'junegunn/goyo.vim' " Zen mode
     Plug 'psliwka/vim-smoothie' " Smooth scrolling
     Plug 'kyazdani42/nvim-tree.lua' " File Explorer
     Plug 'sheerun/vim-polyglot' " Better Syntax Support
@@ -42,8 +40,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'hrsh7th/nvim-compe' " Auto-completion
     Plug 'glepnir/lspsaga.nvim'
     Plug 'onsails/lspkind-nvim' " Adds pictograms to auto-completion pop-ups
-    Plug 'kosayoda/nvim-lightbulb'
-    Plug 'mfussenegger/nvim-jdtls'
     Plug 'kabouzeid/nvim-lspinstall'
 
 call plug#end()

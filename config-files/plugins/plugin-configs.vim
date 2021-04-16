@@ -8,6 +8,7 @@ source ~/.config/nvim/config-files/plugins/Fzf.vim
 source ~/.config/nvim/config-files/plugins/Floaterm.vim
 source ~/.config/nvim/config-files/plugins/Goyo.vim
 luafile ~/.config/nvim/config-files/plugins/LspConfig.lua
+luafile ~/.config/nvim/config-files/plugins/LspKind.lua
 source ~/.config/nvim/config-files/plugins/LspSaga.vim
 source ~/.config/nvim/config-files/plugins/NvimTree.vim
 source ~/.config/nvim/config-files/plugins/Prettier.vim
