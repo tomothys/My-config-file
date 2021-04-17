@@ -10,3 +10,17 @@ function! g:IsCursorWrappedBy(...) abort
 
     return v:false
 endfunction
+
+function! g:ConfirmSurroundings() abort
+    let l:choice = confirm("?",
+        \ "&d \"\"\n" .
+        \ "&s ''\n" .
+        \ "&p ()\n" .
+        \ "&c {}\n" .
+        \ "&b []\n" .
+        \ "&h <>\n"
+    \)
+
+    let l:map = { 1: '""', 2: "''", 3: "()", 4: "{}", 5: "[]", 6: "<>" }
+    return l:map[l:choice]
+endfunction
