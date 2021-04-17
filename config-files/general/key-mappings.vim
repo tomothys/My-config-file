@@ -103,3 +103,6 @@ inoremap <C-k> <Down>
 inoremap <C-h> <Left>
 
 inoremap <C-u> <C-R>=g:ConfirmSurroundings()<CR><Left>
+
+nnoremap gul gu
+nnoremap guu gU
