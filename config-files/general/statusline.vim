@@ -1,28 +1,18 @@
-" Seperator:    
-" Seperator:    
-
-let g:StatusLineSeperatorLeft=''
-let g:StatusLineSeperatorRight=''
-
 function g:GetCurrentBranch()
     return system('git branch --show-current 2>/dev/null | tr -d "\n"')
 endfunction
 
 function g:StatusLine(isCurrentBuffer = v:false)
+    setl statusline=
+
     if a:isCurrentBuffer
         " LEFT SIDE [BEGIN]
-        " Add left seperator
-        setl statusline=%#StatusLineTransparent#\ %#StatusLineColorOneSeperatorTransparentBg#%{StatusLineSeperatorLeft}
         " Add emote
-        setl statusline+=%#StatusLineColorOne#\ 👺\ 
-        " Add right seperator
-        setl statusline+=%#StatusLineColorOneSeperator#%{StatusLineSeperatorRight}
-        " Add right sub seperator
-        setl statusline+=%#StatusLineSubSeperator#%{StatusLineSeperatorRight}%#StatusLine#\ 
+        setl statusline+=%#StatusLineColorOne#\ Nvim\ %#StatusLine#\ 
 
         " Add file path head if it's not NvimTree/FileTree
         if expand('%t') != 'NvimTree'
-            setl statusline+=%#StatusLineFilePathHead#%.25{expand('%:h')}/
+            setl statusline+=%#StatusLineFilePathHead#%.35{expand('%:h')}/
         endif
 
         " Add file name
@@ -37,32 +27,20 @@ function g:StatusLine(isCurrentBuffer = v:false)
         " RIGHT SIDE [BEGIN]
         " Switch to right side
         setl statusline+=%=
-        " Add left sub seperator
-        setl statusline+=%#StatusLineSubSeperator#%{StatusLineSeperatorLeft}
-        " Add left seperator
-        setl statusline+=%#StatusLineColorOneSeperator#%{StatusLineSeperatorLeft}
         " Add current Git-Branch
         setl statusline+=%#StatusLineColorOne#\ %{GetCurrentBranch()}\ 
-        " Add right seperator
-        setl statusline+=%#StatusLineColorOneSeperatorTransparentBg#%{StatusLineSeperatorRight}%#StatusLineTransparent#\ 
         " RIGHT SIDE [END]
     else
         " LEFT SIDE [BEGIN]
-        " Add left seperator
-        setl statusline=%#StatusLineTransparent#\ %#StatusLineColorTwoSeperatorTransparantBg#%{StatusLineSeperatorLeft}
         " Add emote
-        setl statusline+=%#StatusLineColorTwo#\ 👾\ 
-        " Add right seperator
-        setl statusline+=%#StatusLineColorTwoSeperator#%{StatusLineSeperatorRight}\ 
+        setl statusline+=%#StatusLineColorTwo#\ 👾\ %#StatusLineNC#\ 
         " Add file name
-        setl statusline+=%#StatusLineNC#%t
+        setl statusline+=%t
         " LEFT SIDE [END]
 
         " RIGHT SIDE [BEGIN]
         " Switch to rightside
         setl statusline+=%=
-        " Add right seperator
-        setl statusline+=%#StatusLineNCEnd#%{StatusLineSeperatorRight}\ 
         " RIGHT SIDE [END]
 
     endif
