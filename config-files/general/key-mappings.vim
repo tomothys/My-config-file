@@ -95,7 +95,7 @@ inoremap <C-d> ""<Left>
 inoremap <C-a> ()<Left>
 
 " Add to space when cursor is between Parentheses, Curlybraces or Brackets
-inoremap <expr> <Space> g:CursorIsWrappedBy("()", "{}", "[]") ? "<Space><Space><Left>" : "<Space>"
+inoremap <expr> <Space> g:IsCursorWrappedBy("()", "{}", "[]") ? "<Space><Space><Left>" : '<Space>'
 
 " Map Ctrl+j, Ctrl+l, Ctrl+k, Ctrl+h to arrow-keys in insert mode
 inoremap <C-j> <Up>
