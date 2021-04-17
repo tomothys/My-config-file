@@ -1,4 +1,4 @@
-function! g:CursorIsWrappedBy(...) abort
+function! g:IsCursorWrappedBy(...) abort
     let l:charBefore = getline('.')[col('.') - 2]
     let l:charAfter = getline('.')[col('.') - 1]
 
@@ -6,7 +6,7 @@ function! g:CursorIsWrappedBy(...) abort
         if l:charBefore == arg[0] && l:charAfter == arg[1]
             return v:true
         endif
-
-        return v:false
     endfor
+
+    return v:false
 endfunction
