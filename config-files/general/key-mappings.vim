@@ -57,10 +57,6 @@ tnoremap <C-h> <C-\><C-N><C-w>h
 tnoremap <C-j> <C-\><C-N><C-w>j
 tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
 
 " Leave terminal-insert-mode with Ctrl-t instead Esc
 tnoremap <C-e> <C-\><C-N>
@@ -88,4 +84,12 @@ nnoremap S ?
 nnoremap <expr> o &buftype ==# 'quickfix' ? '\<CR>' : 'o'
 nnoremap <CR> :
 
+" Remap Enter in command-mode to remove search-highlighting
 cnoremap <silent> <CR> <CR>:nohl<CR>
+
+" Write Quotes, Braces, Parentheses and Curlybraces with shortcuts
+inoremap <C-b> []<Left>
+inoremap <C-r> {}<Left>
+inoremap <C-s> ''<Left>
+inoremap <C-d> ""<Left>
+inoremap <C-p> ()<Left>
