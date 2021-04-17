@@ -89,7 +89,17 @@ cnoremap <silent> <CR> <CR>:nohl<CR>
 
 " Write Quotes, Braces, Parentheses and Curlybraces with shortcuts
 inoremap <C-b> []<Left>
-inoremap <C-r> {}<Left>
+inoremap <C-u> {}<Left>
 inoremap <C-s> ''<Left>
 inoremap <C-d> ""<Left>
-inoremap <C-p> ()<Left>
+inoremap <C-a> ()<Left>
+
+" Add to space when cursor is between Parentheses, Curlybraces or Brackets
+inoremap <expr> <Space> g:CursorIsWrappedBy("()", "{}", "[]") ? "<Space><Space><Left>" : "<Space>"
+
+" Map Ctrl+j, Ctrl+l, Ctrl+k, Ctrl+h to arrow-keys in insert mode
+inoremap <C-j> <Up>
+inoremap <C-l> <Right>
+inoremap <C-k> <Down>
+inoremap <C-h> <Left>
+
