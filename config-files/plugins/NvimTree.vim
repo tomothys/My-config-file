@@ -5,14 +5,15 @@ let g:nvim_tree_width = 40
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 
 let g:nvim_tree_icons = {
-            \ 'git': {
-            \   'unstaged': "柳",
-            \   'staged': "✓ ",
-            \   'unmerged': " ",
-            \   'renamed': "➜ ",
-            \   'untracked': " "
-            \   },
-            \ }
+    \ 'git': {
+    \   'unstaged': "[U]",
+    \   'staged': "[S]",
+    \   'unmerged': "[UM]",
+    \   'renamed': "[R]",
+    \   'deleted': "[-]",
+    \   'untracked': "[+]"
+    \   },
+    \ }
 
 let g:which_key_map.e = 'Toggle Filetree'
 nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
