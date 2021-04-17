@@ -16,7 +16,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'kyazdani42/nvim-web-devicons' " Nice looking icons
     Plug 'ryanoasis/vim-devicons' " Nice looking icons
     Plug 'liuchengxu/vim-which-key'
-    Plug 'psliwka/vim-smoothie' " Smooth scrolling
     Plug 'kyazdani42/nvim-tree.lua' " File Explorer
     Plug 'sheerun/vim-polyglot' " Better Syntax Support
     Plug 'airblade/vim-gitgutter'
@@ -25,7 +24,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'alvan/vim-closetag' " Auto close html-tags
     Plug 'ChristianChiarulli/nvcode-color-schemes.vim' " Nice colorschemes
     Plug 'voldikss/vim-floaterm'
-    Plug 'mhinz/vim-startify' " Startscreen
     Plug 'airblade/vim-rooter'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
     Plug 'jremmen/vim-ripgrep'
