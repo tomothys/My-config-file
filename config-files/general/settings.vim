@@ -31,8 +31,8 @@ set shortmess+=c                    " Don't pass messages to |ins-completion-men
 set signcolumn=yes                  " Show signcolumn
 set timeoutlen=300                  " Time in milliseconds to wait for a mapped sequence to complete.
 set scrolloff=3                     " Number of lines to keep on edge of editor
-set foldmethod=indent               " Well.. as keyword states: Set foldmethod
-set foldlevel=100                   " Keep all folds open at first
+set foldmethod=marker               " Well.. as keyword states: Set foldmethod
+set foldmarker=#region,#endregion
 set completeopt=menuone,noselect    " Compe said to do so.. 👀
 set ignorecase                      " Make search case insensitive
 
