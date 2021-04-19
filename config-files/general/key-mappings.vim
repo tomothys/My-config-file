@@ -97,9 +97,9 @@ inoremap <expr> <Space> g:IsCursorWrappedBy("()", "{}", "[]") ? "<Space><Space><
 inoremap <expr> <BS> g:IsCursorWrappedBy("  ", "{}", "()", "[]", "''", '""', "<>") ? "<Left><DEL><DEL>" : "<BS>"
 
 " Map Ctrl+j, Ctrl+l, Ctrl+k, Ctrl+h to arrow-keys in insert mode
-inoremap <C-j> <Up>
+inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-inoremap <C-k> <Down>
+inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 
 inoremap <C-u> <C-R>=g:ConfirmSurroundings()<CR><Left>
