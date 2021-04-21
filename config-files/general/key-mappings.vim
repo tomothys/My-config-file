@@ -4,17 +4,9 @@ let mapleader = ' '
 inoremap jk <ESC>
 
 " Map 'cut' to 'x' so I can use 'd' to delete w/o polluting a register
-nnoremap x "+d
-nnoremap X "+D
-vnoremap x "+d
-
-" Copy/yank to clipboard-register by default
-nnoremap y "+y
-nnoremap Y "+Y
-vnoremap y "+y
-
-" Paste from clipboard-register by default
-nnoremap p "+p
+nnoremap x d
+nnoremap X D
+vnoremap x d
 
 " Don't touch the any register while deleting stuff
 nnoremap d "_d
