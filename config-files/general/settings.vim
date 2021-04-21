@@ -35,6 +35,7 @@ set foldmethod=marker               " Well.. as keyword states: Set foldmethod
 set foldmarker=#region,#endregion
 set completeopt=menuone,noselect    " Compe said to do so.. 👀
 set ignorecase                      " Make search case insensitive
+set inccommand=split                " Make substitution visible while typing
 
 augroup highlight_yank
     autocmd!
