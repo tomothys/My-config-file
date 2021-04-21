@@ -69,3 +69,7 @@ nnoremap S ?
 
 " Remove highlight on search end
 cnoremap <CR> <CR>:nohl<CR>
+
+nnoremap <Leader>e <cmd>call VSCodeNotify("workbench.action.toggleSidebarVisibility")<CR>
+nnoremap <Leader>w <cmd>call VSCodeNotify("workbench.action.files.save")<CR>
+nnoremap <Leader>bd <cmd>call VSCodeNotify("workbench.action.closeActiveEditor")<CR>
