@@ -5,8 +5,10 @@ nnoremap <silent> <S-Tab> :BufferPrevious<CR>
 let g:which_key_map.b = { 'name': '+Buffermenu' }
 
 " Close buffers
-let g:which_key_map.b.d = 'Close buffer'
+let g:which_key_map.b.d = 'Close/Kill buffer'
 nnoremap <silent> <Leader>bd :BufferClose<CR>
+let g:which_key_map.b.k = 'Close/Kill buffer'
+nnoremap <silent> <Leader>bk :BufferClose<CR>
 let g:which_key_map.b.a = 'Close all buffer except current'
 nnoremap <silent> <Leader>ba :BufferCloseAllButCurrent<CR>
 
@@ -26,3 +28,7 @@ let g:which_key_map.b.m.n = 'to next tab position'
 nnoremap <silent> <Leader>bmn :BufferMoveNext<CR>
 let g:which_key_map.b.m.p = 'to previous tab position'
 nnoremap <silent> <Leader>bmp :BufferMovePrevious<CR>
+
+" Save buffer
+let g:which_key_map.b.s = 'Save buffer'
+nnoremap <silent> <Leader>bs :w<CR>
