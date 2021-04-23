@@ -79,12 +79,19 @@ nnoremap Q @='n.'<CR>
 " Map o to <CR> only in quick-fix lists
 nnoremap <expr> o &buftype ==# 'quickfix' ? '\<CR>' : 'o'
 nnoremap <CR> :
-
-" Remap Enter in command-mode to remove search-highlighting
-cnoremap <silent> <CR> <CR>:nohl<CR>
-
 " Write Quotes, Braces, Parentheses and Curlybraces with shortcuts
 " 
+
+" Remap motions to clear search highlighting too
+nnoremap <silent> j j:nohl<CR>
+nnoremap <silent> k k:nohl<CR>
+nnoremap <silent> l l:nohl<CR>
+nnoremap <silent> h h:nohl<CR>
+nnoremap <silent> w w:nohl<CR>
+nnoremap <silent> e e:nohl<CR>
+nnoremap <silent> b b:nohl<CR>
+nnoremap <silent> i :nohl<CR>i
+nnoremap <silent> a :nohl<CR>a
 
 " Add to space when cursor is between Parentheses, Curlybraces or Brackets
 inoremap <expr> <Space> g:IsCursorWrappedBy("()", "{}", "[]") ? "<Space><Space><Left>" : '<Space>'
