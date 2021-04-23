@@ -73,6 +73,9 @@ nnoremap s /
 nnoremap S :s/
 vnoremap s :s/
 
+" Repeat last edit on searched item (with count)
+nnoremap Q @='n.'<CR>
+
 " Map o to <CR> only in quick-fix lists
 nnoremap <expr> o &buftype ==# 'quickfix' ? '\<CR>' : 'o'
 nnoremap <CR> :
