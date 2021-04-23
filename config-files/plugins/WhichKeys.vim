@@ -9,10 +9,10 @@ nnoremap <silent> <Leader> :WhichKey '<Space>'<CR>
 " Window close/split
 let g:which_key_map.w = { 'name': '+Window' }
 let g:which_key_map.w.k = 'Close/Kill'
-nnoremap <silent> <Leader>w :q<CR>
+nnoremap <silent> <Leader>wk :q<CR>
 let g:which_key_map.w.s = 'Split horizontally'
 nnoremap <silent> <Leader>ws :sp<CR>
-let g:which_key_map.w.s = 'Split vertically'
+let g:which_key_map.w.v = 'Split vertically'
 nnoremap <silent> <Leader>wv :vsp<CR>
 
 let g:which_key_map.h = 'Remove search highlight'
