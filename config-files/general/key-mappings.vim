@@ -112,3 +112,8 @@ inoremap <C-u> <C-R>=g:ConfirmSurroundings()<CR><Left>
 " To uppercase mapping which doesn't need the the shift-button
 nnoremap guu gU
 vnoremap guu gU
+
+" highlight word and every other occassion of that word in document
+nnoremap # *N
+
+nnoremap <C-p> :call g:SynStack()<CR>
