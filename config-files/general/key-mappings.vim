@@ -108,5 +108,6 @@ inoremap <C-h> <Left>
 
 inoremap <C-u> <C-R>=g:ConfirmSurroundings()<CR><Left>
 
-nnoremap gul gu
+" To uppercase mapping which doesn't need the the shift-button
 nnoremap guu gU
+vnoremap guu gU
