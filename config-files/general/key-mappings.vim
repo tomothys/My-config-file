@@ -70,7 +70,8 @@ vnoremap + <Esc>:set rnu!<CR>gv
 
 " Remap search and backward search
 nnoremap s /
-nnoremap S ?
+nnoremap S :s/
+vnoremap s :s/
 
 " Map o to <CR> only in quick-fix lists
 nnoremap <expr> o &buftype ==# 'quickfix' ? '\<CR>' : 'o'
