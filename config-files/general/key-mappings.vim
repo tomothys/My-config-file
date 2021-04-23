@@ -81,6 +81,7 @@ nnoremap <expr> o &buftype ==# 'quickfix' ? '\<CR>' : 'o'
 nnoremap <CR> :
 " Write Quotes, Braces, Parentheses and Curlybraces with shortcuts
 " 
+nnoremap <M-x> :
 
 " Remap motions to clear search highlighting too
 nnoremap <silent> j j:nohl<CR>
