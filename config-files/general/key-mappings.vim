@@ -106,6 +106,7 @@ inoremap <C-l> <Right>
 inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 
+inoremap <C-e> =
 inoremap <C-u> <C-R>=g:ConfirmSurroundings()<CR><Left>
 
 " To uppercase mapping which doesn't need the the shift-button
