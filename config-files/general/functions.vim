@@ -24,3 +24,10 @@ function! g:ConfirmSurroundings() abort
     let l:map = { 1: '""', 2: "''", 3: "()", 4: "{}", 5: "[]", 6: "<>" }
     return l:map[l:choice]
 endfunction
+
+function! g:SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunction
