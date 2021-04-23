@@ -34,12 +34,12 @@ nnoremap <silent> <S-Left> :vertical resize +2<CR>
 nnoremap <silent> <S-Right> :vertical resize -2<CR>
 
 " Move line up and down
-inoremap <silent> <M-k> <C-O>:move -2<CR>
-inoremap <silent> <M-j> <C-O>:move +1<CR>
-nnoremap <silent> <M-k> :move -2<CR>
-nnoremap <silent> <M-j> :move +1<CR>
-xnoremap <silent> <M-k> :move '<-2<CR>gv-gv
-xnoremap <silent> <M-j> :move '>+1<CR>gv-gv
+inoremap <silent> <C-k> <C-O>:move -2<CR>
+inoremap <silent> <C-j> <C-O>:move +1<CR>
+nnoremap <silent> <C-k> :move -2<CR>
+nnoremap <silent> <C-j> :move +1<CR>
+xnoremap <silent> <C-k> :move '<-2<CR>gv-gv
+xnoremap <silent> <C-j> :move '>+1<CR>gv-gv
 
 " Unindent line in insert-mode
 inoremap <S-Tab> <C-O><<<C-O>^
