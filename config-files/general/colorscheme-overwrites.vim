@@ -5,7 +5,8 @@ endfunction
 " #endregion
 
 " #region Colors
-let s:blue = "#2b394a"
+let s:black = "#546e7a"
+let s:blue = "#88aaff"
 let s:darkBlue = "#12181f"
 " #endregion
 
@@ -40,12 +41,14 @@ highlight BufferLineSeperatorVisible guibg=#363535
 " Custom StatusLine highlights
 execute 'hi StatusLineNC guibg=' . s:getColor("StatusLine", "bg")
 execute 'hi StatusLineFilePathHead guibg=' . s:getColor("StatusLine", "bg") . ' guifg=' . s:getColor("StatusLineNC", "fg")
-hi StatusLineBgColorOne guibg=#f04123 guifg=white
-execute 'hi StatusLineColorTwo guibg=' . s:getColor("StatusLineNC", "fg")
+execute 'hi StatusLineBgColorOne guibg=' . s:blue . ' guifg=black'
+execute 'hi StatusLineFgColorOne guifg=' . s:blue . ' guibg=' s:getColor("StatusLine", "bg")
+execute 'hi StatusLineBgColorTwo guibg=' . s:getColor("StatusLineNC", "fg")
+execute 'hi StatusLineFgColorTwo guifg=' . s:getColor("StatusLineNc", "fg") . ' guibg=' s:getColor("StatusLine", "bg")
 
 " Change background
 execute 'highlight Normal guibg=' . s:darkBlue
-execute 'highlight CursorLine guibg=' . s:blue
+" execute 'highlight CursorLine guibg=' . s:blue
 execute 'highlight SignColumn guibg=' . s:darkBlue
 
 " Remove bg for GitGutter symbols
