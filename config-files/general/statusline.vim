@@ -11,7 +11,7 @@ function g:StatusLine(isCurrentBuffer = v:false)
     if a:isCurrentBuffer
         " LEFT SIDE [BEGIN]
         " Add emote
-        setl statusline+=%#StatusLineBgColorOne#\ Nvim\ %#StatusLineFgColorOne#%#StatusLine#\ 
+        setl statusline+=%#StatusLineBgColorOne#\ Nvim\ %#StatusLineFgColorOne#%#StatusLine#\ 
 
         " Add file path head if it's not NvimTree/FileTree
         if expand('%t') != 'NvimTree'
@@ -29,14 +29,14 @@ function g:StatusLine(isCurrentBuffer = v:false)
 
         " RIGHT SIDE [BEGIN]
         " Switch to right side
-        setl statusline+=%=%#StatusLineFgColorOne#
+        setl statusline+=%=%#StatusLineFgColorOne#
         " Add current Git-Branch
         setl statusline+=%#StatusLineBgColorOne#\ %{GetCurrentBranch()}\ 
         " RIGHT SIDE [END]
     else
         " LEFT SIDE [BEGIN]
         " Add emote
-        setl statusline+=%#StatusLineBgColorTwo#\ 👾\ %#StatusLineNC#\ 
+        setl statusline+=%#StatusLineBgColorTwo#\ 👾\ %#StatusLineFgColorTwo#%#StatusLineNC#\ 
         " Add file name
         setl statusline+=%t
         " LEFT SIDE [END]
