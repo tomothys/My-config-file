@@ -76,11 +76,6 @@ vnoremap s :s/
 " Repeat last edit on searched item (with count)
 nnoremap Q @='n.'<CR>
 
-" Map o to <CR> only in quick-fix lists
-nnoremap <expr> o &buftype ==# 'quickfix' ? '\<CR>' : 'o'
-nnoremap <CR> :
-" Write Quotes, Braces, Parentheses and Curlybraces with shortcuts
-" 
 nnoremap <M-x> :
 
 " Remap motions to clear search highlighting too
