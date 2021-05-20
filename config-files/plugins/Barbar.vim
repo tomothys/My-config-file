@@ -1,3 +1,8 @@
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.icon_custom_colors = v:true
+let bufferline.icon_separator_active = ''
+let bufferline.icon_separator_inactive = ''
+
 " Make moving between buffers easier
 nnoremap <silent> <Tab> :BufferNext<CR>
 nnoremap <silent> <S-Tab> :BufferPrevious<CR>
