@@ -32,7 +32,6 @@
     Plug('nvim-treesitter/nvim-treesitter', { ['do'] = function()
         vim.cmd(':TSUpdate')
     end })
-    Plug 'evanleck/vim-svelte'
 
     -- Intellisense
     Plug 'neovim/nvim-lspconfig'
