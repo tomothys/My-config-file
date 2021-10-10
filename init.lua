@@ -152,7 +152,7 @@
         vim.cmd [[
             let $FZF_DEFAULT_OPTS='--layout=reverse'
             let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
-            let g:fzf_preview_window = ['right:60%', '\']
+            let g:fzf_preview_window = ['right:40%', '\']
             let g:fzf_layout = {'window': { 'width': 0.7, 'height': 0.5, 'border': 'rounded', 'yoffset': 0.1 }}
         ]]
 
@@ -160,7 +160,8 @@
             ["<leader>f"] = {
                 name = "+File",
                 p = { "<cmd>Files<CR>", "File finder" },
-                s = { "<cmd>DocumentSymbols<CR>", "Document Symbol finder" }
+                s = { "<cmd>DocumentSymbols<CR>", "Document Symbol finder" },
+                b = { "<cmd>Buffer<CR>", "Buffer finder" },
             },
         })
 
@@ -258,7 +259,7 @@
 
 -- #region - Svelte PlugIn
     
-    vim.cmd [[
+    --[[ vim.cmd [[
         let g:svelte_preprocessors = ['typescript', 'scss']
     ]]
 
@@ -445,6 +446,7 @@
         nnoremap Q @='n.'<CR>
 
         nnoremap <M-x> :
+        nnoremap <CR> :
 
         " Remap motions to clear search highlighting too
         nnoremap <silent> j j:nohl<CR>
@@ -481,12 +483,14 @@
 
         nnoremap <C-p> :call g:SynStack()<CR>
 
-        inoremap <expr> <CR> g:IsCursorWrappedBy("{}") ? "<CR><C-o>O" : "<CR>"
+        inoremap <expr> <CR> g:IsCursorWrappedBy("{}") ? "<Right><BS><CR>}<C-o>O" : "<CR>"
 
         " Navigating around while using buffers made ez
         nnoremap <expr> <BS> v:count ? ":b " . v:count . "<CR>" : "<BS>"
         nnoremap <Left> :bprev<CR>
         nnoremap <Right> :bnext<CR>
+
+        nnoremap ' `
 
     ]]
 
@@ -496,31 +500,31 @@
 
     vim.cmd [[
         augroup javascript_abbrevs
-            autocmd FileType javascript,typescript,svelte,vue :inoreab afunc@ () => {}<ESC>i<CR><C-o>O<C-R>=g:Eatchar('@')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab nfunc@ function () {}<ESC>i<CR><C-o>?(<CR><C-R>=g:Eatchar('@')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab meth@ () {}<ESC>i<CR><C-o>?(<CR><C-R>=g:Eatchar('@')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab log@ console.log()<Left><C-R>=g:Eatchar('@')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab vlog@ <ESC>^d$aconsole.log("<C-o>p<BS>", <C-o>p<BS>)<C-R>=g:Eatchar('@')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab if@ if() {}<ESC>i<CR><C-o>?)<CR><C-R>=g:Eatchar('@')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab else@ <C-o>/}<CR><Right> else {}<Left><CR><C-o>O<C-R>=g:Eatchar('@')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab elseif@ <C-o>/}<CR><Right> else if() {}<Left><CR><C-o>?)<CR><C-R>=g:Eatchar('@')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab afunc= ()<C-o>ma => {<CR>}<C-o>O<C-R>=g:Eatchar('=,@,,,.,?')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab nfunc= <ESC>bdeifunction <C-r>"()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab meth= ()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab log= console.log()<Left><C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab vlog= <ESC>bdeiconsole.log("<C-o>P", <C-o>P)<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab if= if ()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab else= <ESC>/}<CR>a else {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab elseif= <ESC>/}<CR>a else if ()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
         augroup END
 
         augroup vue_abbrevs
-            autocmd FileType typescript,vue :inoreab vcomp@ <Esc>bdeiimport Vue from "vue";<CR><CR>interface <C-o>pData {}<CR><CR>export const <C-o>p = Vue.extend({<CR>});<C-o>Oname: "<C-o>p",<CR>template: "",<CR>data() {<CR>return {} as <C-o>pData;<CR>},<CR>components: {<CR>},<C-o>?"<CR><C-R>=g:Eatchar('@')<CR>
-            autocmd FileType typescript,vue :inoreab vimport@ <Esc>bdeiimport {<C-o>p } from "<ESC>mza/components/<C-o>p";<ESC>/components:<CR>/}<CR>O<C-R>",<ESC>`za<C-R>=g:Eatchar('@')<CR>
+            autocmd FileType javascript,typescript,vue :inoreab vcomp= <Esc>bdeiimport Vue from "vue";<CR><CR>interface <C-o>pData {}<CR><CR>export const <C-o>p = Vue.extend({<CR>});<C-o>Oname: "<C-o>p",<CR>template: "",<CR>data(): <C-o>pData {<CR>return {};<CR>},<CR>components: {<CR>},<C-o>?"<CR><C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,vue :inoreab vimport= <Esc>bdeiimport {<C-o>p } from "<ESC>mza/components/<C-o>p";<ESC>/components:<CR>/}<CR>O<C-R>",<ESC>`za<C-R>=g:Eatchar('=')<CR>
         augroup END
 
         augroup svelte_abbrevs
-            autocmd FileType svelte :inoreab sif@ {#if}<CR>{/if}<Esc>?#if}<CR>f}i <C-R>=g:Eatchar('@')<CR>
-            autocmd FileType svelte :inoreab selse@ <Esc>/{/if}<CR>O{:else}<CR><C-R>=g:Eatchar('@')<CR>
-            autocmd FileType svelte :inoreab rlog@ <ESC>^d$a$: console.log("<C-o>p<BS>", <C-o>p<BS>)<C-R>=g:Eatchar('@')<CR>
+            autocmd FileType svelte :inoreab sif= {#if <C-o>ma}<CR>{/if}<C-o>`a<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType svelte :inoreab selse= <C-o>/{/if}<C-o>O{:else}<CR><C-R>=g:Eatchar('=')<CR>
+            autocmd FileType svelte :inoreab rlog= <ESC>bdei$: console.log("<C-o>p"= <C-o>p)<C-R>=g:Eatchar('=')<CR>
         augroup END
     ]]
 
 -- #endregion
 
--- #region - Statusline
+-- #region - Statusline (living in the tabline)
 
     vim.cmd [[
         
@@ -532,45 +536,45 @@
         endfunction
 
         function! g:StatusLine(isCurrentBuffer = v:false)
-            setl statusline=
+            setl tabline=
 
             if a:isCurrentBuffer
                 " #region - LEFT SIDE
                 " Add emote
-                setl statusline+=\ Nvim\ \ \ 
+                setl tabline+=%#TabLineSel#\ Nvim\ %#TabLineFill#\ 
 
                 " Add file path head if it's not NvimTree/FileTree
                 if expand('%t') != 'NvimTree'
-                    setl statusline+=%.40{expand('%:h')}/
+                    setl tabline+=%.40{expand('%:h')}/
                 endif
 
                 " Add file name
-                " setl statusline+=%#StatusLine#%t
-                setl statusline+=%t
+                " setl tabline+=%#StatusLine#%t
+                setl tabline+=%t
 
                 if expand('%t') != 'NvimTree'
                     " Is file modified
-                    setl statusline+=\ %m
+                    setl tabline+=\ %m
                 endif
                 " #endregion
 
                 " #region - RIGHT SIDE
                 " Switch to right side
-                setl statusline+=%=\ 
+                setl tabline+=%=\ 
                 " Add current Git-Branch
-                setl statusline+=\ %{GetCurrentBranch()}\ 
+                setl tabline+=%#TabLineSel#\ %{GetCurrentBranch()}\ 
                 " #endregion
             else
                 " #region - LEFT SIDE
                 " Add emote
-                setl statusline+=\ 👾\ \ \ 
+                setl tabline+=\ 👾\ \ \ 
                 " Add file name
-                setl statusline+=%t
+                setl tabline+=%t
                 " #endregion
 
                 " #region - RIGHT SIDE
                 " Switch to rightside
-                setl statusline+=%=
+                setl tabline+=%=
                 " #endregion
             endif
         endfunction
@@ -583,23 +587,26 @@
 
 -- #endregion
 
--- #region - Tabline (made to Bufferline)
+-- #region - Bufferline (living in the statusline)
 
     vim.cmd [[
 
         function! g:Bufferline()
-            let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))')
-            let num = '"%#TabLineSel# " . v:val . '
-            let hi = '(v:val == bufnr("%") ? " %#Special# " : " %#TabLine# ") . '
-            let bufname = 'fnamemodify(bufname(v:val), ":t") . '
-            let mod = '(getbufvar(v:val, "&modified") ? " [+] " : " ")'
-            let bufline = join(map(buffers, num . hi . bufname . mod))
+            setl statusline=
 
-            return bufline
+            if expand('%') != 'NvimTree'
+                setl statusline+=%#TabLineSel#\ %{bufnr('%')}\ %#TabLineFill#
+            endif
+
+            setl statusline+=%#TabLine#\ %{expand('%:h')}/%#TabLineFill#
+            setl statusline+=%t
+
+            if expand('%') != 'NvimTree'
+                setl statusline+=\ %m\ %#TabLine#
+            endif
         endfunction
 
-        set tabline=%!g:Bufferline()
-
+        autocmd BufEnter * call g:Bufferline()
     ]]
 
 -- #endregion
