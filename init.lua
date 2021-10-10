@@ -157,10 +157,10 @@
     -- #region - FZF
         
         vim.cmd [[
-            " let $FZF_DEFAULT_OPTS='--layout=reverse'
+            let $FZF_DEFAULT_OPTS='--layout=reverse'
             let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
             let g:fzf_preview_window = ['right:50%', '\']
-            let g:fzf_layout = {'window': { 'width': 0.9, 'height': 0.6, 'border': 'rounded', 'yoffset': 0.1 }}
+            let g:fzf_layout = {'window': { 'width': 0.8, 'height': 0.6, 'border': 'rounded', 'yoffset': 0.2 }}
         ]]
 
         wk.register({
@@ -273,14 +273,6 @@
 
 -- #endregion
 
--- #region - Svelte PlugIn
-    
-    --[[ vim.cmd [[
-        let g:svelte_preprocessors = ['typescript', 'scss']
-    ]]
-
--- #endregion
-
 -- #region - Nvim-Treesitter
 
     require'nvim-treesitter.configs'.setup {
@@ -294,6 +286,14 @@
             additional_vim_regex_highlighting = false,
         },
     }
+
+-- #endregion
+
+-- #region - Peakaboo
+
+    vim.cmd [[
+        let g:peekaboo_window = "vert bo 80new"
+    ]]
 
 -- #endregion
 
@@ -516,6 +516,7 @@
         inoremap g5 []<Left>
         inoremap g6 &
         inoremap g7 /
+        cnoremap g7 /
         inoremap g8 ()<Left>
         inoremap g9 {}<Left>
         inoremap g, ;
@@ -523,6 +524,7 @@
         inoremap gl @
         inoremap g< <><Left>
         inoremap gß ?
+        nnoremap g2 :<c-u>call peekaboo#aboo()<cr>
         
     ]]
 
