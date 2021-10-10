@@ -84,6 +84,13 @@
 -- #region - General vim settings
 
     vim.cmd [[
+        set nocompatible
+        filetype plugin on
+        runtime macros/matchit.vim
+        set path+=**
+        set wildmenu
+        set wildignore+=**/node_modules/**
+
         syntax enable				        " Enable syntax highlighting
         set iskeyword+=-,32  		        " Treat dash separated words as a word text object
         set formatoptions-=cro			    " Stop newline continution of comments
@@ -150,18 +157,27 @@
     -- #region - FZF
         
         vim.cmd [[
-            let $FZF_DEFAULT_OPTS='--layout=reverse'
+            " let $FZF_DEFAULT_OPTS='--layout=reverse'
             let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
-            let g:fzf_preview_window = ['right:40%', '\']
-            let g:fzf_layout = {'window': { 'width': 0.7, 'height': 0.5, 'border': 'rounded', 'yoffset': 0.1 }}
+            let g:fzf_preview_window = ['right:50%', '\']
+            let g:fzf_layout = {'window': { 'width': 0.9, 'height': 0.6, 'border': 'rounded', 'yoffset': 0.1 }}
         ]]
 
         wk.register({
-            ["<leader>f"] = {
-                name = "+File",
-                p = { "<cmd>Files<CR>", "File finder" },
-                s = { "<cmd>DocumentSymbols<CR>", "Document Symbol finder" },
+            ["<leader>"] = {
+                f = {
+                    name = "+File",
+                    p = { "<cmd>Files<CR>", "File finder" },
+                    s = { "<cmd>DocumentSymbols<CR>", "Document Symbol finder" },
+                },
+                h = {
+                    h = { "<cmd>History<CR>", "File history" },
+                    c = { "<cmd>History:<CR>", "Command history" },
+                    s = { "<cmd>History/<CR>", "Search history" },
+                },
                 b = { "<cmd>Buffer<CR>", "Buffer finder" },
+                ["7"] = { "<cmd>BLines<CR>", "Search in buffer" },
+                m = { "<cmd>Marks<CR>", "Mark finder" },
             },
         })
 
@@ -439,14 +455,14 @@
 
         " Remap search and substitute
         nnoremap s /
-        nnoremap S :s/
+        nnoremap S :%s/
         vnoremap s :s/
 
         " Repeat last edit on searched item (with count)
         nnoremap Q @='n.'<CR>
 
-        nnoremap <M-x> :
-        nnoremap <CR> :
+        nnoremap <Leader>c :
+        vnoremap <Leader>c :
 
         " Remap motions to clear search highlighting too
         nnoremap <silent> j j:nohl<CR>
@@ -471,9 +487,6 @@
         inoremap <C-j> <Down>
         inoremap <C-h> <Left>
 
-        inoremap <C-e> =
-        inoremap <C-u> <C-R>=g:ConfirmSurroundings()<CR><Left>
-
         " To uppercase mapping which doesn't need the the shift-button
         nnoremap guu gU
         vnoremap guu gU
@@ -492,6 +505,25 @@
 
         nnoremap ' `
 
+        cnoremap ## <C-R><C-W>/
+        
+        " Make writing those pair more convenient
+        inoremap g0 =
+        inoremap g1 !
+        inoremap g+ ´´<Left>
+        inoremap g2 ""<Left>
+        inoremap g4 $
+        inoremap g5 []<Left>
+        inoremap g6 &
+        inoremap g7 /
+        inoremap g8 ()<Left>
+        inoremap g9 {}<Left>
+        inoremap g, ;
+        inoremap g# ''<Left>
+        inoremap gl @
+        inoremap g< <><Left>
+        inoremap gß ?
+        
     ]]
 
 -- #endregion
