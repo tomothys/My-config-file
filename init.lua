@@ -505,11 +505,9 @@
         nnoremap <Left> :bprev<CR>
         nnoremap <Right> :bnext<CR>
 
-        nnoremap ' `
-
         cnoremap ## <C-R><C-W>/
         
-        " Make writing those pair more convenient
+        " Make writing those pairs more convenient
         inoremap g0 =
         inoremap g1 !
         inoremap g+ ´´<Left>
@@ -518,16 +516,13 @@
         inoremap g5 []<Left>
         inoremap g6 &
         inoremap g7 /
-        cnoremap g7 /
         inoremap g8 ()<Left>
         inoremap g9 {}<Left>
-        inoremap g, ;
         inoremap g# ''<Left>
-        inoremap gl @
         inoremap g< <><Left>
         inoremap gß ?
-        nnoremap g2 :<c-u>call peekaboo#aboo()<cr>
-        
+        nmap g2 "
+        nmap g# `
     ]]
 
 -- #endregion
