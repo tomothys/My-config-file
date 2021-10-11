@@ -134,11 +134,6 @@
             autocmd!
             au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=300 }
         augroup END
-
-        augroup only_highlight_current_buffer
-            autocmd!
-            au BufEnter,WinEnter * vert res | vert res -40
-        augroup END
     ]]
 
 -- #endregion
