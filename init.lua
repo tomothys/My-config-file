@@ -330,6 +330,9 @@
         -- VIM
         require'lspconfig'.vimls.setup{}
 
+        -- Graphviz
+        require'lspconfig'.dotls.setup{}
+
         -- Vue 2
         require'lspconfig'.vuels.setup{}
 
