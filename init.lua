@@ -35,7 +35,10 @@
 
     -- Intellisense
     Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe' -- Auto-completion
+    -- Plug 'hrsh7th/nvim-compe' -- Auto-completion
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/nvim-cmp'
     Plug 'glepnir/lspsaga.nvim'
     -- Plug 'onsails/lspkind-nvim' -- Adds pictograms to auto-completion pop-ups
 
@@ -126,7 +129,7 @@
         set scrolloff=3                     " Number of lines to keep on edge of editor
         set foldmethod=marker               " Well.. as keyword states: Set foldmethod
         set foldmarker=#region,#endregion
-        set completeopt=menuone,noselect    " Compe said to do so.. 👀
+        set completeopt=menu,menuone,noselect
         set ignorecase                      " Make search case insensitive
         set inccommand=split                " Make substitution visible while typing
 
@@ -371,7 +374,7 @@
 
     -- #region - Compe
 
-        local setKey = vim.api.nvim_set_keymap
+        --[[ local setKey = vim.api.nvim_set_keymap
 
         require'compe'.setup {
             enabled = true;
@@ -402,9 +405,34 @@
         }
         
         setKey('i', '<C-Space>', 'compe#complete()', { silent=true, expr=true })
-        setKey('i', '<CR>', 'compe#confirm("<CR>")', { silent=true, expr=true })
+        setKey('i', '<CR>', 'compe#confirm("<CR>")', { silent=true, expr=true }) ]]
     
     -- #endregion
+
+-- #region - Nvim-Cmp
+
+    local cmp = require'cmp'
+
+    cmp.setup {
+        mapping = {
+            ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+            ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+            ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+            ['<Tab>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+        },
+        sources = {
+            { name = 'nvim_lsp' },
+            { name = 'buffer' },
+        },
+    }
+
+-- #endregion
 
 -- #region - Prettier
 
