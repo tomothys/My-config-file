@@ -74,63 +74,55 @@
             endif
             echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
         endfunction
-
-       function! g:Eatchar(pat)
-          let c = nr2char(getchar(0))
-          return (c =~ a:pat) ? '' : c
-       endfunc
     ]]
 
 -- #endregion
 
 -- #region - General vim settings
 
+    vim.opt.compatible = false
+    vim.opt.path:append({ '**' })
+    vim.opt.wildmenu = true
+    vim.opt.wildignore:append({ '**/node_modules/**' })
+    vim.opt.iskeyword:append({ '-', '32' })
+    vim.opt.formatoptions:append({ 'cro' })
+    vim.opt.hidden = true
+    vim.opt.wrap = false
+    vim.opt.encoding = 'utf-8'
+    vim.opt.fileencoding = 'utf-8'
+    vim.opt.splitbelow = true
+    vim.opt.splitright = true
+    vim.opt.conceallevel = 0
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 0
+    vim.opt.expandtab = true
+    vim.opt.autoindent = true
+    vim.opt.smartindent = true
+    vim.opt.laststatus = 2
+    vim.opt.showtabline = 2
+    vim.opt.showmode = false
+    vim.opt.number = true
+    vim.opt.background = 'dark'
+    vim.opt.termguicolors = true
+    vim.opt.backup = false
+    vim.opt.writebackup = false
+    vim.opt.signcolumn = 'yes'
+    vim.opt.timeoutlen = 300
+    vim.opt.scrolloff = 3
+    vim.opt.foldmethod = 'marker'
+    vim.opt.foldmarker = { '#region', '#endregion' }
+    vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+    vim.opt.ignorecase = true
+    vim.opt.inccommand = 'split'
+
     vim.cmd [[
-        set nocompatible
         filetype plugin on
         runtime macros/matchit.vim
-        set path+=**
-        set wildmenu
-        set wildignore+=**/node_modules/**
 
-        syntax enable				        " Enable syntax highlighting
-        set iskeyword+=-,32  		        " Treat dash separated words as a word text object
-        set formatoptions-=cro			    " Stop newline continution of comments
+        syntax enable
         autocmd FileType * set formatoptions-=cro
-        set hidden				            " Keep multiple buffers open
-        set nowrap				            " Don't wrap lines
-        set whichwrap+=<,>,[,],h,l		    " Allow specified keys to move to the previous/next line
-        set encoding=utf-8			        " Set displayed encoding
-        set fileencoding=utf-8			    " The encoding written to file
-        set cursorline                      " Highlight current line
-        "set cursorcolumn                    " Highlight current column
-        set mouse=a				            " Enable mouse
-        set splitbelow				        " Horizontal splits will open below
-        set splitright				        " Vertical splits will open on the right
-        set conceallevel=0			        " To make `` visible in markdown files
-        set tabstop=4				        " 1 tab = 4 spaces
-        set shiftwidth=0			        " If zero if falls back to tabstop
-        set expandtab				        " Converts tabs to spaces
-        set autoindent                      " Enable auto indentation
-        set smartindent                     " Claims to indent smart
-        set laststatus=2                    " Always display status line
-        set showtabline=2                   " Show tabs
-        set noshowmode                      " Hide mode in statusline
-        set number                          " Display line numbers
-        set background=dark                 " Set background-color to dark
-        set t_Co=256				        " Enable 256 color support
-        set termguicolors
-        set nobackup                        " Disable backup files
-        set nowritebackup                   " Disable backup files
-        set shortmess+=c                    " Don't pass messages to |ins-completion-menu|
-        set signcolumn=yes                  " Show signcolumn
-        set timeoutlen=300                  " Time in milliseconds to wait for a mapped sequence to complete.
-        set scrolloff=3                     " Number of lines to keep on edge of editor
-        set foldmethod=marker               " Well.. as keyword states: Set foldmethod
-        set foldmarker=#region,#endregion
-        set completeopt=menu,menuone,noselect
-        set ignorecase                      " Make search case insensitive
-        set inccommand=split                " Make substitution visible while typing
+    	set whichwrap+=<,>,[,]
+        set shortmess+=c
 
         augroup highlight_yank
             autocmd!
@@ -186,19 +178,19 @@
 
     -- #region - GitGutter / Git-Messenger
 
+        vim.api.nvim_set_var('gitgutter_enabled', 1)
+        vim.api.nvim_set_var('gitgutter_map_keys', 1)
+        vim.api.nvim_set_var('gitgutter_preview_win_floating', 1)
+
+        vim.api.nvim_set_var('gitgutter_sign_allow_clobber', 1)
+        vim.api.nvim_set_var('gitgutter_sign_added', '▎')
+        vim.api.nvim_set_var('gitgutter_sign_modified', '▎')
+        vim.api.nvim_set_var('gitgutter_sign_removed', '契')
+        vim.api.nvim_set_var('gitgutter_sign_removed_first_line', '契')
+        vim.api.nvim_set_var('gitgutter_sign_modified_removed', '▎')
+        vim.api.nvim_set_var('gitgutter_preview_win_floating', 1)
+
         vim.cmd [[
-            let g:gitgutter_enabled = 0
-            let g:gitgutter_map_keys = 0
-            let g:gitgutter_preview_win_floating = 0
-
-            let g:gitgutter_sign_allow_clobber = 1
-            let g:gitgutter_sign_added = '▎'
-            let g:gitgutter_sign_modified = '▎'
-            let g:gitgutter_sign_removed = '契'
-            let g:gitgutter_sign_removed_first_line = '契'
-            let g:gitgutter_sign_modified_removed = '▎'
-            let g:gitgutter_preview_win_floating = 1
-
             if g:gitgutter_enabled
                 highlight GitGutterAdd guifg=#587C0C ctermfg=2
                 highlight GitGutterChange guifg=#FABD2F ctermfg=3
@@ -226,14 +218,13 @@
     
     -- #region - NvimTree
         
+        vim.api.nvim_set_var('nvim_tree_git_hl', 1)
+        vim.api.nvim_set_var('nvim_tree_indent_markers', 1)
+
         vim.cmd [[
-            let g:nvim_tree_git_hl = 1                  " Enable file highlight for git stuff
             let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
             let g:nvim_tree_special_files = { 'README.md': 1, 'package.json': 1, 'init.lua': 1, 'init.vim': 1 }
             let g:nvim_tree_icons = { 'git': { 'unstaged': "[U]", 'staged': "[S]", 'unmerged': "[UM]", 'renamed': "[R]", 'deleted': "[-]", 'untracked': "[+]" } }
-
-            nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
-            nnoremap <silent> <Leader>r :NvimTreeRefresh<CR>
         ]]
 
         wk.register({
@@ -245,6 +236,9 @@
         })
 
         require'nvim-tree'.setup {
+            diagnostics = {
+                enable = false,
+            },
             disable_netrw = true,
             hijack_netrw = true,
             open_on_setup = false,
@@ -252,7 +246,6 @@
             auto_close = false,
             open_on_tab = false,
             update_cwd = false,
-            lsp_diagnostics = false,
             update_focused_file = {
                 enable = true,
                 ignore_list = {}
@@ -292,9 +285,7 @@
 
 -- #region - Peakaboo
 
-    vim.cmd [[
-        let g:peekaboo_window = "vert bo 80new"
-    ]]
+    vim.api.nvim_set_var('peekaboo_window', 'vert bo 80new')
 
 -- #endregion
 
@@ -457,6 +448,9 @@
                 return vim_item
             end
         },
+        documentation = {
+            border = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
+        },
     }
 
 -- #endregion
@@ -479,106 +473,107 @@
 
 -- #region - Key mappings
 
-    vim.cmd [[
-        let mapleader = ' '
+    local set_key = vim.api.nvim_set_keymap;
 
-        " Exit insert mode
-        inoremap jk <ESC>
+    vim.api.nvim_set_var('mapleader', ' ')   
 
-        " Make moving between windows/panes smoother
-        nnoremap <C-j> <C-w>j
-        nnoremap <C-k> <C-w>k
-        nnoremap <C-l> <C-w>l
-        nnoremap <C-h> <C-w>h
+    -- Escape insert mode
+    set_key('i', 'jk', '<ESC>', { noremap = true })
+    
+    -- Make navigating windows/splits smooth af
+    set_key('n', '<C-j>', '<C-W>j', { noremap = true })
+    set_key('n', '<C-k>', '<C-W>k', { noremap = true })
+    set_key('n', '<C-l>', '<C-W>l', { noremap = true })
+    set_key('n', '<C-h>', '<C-W>h', { noremap = true })
+    set_key('t', '<C-h>', '<C-\\><C-N><C-w>h', { noremap = true })
+    set_key('t', '<C-j>', '<C-\\><C-N><C-w>j', { noremap = true })
+    set_key('t', '<C-k>', '<C-\\><C-N><C-w>k', { noremap = true })
+    set_key('t', '<C-l>', '<C-\\><C-N><C-w>l', { noremap = true })
 
-        " Terminal window navigation
-        tnoremap <C-h> <C-\><C-N><C-w>h
-        tnoremap <C-j> <C-\><C-N><C-w>j
-        tnoremap <C-k> <C-\><C-N><C-w>k
-        tnoremap <C-l> <C-\><C-N><C-w>l
+    -- Terminal window navigation
+    -- Reselect after indentation in visual mode
+    set_key('v', '>', '>gv', { noremap = true })
+    set_key('v', '<', '<gv', { noremap = true })
+    set_key('v', '<Tab>', '>gv', { noremap = true })
+    set_key('v', '<S-Tab>', '<gv', { noremap = true })
 
-        " Reselect after indentation in visual mode
-        vnoremap > >gv
-        vnoremap < <gv
-        vnoremap <Tab> >gv
-        vnoremap <S-Tab> <gv
+    -- Always leave visual mode on first 'v' instead of double tapping 'v' for visual line
+    set_key('v', 'v', '<Esc>', { noremap = true });
 
-        " Always leave visual mode on first 'v' instead of double tapping 'v' for visual line
-        vnoremap v <Esc>
+    -- Toggle between absolute line numbers and relative line numbers
+    set_key('n', '+', ':set rnu!<CR>', { noremap = true })
+    set_key('v', '+', '<Esc>:set rnu!<CR>gv', { noremap = true })
 
-        " Toggle between absolute line numbers and relative line numbers
-        nnoremap + :set rnu!<CR>
-        vnoremap + <Esc>:set rnu!<CR>gv
+    -- Remap search and substitute
+    set_key('n', 's', '/', { noremap = true })
+    set_key('n', 'S', ':%s/', { noremap = true })
+    set_key('v', 's', ':s/', { noremap = true })
 
-        " Remap search and substitute
-        nnoremap s /
-        nnoremap S :%s/
-        vnoremap s :s/
+    -- Trigger command-mode
+    set_key('n', '<Leader>c', ':', { noremap = true })
+    set_key('v', '<Leader>c', ':', { noremap = true })
 
-        " Repeat last edit on searched item (with count)
-        nnoremap Q @='n.'<CR>
+    -- Remap motions to clear search highlighting too
+    set_key('n', 'j', 'j:nohl<CR>', { silent = true, noremap = true })
+    set_key('n', 'k', 'k:nohl<CR>', { silent = true, noremap = true })
+    set_key('n', 'l', 'l:nohl<CR>', { silent = true, noremap = true })
+    set_key('n', 'h', 'h:nohl<CR>', { silent = true, noremap = true })
+    set_key('n', 'w', 'w:nohl<CR>', { silent = true, noremap = true })
+    set_key('n', 'e', 'e:nohl<CR>', { silent = true, noremap = true })
+    set_key('n', 'b', 'b:nohl<CR>', { silent = true, noremap = true })
+    set_key('n', 'i', ':nohl<CR>i', { silent = true, noremap = true })
+    set_key('n', 'a', ':nohl<CR>a', { silent = true, noremap = true })
 
-        nnoremap <Leader>c :
-        vnoremap <Leader>c :
+    -- Add to space when cursor is between Parentheses, Curlybraces or Brackets
+    set_key('i', ' ', 'g:IsCursorWrappedBy("()", "{}", "[]") ? "<Space><Space><Left>" : "<Space>"', { expr = true, silent = true, noremap = true })
 
-        " Remap motions to clear search highlighting too
-        nnoremap <silent> j j:nohl<CR>
-        nnoremap <silent> k k:nohl<CR>
-        nnoremap <silent> l l:nohl<CR>
-        nnoremap <silent> h h:nohl<CR>
-        nnoremap <silent> w w:nohl<CR>
-        nnoremap <silent> e e:nohl<CR>
-        nnoremap <silent> b b:nohl<CR>
-        nnoremap <silent> i :nohl<CR>i
-        nnoremap <silent> a :nohl<CR>a
+    -- Remove whole pair
+    set_key('i', '<BS>', 'g:IsCursorWrappedBy("  ", "{}", "()", "[]", "\'\'", \'""\', "<>") ? "<Left><DEL><DEL>" : "<BS>"', { expr = true, silent = true, noremap = true })
 
-        " Add to space when cursor is between Parentheses, Curlybraces or Brackets
-        inoremap <expr> <Space> g:IsCursorWrappedBy("()", "{}", "[]") ? "<Space><Space><Left>" : '<Space>'
+    -- Map Ctrl+j, Ctrl+l, Ctrl+k, Ctrl+h to arrow-keys in insert mode
+    set_key('i', '<C-k>', '<Up>', { noremap = true })
+    set_key('i', '<C-l>', '<Right>', { noremap = true })
+    set_key('i', '<C-j>', '<Down>', { noremap = true })
+    set_key('i', '<C-h>', '<Left>', { noremap = true })
 
-        " Remove whole pair
-        inoremap <expr> <BS> g:IsCursorWrappedBy("  ", "{}", "()", "[]", "''", '""', "<>") ? "<Left><DEL><DEL>" : "<BS>"
+    -- To uppercase mapping which doesn't need the the shift-button
+    set_key('n', 'guu', 'gU', { noremap = true })
+    set_key('v', 'guu', 'gU', { noremap = true })
 
-        " Map Ctrl+j, Ctrl+l, Ctrl+k, Ctrl+h to arrow-keys in insert mode
-        inoremap <C-k> <Up>
-        inoremap <C-l> <Right>
-        inoremap <C-j> <Down>
-        inoremap <C-h> <Left>
+    -- highlight word and every other occassion of that word in document
+    set_key('n', '#', '*N', { noremap = true })
 
-        " To uppercase mapping which doesn't need the the shift-button
-        nnoremap guu gU
-        vnoremap guu gU
+    set_key('n', '<C-p>', ':call :SynStack()<CR>', { expr = true, silent = true, noremap = true })
 
-        " highlight word and every other occassion of that word in document
-        nnoremap # *N
+    set_key('i', '<CR>', 'g:IsCursorWrappedBy("{}") ? "<Right><BS><CR>}<C-o>O" : "<CR>"', { expr = true, silent = true, noremap = true })
 
-        nnoremap <C-p> :call g:SynStack()<CR>
+    -- Navigating around while using buffers made ez
+    set_key('n', '<BS>', 'v:count ? ":b " . v:count . "<CR>" : "<BS>"', { expr = true, silent = true, noremap = true })
+    set_key('n', '<Left>', ':bprev<CR>', { noremap = true })
+    set_key('n', '<Right>', ':bnext<CR>', { noremap = true })
 
-        inoremap <expr> <CR> g:IsCursorWrappedBy("{}") ? "<Right><BS><CR>}<C-o>O" : "<CR>"
+    -- Shortcut to paste last search-result into commands
+    set_key('c', '##', '<C-R><C-W>/', { noremap = true })
 
-        " Navigating around while using buffers made ez
-        nnoremap <expr> <BS> v:count ? ":b " . v:count . "<CR>" : "<BS>"
-        nnoremap <Left> :bprev<CR>
-        nnoremap <Right> :bnext<CR>
+    set_key('i', 'w', 'z', { noremap = true })
 
-        cnoremap ## <C-R><C-W>/
-        
-        " Make writing those pairs more convenient
-        inoremap g0 =
-        inoremap g1 !
-        inoremap g+ ´´<Left>
-        inoremap g2 ""<Left>
-        inoremap g4 $
-        inoremap g5 []<Left>
-        inoremap g6 &
-        inoremap g7 /
-        inoremap g8 ()<Left>
-        inoremap g9 {}<Left>
-        inoremap g# ''<Left>
-        inoremap g< <><Left>
-        inoremap gß ?
-        nmap g2 "
-        nmap g# `
-    ]]
+    -- Make writing those pairs more convenient
+    set_key('i', 'g0', '=', { noremap = true })
+    set_key('i', 'g1', '!', { noremap = true })
+    set_key('i', 'g+', '´´<Left>', { noremap = true })
+    set_key('i', 'g2', '""<Left>', { noremap = true })
+    set_key('i', 'g4', '$', { noremap = true })
+    set_key('i', 'g5', '[]<Left>', { noremap = true })
+    set_key('i', 'g6', '&', { noremap = true })
+    set_key('i', 'g7', '/', { noremap = true })
+    set_key('i', 'g8', '()<Left>', { noremap = true })
+    set_key('i', 'g9', '{}<Left>', { noremap = true })
+    set_key('i', 'g#', "''<Left>", { noremap = true })
+    set_key('i', 'g<', '<><Left>', { noremap = true })
+    set_key('i', 'gß', '?', { noremap = true })
+
+    set_key('n', 'g2', '"', {})
+    set_key('n', 'g#', '`', {})
 
 -- #endregion
 
@@ -586,31 +581,31 @@
 
     vim.cmd [[
         augroup javascript_abbrevs
-            autocmd FileType javascript,typescript,svelte,vue :inoreab afunc= ()<C-o>ma => {<CR>}<C-o>O<C-R>=g:Eatchar('=,@,,,.,?')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab nfunc= <ESC>bdeifunction <C-r>"()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab meth= ()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab log= console.log()<Left><C-R>=g:Eatchar('=')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab vlog= <ESC>bdeiconsole.log("<C-o>P", <C-o>P)<C-R>=g:Eatchar('=')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab if= if ()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab else= <ESC>/}<CR>a else {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
-            autocmd FileType javascript,typescript,svelte,vue :inoreab elseif= <ESC>/}<CR>a else if ()<C-o>ma {<CR>}<C-o>O<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab afunc ()<C-o>ma => {<CR>}<C-o>O
+            autocmd FileType javascript,typescript,svelte,vue :inoreab nfunc <ESC>bdeifunction <C-r>"()<C-o>ma {<CR>}<C-o>O
+            autocmd FileType javascript,typescript,svelte,vue :inoreab meth ()<C-o>ma {<CR>}<C-o>O
+            autocmd FileType javascript,typescript,svelte,vue :inoreab log console.log()<Left>
+            autocmd FileType javascript,typescript,svelte,vue :inoreab vlog <ESC>bdeiconsole.log("<C-o>P", <C-o>P)
+            autocmd FileType javascript,typescript,svelte,vue :inoreab if if ()<C-o>ma {<CR>}<C-o>O
+            autocmd FileType javascript,typescript,svelte,vue :inoreab else <ESC>/}<CR>a else {<CR>}<C-o>O
+            autocmd FileType javascript,typescript,svelte,vue :inoreab elseif <ESC>/}<CR>a else if ()<C-o>ma {<CR>}<C-o>O
         augroup END
 
         augroup vue_abbrevs
-            autocmd FileType javascript,typescript,vue :inoreab vcomp= <Esc>bdeiimport Vue from "vue";<CR><CR>interface <C-o>pData {}<CR><CR>export const <C-o>p = Vue.extend({<CR>});<C-o>Oname: "<C-o>p",<CR>template: "",<CR>data(): <C-o>pData {<CR>return {};<CR>},<CR>components: {<CR>},<C-o>?"<CR><C-R>=g:Eatchar('=')<CR>
-            autocmd FileType javascript,typescript,vue :inoreab vimport= <Esc>bdeiimport {<C-o>p } from "<ESC>mza/components/<C-o>p";<ESC>/components:<CR>/}<CR>O<C-R>",<ESC>`za<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType javascript,typescript,vue :inoreab vcomp <Esc>bdeiimport Vue from "vue";<CR><CR>interface <C-o>pData {}<CR><CR>export const <C-o>p = Vue.extend({<CR>});<C-o>Oname: "<C-o>p",<CR>template: "",<CR>data(): <C-o>pData {<CR>return {};<CR>},<CR>components: {<CR>},<C-o>?"<CR>
+            autocmd FileType javascript,typescript,vue :inoreab vimport <Esc>bdeiimport {<C-o>p } from "<ESC>mza/components/<C-o>p";<ESC>/components:<CR>/}<CR>O<C-R>",<ESC>`za
         augroup END
 
         augroup svelte_abbrevs
-            autocmd FileType svelte :inoreab sif= {#if <C-o>ma}<CR>{/if}<C-o>`a<C-R>=g:Eatchar('=')<CR>
-            autocmd FileType svelte :inoreab selse= <C-o>/{/if}<C-o>O{:else}<CR><C-R>=g:Eatchar('=')<CR>
-            autocmd FileType svelte :inoreab rlog= <ESC>bdei$: console.log("<C-o>p"= <C-o>p)<C-R>=g:Eatchar('=')<CR>
+            autocmd FileType svelte :inoreab sif {#if <C-o>ma}<CR>{/if}<C-o>`a
+            autocmd FileType svelte :inoreab selse <C-o>/{\/if}<CR><C-o>O{:else}<CR>
+            autocmd FileType svelte :inoreab rlog <ESC>bdei$: console.log("<C-o>p"= <C-o>p)
         augroup END
     ]]
 
 -- #endregion
 
--- #region - Statusline (living in the tabline)
+-- #region - Tabline
 
     vim.cmd [[
         
@@ -621,13 +616,14 @@
             return system('git branch --show-current 2>/dev/null | tr -d "\n"')
         endfunction
 
-        function! g:StatusLine(isCurrentBuffer = v:false)
+        function! g:Tabline()
             setl tabline=
 
-            if a:isCurrentBuffer
-                " #region - LEFT SIDE
+                """"""""""""
+                " LEFT SIDE
+                """"""""""""
                 " Add emote
-                setl tabline+=%#TabLineSel#\ Nvim\ %#TabLineFill#\ 
+                setl tabline+=%#TabLineSel#\ Nvim\ %#Folded#\ 
 
                 " Add file path head if it's not NvimTree/FileTree
                 if expand('%t') != 'NvimTree'
@@ -635,64 +631,56 @@
                 endif
 
                 " Add file name
-                " setl tabline+=%#StatusLine#%t
                 setl tabline+=%t
 
                 if expand('%t') != 'NvimTree'
                     " Is file modified
                     setl tabline+=\ %m
                 endif
-                " #endregion
 
-                " #region - RIGHT SIDE
+                """""""""""""
+                " RIGHT SIDE
+                """""""""""""
                 " Switch to right side
                 setl tabline+=%=\ 
                 " Add current Git-Branch
                 setl tabline+=%#TabLineSel#\ %{GetCurrentBranch()}\ 
-                " #endregion
-            else
-                " #region - LEFT SIDE
-                " Add emote
-                setl tabline+=\ 👾\ \ \ 
-                " Add file name
-                setl tabline+=%t
-                " #endregion
-
-                " #region - RIGHT SIDE
-                " Switch to rightside
-                setl tabline+=%=
-                " #endregion
-            endif
         endfunction
 
-        autocmd WinEnter * call g:StatusLine(v:true)
-        autocmd WinLeave * call g:StatusLine()
-        autocmd FileType * call g:StatusLine(v:true)
+        autocmd WinEnter * call g:Tabline()
 
     ]]
 
 -- #endregion
 
--- #region - Bufferline (living in the statusline)
+-- #region - Statusline
 
     vim.cmd [[
 
-        function! g:Bufferline()
-            setl statusline=
+        function! g:Statusline(currentBuffer)
+            setl statusline=%#TabLineSel#
 
             if expand('%') != 'NvimTree'
-                setl statusline+=%#TabLineSel#\ %{bufnr('%')}\ %#TabLineFill#
+                setl statusline+=%#Search#\ %{bufnr('%')}\ 
             endif
 
-            setl statusline+=%#TabLine#\ %{expand('%:h')}/%#TabLineFill#
+            if a:currentBuffer
+                setl statusline+=%#TabLineSel#
+            else
+                setl statusline+=%#Folded#
+            endif
+
+            setl statusline+=\ %{expand('%:h')}/
             setl statusline+=%t
 
             if expand('%') != 'NvimTree'
-                setl statusline+=\ %m\ %#TabLine#
+                setl statusline+=\ %m\ 
             endif
         endfunction
 
-        autocmd BufEnter * call g:Bufferline()
+        autocmd WinEnter * call g:Statusline(v:true)
+        autocmd WinLeave * call g:Statusline(v:false)
+        autocmd BufEnter * call g:Statusline(v:true)
     ]]
 
 -- #endregion
