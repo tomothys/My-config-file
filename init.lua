@@ -35,12 +35,11 @@
 
     -- Intellisense
     Plug 'neovim/nvim-lspconfig'
-    -- Plug 'hrsh7th/nvim-compe' -- Auto-completion
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/nvim-cmp'
     Plug 'glepnir/lspsaga.nvim'
-    -- Plug 'onsails/lspkind-nvim' -- Adds pictograms to auto-completion pop-ups
+    Plug 'onsails/lspkind-nvim' -- Adds pictograms to auto-completion pop-ups
 
     vim.call('plug#end')
 
@@ -409,7 +408,13 @@
     
     -- #endregion
 
--- #region - Nvim-Cmp
+-- #region - LspKind
+
+    local lspkind = require('lspkind')
+
+-- #endregion
+
+-- #region - Nvim-Cmp - local lspkind must be set at this point!
 
     local cmp = require'cmp'
 
@@ -428,7 +433,29 @@
         },
         sources = {
             { name = 'nvim_lsp' },
-            { name = 'buffer' },
+            { name = 'treesitter' },
+            { name = 'buffer', opts = {
+                get_bufnr = function()
+                    return vim.api.nvim_list_bufs()
+                end,
+            }},
+            { name = 'path' },
+        },
+        formatting = {
+            format = function(entry, vim_item)
+                vim_item.kind = string.format("%s %s", lspkind.presets.default[vim_item.kind], vim_item.kind)
+                vim_item.menu = ({
+                    nvim_lsp = "",
+                    nvim_lua = "",
+                    treesitter = "",
+                    path = "",
+                    buffer = "﬘",
+                    zsh = "ﲵ",
+                    spell = "暈",
+                })[entry.source.name]
+
+                return vim_item
+            end
         },
     }
 
