@@ -84,8 +84,6 @@
     vim.opt.path:append({ '**' })
     vim.opt.wildmenu = true
     vim.opt.wildignore:append({ '**/node_modules/**' })
-    vim.opt.iskeyword:append({ '-', '32' })
-    vim.opt.formatoptions:append({ 'cro' })
     vim.opt.hidden = true
     vim.opt.wrap = false
     vim.opt.encoding = 'utf-8'
@@ -142,7 +140,10 @@
             window = {
                 border = "double",
                 position = "bottom"
-            }
+            },
+            triggers = { "<leader>" },
+            ignore_missing = true,
+            registers = false,
         }
 
     -- #endregion
@@ -465,6 +466,8 @@
 
     -- #region - Colorscheme
 
+        vim.g.tokyonight_style = 'night'
+        tokyonight_sidebars = { "terminal", "NvimTree" }
         vim.cmd('color tokyonight')
 
     -- #endregion
@@ -479,6 +482,9 @@
 
     -- Escape insert mode
     set_key('i', 'jk', '<ESC>', { noremap = true })
+
+    -- Escape terminal mode
+    set_key('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
     
     -- Make navigating windows/splits smooth af
     set_key('n', '<C-j>', '<C-W>j', { noremap = true })
@@ -540,8 +546,8 @@
     set_key('n', 'guu', 'gU', { noremap = true })
     set_key('v', 'guu', 'gU', { noremap = true })
 
-    -- highlight word and every other occassion of that word in document
-    set_key('n', '#', '*N', { noremap = true })
+    -- highlight word and every other occassion of that word in document without cursor "jumping" around
+    set_key('n', '#', 'mzyiw0k/<C-R>0<CR>`z', { noremap = true })
 
     set_key('n', '<C-p>', ':call :SynStack()<CR>', { expr = true, silent = true, noremap = true })
 
@@ -554,8 +560,6 @@
 
     -- Shortcut to paste last search-result into commands
     set_key('c', '##', '<C-R><C-W>/', { noremap = true })
-
-    set_key('i', 'w', 'z', { noremap = true })
 
     -- Make writing those pairs more convenient
     set_key('i', 'g0', '=', { noremap = true })

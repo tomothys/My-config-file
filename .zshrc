@@ -1,15 +1,42 @@
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/thomasschmieck/.oh-my-zsh"
+#-----------------
+# Auto-completion
+#-----------------
+zstyle ":completion:*" menu select
 
-ZSH_THEME="avit"
-plugins=(git)
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format $'\n%F{yellow} Tab-completion%f'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format $'%F{red}No matches for:%f %d'
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*' group-name ''
 
-source $ZSH/oh-my-zsh.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# nvm needs to be installed
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#-----
+# FZF
+#-----
+export FZF_DEFAULT_OPTS='--height=40% --margin=1 --padding=1 --layout=reverse --border=sharp -i -m --keep-right --filepath-word'
+export FZF_COMPLETION_TRIGGER='~~'
+
+#--------
+# PROMPT
+#--------
+setopt prompt_subst
+
+function git_branch_name() {
+    branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+
+    if [[ $branch == "" ]];
+    then
+        :
+    else
+        echo " %F{red} $branch%f"
+    fi
+}
+
+PROMPT=$'\n%F{green}%n%f  %F{yellow}  %~%f  %F{red} $(nvm current)%f $(git_branch_name)\n ﬌ 👾 '
 
 #-------------------------------
 # fd - cd to selected directory
@@ -17,8 +44,7 @@ source $ZSH/oh-my-zsh.sh
 #-------------------------------
 fd() {
   local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
+  dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
 
@@ -30,10 +56,14 @@ fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
-#---------
-# aliases
-#---------
-alias clone="git clone --recurse-submodules"
+#-------
+# ALIAS
+#-------
 alias ls=exa
-alias dock-up="docker-compose up --force-recreate --build"
-alias dock-down="docker-compose down"
+alias cat=bat
+
+#--------------
+# Key bindings
+#--------------
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
