@@ -1,18 +1,26 @@
-# My neovim config
+# My config files
+
+## Contains
+* zsh (`.zshrc`)
+* neovim (`init.lua`)
+* (neo-)vim for vscode-extension (`vscode_init.vim`)
+* colorscheme file for iterms (`iterm_toykonight_night.itermcolors`)
+* tmux (`tmux.conf`) *needs to be rewritten*
 
 My neovim config might look messy at first but I like to keep my vim-config in just one file and organize it with fold-markers.
 
-## .zshrc
+### .zshrc
 Just copy the `.zshrc` file into your home directory. No `.oh-my-zsh` needed but I'm using `fzf`, `bat`, and `exa`. If you don't want to use either of them you might want to delete the functions and aliases.
 
-### Features:
+#### Features:
 * Auto-completion enabled.
 * `fd` let's you `cd` into a directory while using `fzf` to search for the folder/path. 
 * `fh` let's you search in the command-history and use found command.
 * `cat` comes with column-numbers and syntax-highlighting.
 * Shows current git-branch and current node version in prompt.
 
-## Neovim
+### Neovim
+#### Language-Server:
 You have to install the following language-server:
 * `npm i -g bash-language-server`
 * `npm i -g vscode-langservers-extracted`
@@ -28,6 +36,10 @@ You have to install the following language-server:
 
 `npm i -g bash-language-server vscode-langservers-extracted dockerfile-language-server-nodejs dot-language-server emmet-ls graphql-language-service-cli svelte-language-server typescript typescript-language-server vim-language-server @volar/server vls`
 
-# TODO
+#### Tree-Sitter
+You might want to install the following parser:
+`:TSInstall html css scss javascript typescript vue svelte`
+
+## TODO
 * [x] lua-fy neovim-configuration properly
-* [ ] I'm thinking to reverte everything back to .vim. Lua-fying the configuration seems not to 
+* [ ] I'm thinking to revert everything back to a .vim file. Lua-fying the configuration seems not to improve anything. It's just more verbose.
