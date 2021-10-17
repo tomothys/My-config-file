@@ -12,6 +12,22 @@ Just copy the `.zshrc` file into your home directory. No `.oh-my-zsh` needed but
 * `cat` comes with column-numbers and syntax-highlighting.
 * Shows current git-branch and current node version in prompt.
 
+## Neovim
+You have to install the following language-server:
+* `npm i -g bash-language-server`
+* `npm i -g vscode-langservers-extracted`
+* `npm i -g dockerfile-language-server-nodejs`
+* `npm i -g dot-language-server`
+* `npm i -g emmet-ls`
+* `npm i -g graphql-language-service-cli`
+* `npm i -g svelte-language-server`
+* `npm i -g typescript typescript-language-server`
+* `npm i -g vim-language-server`
+* `npm i -g @volar/server`
+* `npm i -g vls`
+
+`npm i -g bash-language-server vscode-langservers-extracted dockerfile-language-server-nodejs dot-language-server emmet-ls graphql-language-service-cli svelte-language-server typescript typescript-language-server vim-language-server @volar/server vls`
+
 # TODO
 * [x] lua-fy neovim-configuration properly
 * [ ] I'm thinking to reverte everything back to .vim. Lua-fying the configuration seems not to 

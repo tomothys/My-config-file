@@ -292,8 +292,20 @@
 
     -- #region - LspConfig
 
+        -- Bash
+        require'lspconfig'.bashls.setup{}
+
+        -- Diagnostics
+        require'lspconfig'.diagnosticls.setup{}
+
         -- Docker
         require'lspconfig'.dockerls.setup{}
+
+        -- Emmet LS
+        require'lspconfig'.emmet_ls.setup{}
+
+        -- ESLint
+        require'lspconfig'.eslint.setup{}
 
         -- GraphQL
         require'lspconfig'.graphql.setup{}
@@ -314,6 +326,9 @@
               }
             }
         }
+
+        -- SQL
+        require'lspconfig'.sqlls.setup{}
 
         -- Svelte
         require'lspconfig'.svelte.setup{}
