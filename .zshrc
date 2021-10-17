@@ -2,13 +2,14 @@
 # Auto-completion
 #-----------------
 zstyle ":completion:*" menu select
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format $'\n%F{yellow} Tab-completion%f'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format $'%F{red}No matches for:%f %d'
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
-zstyle ':completion:*' group-name ''
+zstyle ":completion:*" verbose yes
+zstyle ":completion:*:descriptions" format $"\n%F{yellow} Tab-completion%f"
+zstyle ":completion:*:messages" format "%d"
+zstyle ":completion:*:warnings" format $"%F{red}No matches for:%f %d"
+zstyle ":completion:*:corrections" format "%B%d (errors: %e)%b"
+zstyle ":completion:*" group-name ""
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -18,7 +19,6 @@ export NVM_DIR="$HOME/.nvm"
 # FZF
 #-----
 export FZF_DEFAULT_OPTS='--height=40% --margin=1 --padding=1 --layout=reverse --border=sharp -i -m --keep-right --filepath-word'
-export FZF_COMPLETION_TRIGGER='~~'
 
 #--------
 # PROMPT
@@ -36,7 +36,7 @@ function git_branch_name() {
     fi
 }
 
-PROMPT=$'\n%F{green}%n%f  %F{yellow}  %~%f  %F{red} $(nvm current)%f $(git_branch_name)\n ﬌ 👾 '
+PROMPT=$"\n%F{green}%n%f  %F{yellow}  %~%f  %F{red} $(nvm current)%f $(git_branch_name)\n ﬌ 👾 "
 
 #-------------------------------
 # fd - cd to selected directory

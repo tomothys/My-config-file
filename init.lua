@@ -483,7 +483,23 @@
 
         vim.g.tokyonight_style = 'night'
         tokyonight_sidebars = { "terminal", "NvimTree" }
-        vim.cmd('color tokyonight')
+
+        vim.cmd [[
+            color tokyonight
+
+            hi BufferNoIndicator guifg=white guibg=#292e42
+            hi BufferNoIndicatorInverted guifg=#292e42 guibg=#7aa2f7
+            hi FolderPath guifg=#e0af68 guibg=#292e42
+            hi GitBranch guifg=#f7768e guibg=#292e42
+            hi Folded guibg=#292e42
+            hi LineNr guifg=#3b4261 guibg=#1f2335
+            hi SignColumn guibg=#1f2335
+            hi GitGutterAdd guibg=#1f2335
+            hi GitGutterChange guibg=#1f2335
+            hi GitGutterDelete guibg=#1f2335
+            exec 'hi TabLineSelInverted guifg=' . synIDattr(hlID('TabLineSel'), 'bg') . ' guibg=#292e42'
+            exec 'hi FoldedInverted gui=bold guifg=' . synIDattr(hlID('Folded'), 'bg') . ' guibg=' . synIDattr(hlID('Folded'), 'fg')
+        ]]
 
     -- #endregion
 
@@ -627,7 +643,7 @@
 -- #region - Tabline
 
     vim.cmd [[
-        
+
         " Seperator:    
         " Seperator:    
 
@@ -642,31 +658,46 @@
                 " LEFT SIDE
                 """"""""""""
                 " Add emote
-                setl tabline+=%#TabLineSel#\ Nvim\ %#Folded#\ 
+                setl tabline+=%#TabLineSel#
+                setl tabline+=\ \ 
+                setl tabline+=
+                setl tabline+=\ \ 
+                setl tabline+=%#TabLineSelInverted#
+                setl tabline+=
+                setl tabline+=\ \ 
 
                 " Add file path head if it's not NvimTree/FileTree
                 if expand('%t') != 'NvimTree'
-                    setl tabline+=%.40{expand('%:h')}/
-                endif
-
-                " Add file name
-                setl tabline+=%t
-
-                if expand('%t') != 'NvimTree'
-                    " Is file modified
-                    setl tabline+=\ %m
+                    setl tabline+=%#FolderPath#
+                    setl tabline+=
+                    setl tabline+=\ \ 
+                    setl tabline+=%#CursorColumn#
+                    setl tabline+=
+                    setl tabline+=\ 
+                    setl tabline+=%#FolderPath#
+                    setl tabline+=%{expand('%:~')}
+                    setl tabline+=%#CursorColumn#
                 endif
 
                 """""""""""""
                 " RIGHT SIDE
                 """""""""""""
                 " Switch to right side
-                setl tabline+=%=\ 
-                " Add current Git-Branch
-                setl tabline+=%#TabLineSel#\ %{GetCurrentBranch()}\ 
+                setl tabline+=%=
+
+                if GetCurrentBranch() != ""
+                    " Add current Git-Branch
+                    setl tabline+=\ 
+                    setl tabline+=%#GitBranch#
+                    setl tabline+=
+                    setl tabline+=\ 
+                    setl tabline+=%{GetCurrentBranch()}
+                    setl tabline+=\ \ 
+                endif
         endfunction
 
         autocmd WinEnter * call g:Tabline()
+        autocmd BufEnter * call g:Tabline()
 
     ]]
 
@@ -677,23 +708,41 @@
     vim.cmd [[
 
         function! g:Statusline(currentBuffer)
-            setl statusline=%#TabLineSel#
+            if a:currentBuffer
+                setl statusline=%#BufferNoIndicator#
+            else
+                setl statusline=%#FoldedInverted#
+            endif
 
             if expand('%') != 'NvimTree'
-                setl statusline+=%#Search#\ %{bufnr('%')}\ 
+                setl statusline+=\ \ 
+                setl statusline+=%{bufnr('%')}
+                setl statusline+=\ \ 
+            else
+                setl statusline+=\ \ 
+                setl statusline+=
+                setl statusline+=\ \ 
             endif
 
             if a:currentBuffer
-                setl statusline+=%#TabLineSel#
+                setl statusline+=%#BufferNoIndicatorInverted#
             else
                 setl statusline+=%#Folded#
             endif
 
-            setl statusline+=\ %{expand('%:h')}/
+            setl statusline+=\ 
+
+            if a:currentBuffer
+                setl statusline+=%#TabLineSel#
+            endif
+
+            setl statusline+=\ 
             setl statusline+=%t
 
             if expand('%') != 'NvimTree'
-                setl statusline+=\ %m\ 
+                setl statusline+=\ 
+                setl statusline+=%m
+                setl statusline+=\ 
             endif
         endfunction
 
