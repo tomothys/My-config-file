@@ -491,12 +491,13 @@
     set_key('n', '<C-k>', '<C-W>k', { noremap = true })
     set_key('n', '<C-l>', '<C-W>l', { noremap = true })
     set_key('n', '<C-h>', '<C-W>h', { noremap = true })
+
+    -- Terminal window navigation
     set_key('t', '<C-h>', '<C-\\><C-N><C-w>h', { noremap = true })
     set_key('t', '<C-j>', '<C-\\><C-N><C-w>j', { noremap = true })
     set_key('t', '<C-k>', '<C-\\><C-N><C-w>k', { noremap = true })
     set_key('t', '<C-l>', '<C-\\><C-N><C-w>l', { noremap = true })
 
-    -- Terminal window navigation
     -- Reselect after indentation in visual mode
     set_key('v', '>', '>gv', { noremap = true })
     set_key('v', '<', '<gv', { noremap = true })
@@ -546,7 +547,7 @@
     set_key('n', 'guu', 'gU', { noremap = true })
     set_key('v', 'guu', 'gU', { noremap = true })
 
-    -- highlight word and every other occassion of that word in document without cursor "jumping" around
+    -- Highlight word in document without cursor 'jumping' around
     set_key('n', '#', 'mzyiw0k/<C-R>0<CR>`z', { noremap = true })
 
     set_key('n', '<C-p>', ':call :SynStack()<CR>', { expr = true, silent = true, noremap = true })
@@ -561,10 +562,10 @@
     -- Shortcut to paste last search-result into commands
     set_key('c', '##', '<C-R><C-W>/', { noremap = true })
 
-    -- Make writing those pairs more convenient
+    -- Make writing those pairs and special characters more convenient
     set_key('i', 'g0', '=', { noremap = true })
     set_key('i', 'g1', '!', { noremap = true })
-    set_key('i', 'g+', '´´<Left>', { noremap = true })
+    set_key('i', 'g+', '``<Left>', { noremap = true })
     set_key('i', 'g2', '""<Left>', { noremap = true })
     set_key('i', 'g4', '$', { noremap = true })
     set_key('i', 'g5', '[]<Left>', { noremap = true })
@@ -575,9 +576,6 @@
     set_key('i', 'g#', "''<Left>", { noremap = true })
     set_key('i', 'g<', '<><Left>', { noremap = true })
     set_key('i', 'gß', '?', { noremap = true })
-
-    set_key('n', 'g2', '"', {})
-    set_key('n', 'g#', '`', {})
 
 -- #endregion
 
