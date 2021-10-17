@@ -491,7 +491,7 @@
             hi BufferNoIndicatorInverted guifg=#292e42 guibg=#7aa2f7
             hi FolderPath guifg=#e0af68 guibg=#292e42
             hi GitBranch guifg=#f7768e guibg=#292e42
-            hi Folded guibg=#292e42
+            hi Folded guibg=#1f2335
             hi LineNr guifg=#3b4261 guibg=#1f2335
             hi SignColumn guibg=#1f2335
             hi GitGutterAdd guibg=#1f2335
