@@ -112,6 +112,7 @@
     vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
     vim.opt.ignorecase = true
     vim.opt.inccommand = 'split'
+    vim.opt.mouse = 'a'
 
     vim.cmd [[
         filetype plugin on
@@ -296,7 +297,7 @@
         require'lspconfig'.bashls.setup{}
 
         -- Diagnostics
-        require'lspconfig'.diagnosticls.setup{}
+        -- require'lspconfig'.diagnosticls.setup{}
 
         -- Docker
         require'lspconfig'.dockerls.setup{}
