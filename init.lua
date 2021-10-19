@@ -673,7 +673,7 @@
                     setl tabline+=
                     setl tabline+=\ 
                     setl tabline+=%#FolderPath#
-                    setl tabline+=%{expand('%:~')}
+                    setl tabline+=%.60{expand('%:~')}
                     setl tabline+=%#CursorColumn#
                 endif
 
@@ -747,6 +747,17 @@
         autocmd WinEnter * call g:Statusline(v:true)
         autocmd WinLeave * call g:Statusline(v:false)
         autocmd BufEnter * call g:Statusline(v:true)
+    ]]
+
+-- #endregion
+
+-- #region - Just a hot-fix for that CursorHold error I'm getting way to often
+
+    vim.cmd [[
+
+        autocmd! CursorHold *
+        autocmd! CursorHoldI *
+
     ]]
 
 -- #endregion
