@@ -5,7 +5,7 @@
 * neovim (`init.lua`)
 * (neo-)vim for vscode-extension (`vscode_init.vim`)
 * colorscheme file for iterms (`iterm_toykonight_night.itermcolors`)
-* tmux (`tmux.conf`) *needs to be rewritten*
+* tmux (`tmux.conf`)
 
 My neovim config might look messy at first but I like to keep my vim-config in just one file and organize it with fold-markers.
 
