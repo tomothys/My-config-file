@@ -38,7 +38,7 @@
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/nvim-cmp'
-    Plug 'glepnir/lspsaga.nvim'
+    Plug 'tami5/lspsaga.nvim'
     Plug 'onsails/lspkind-nvim' -- Adds pictograms to auto-completion pop-ups
 
     vim.call('plug#end')
@@ -329,7 +329,7 @@
         }
 
         -- SQL
-        require'lspconfig'.sqlls.setup{}
+        require'lspconfig'.sqls.setup{}
 
         -- Svelte
         require'lspconfig'.svelte.setup{}
