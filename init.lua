@@ -5,15 +5,15 @@
     vim.call('plug#begin', '~/.config/nvim/plugged')
 
     -- List of plugins
-    Plug 'b3nj5m1n/kommentary'
+    Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
-    Plug 'kyazdani42/nvim-web-devicons' -- Nice looking icons
-    Plug 'ryanoasis/vim-devicons' -- Nice looking icons
-    Plug 'kyazdani42/nvim-tree.lua' -- File Explorer
+    Plug 'tpope/vim-fugitive'
+    -- Plug 'kyazdani42/nvim-web-devicons' -- Nice looking icons
+    -- Plug 'ryanoasis/vim-devicons' -- Nice looking icons
+    -- Plug 'kyazdani42/nvim-tree.lua' -- File Explorer
     Plug 'folke/which-key.nvim'
     Plug 'airblade/vim-gitgutter'
     Plug 'rhysd/git-messenger.vim' -- Open commits + messages in popup window
-    Plug 'alvan/vim-closetag' -- Auto close html-tags
     Plug 'airblade/vim-rooter'
     Plug 'jremmen/vim-ripgrep'
     Plug('junegunn/fzf', { ['do'] = function()
@@ -24,8 +24,6 @@
     Plug('prettier/vim-prettier', { ['do'] = function()
         vim.call('npm install')
     end })
-    Plug 'editorconfig/editorconfig-vim'
-    Plug 'junegunn/vim-peekaboo'
     Plug('folke/tokyonight.nvim', { ['do'] = function()
         vim.cmd('color tokyonight')
     end })
@@ -42,6 +40,12 @@
     Plug 'onsails/lspkind-nvim' -- Adds pictograms to auto-completion pop-ups
 
     vim.call('plug#end')
+
+-- #endregion
+
+-- #region - Own PlugIns
+    
+    vim.cmd("so ~/.config/nvim/own-plugins/register-peek.vim")
 
 -- #endregion
 
@@ -220,46 +224,46 @@
     
     -- #region - NvimTree
         
-        vim.api.nvim_set_var('nvim_tree_git_hl', 1)
-        vim.api.nvim_set_var('nvim_tree_indent_markers', 1)
+        -- vim.api.nvim_set_var('nvim_tree_git_hl', 1)
+        -- vim.api.nvim_set_var('nvim_tree_indent_markers', 1)
 
-        vim.cmd [[
-            let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
-            let g:nvim_tree_special_files = { 'README.md': 1, 'package.json': 1, 'init.lua': 1, 'init.vim': 1 }
-            let g:nvim_tree_icons = { 'git': { 'unstaged': "[U]", 'staged': "[S]", 'unmerged': "[UM]", 'renamed': "[R]", 'deleted': "[-]", 'untracked': "[+]" } }
-        ]]
+        -- vim.cmd [[
+        --     let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+        --     let g:nvim_tree_special_files = { 'README.md': 1, 'package.json': 1, 'init.lua': 1, 'init.vim': 1 }
+        --     let g:nvim_tree_icons = { 'git': { 'unstaged': "[U]", 'staged': "[S]", 'unmerged': "[UM]", 'renamed': "[R]", 'deleted': "[-]", 'untracked': "[+]" } }
+        -- ]]
 
-        wk.register({
-            ["<leader>"] = {
-                name = "+WhichKey",
-                e = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
-                r = { "<cmd>NvimTreeRefresh<CR>", "Refresh NvimTree" }
-            }
-        })
+        -- wk.register({
+        --     ["<leader>"] = {
+        --         name = "+WhichKey",
+        --         e = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
+        --         r = { "<cmd>NvimTreeRefresh<CR>", "Refresh NvimTree" }
+        --     }
+        -- })
 
-        require'nvim-tree'.setup {
-            diagnostics = {
-                enable = false,
-            },
-            disable_netrw = true,
-            hijack_netrw = true,
-            open_on_setup = false,
-            ignore_ft_on_setup = {},
-            auto_close = false,
-            open_on_tab = false,
-            update_cwd = false,
-            update_focused_file = {
-                enable = true,
-                ignore_list = {}
-            },
-            view = {
-                width = 40,
-                side = 'left',
-                mappings = {
-                    list = {}
-                }
-            }
-        }
+        -- require'nvim-tree'.setup {
+        --     diagnostics = {
+        --         enable = false,
+        --     },
+        --     disable_netrw = true,
+        --     hijack_netrw = true,
+        --     open_on_setup = false,
+        --     ignore_ft_on_setup = {},
+        --     auto_close = false,
+        --     open_on_tab = false,
+        --     update_cwd = false,
+        --     update_focused_file = {
+        --         enable = true,
+        --         ignore_list = {}
+        --     },
+        --     view = {
+        --         width = 40,
+        --         side = 'left',
+        --         mappings = {
+        --             list = {}
+        --         }
+        --     }
+        -- }
 
     -- #endregion
 
@@ -287,7 +291,7 @@
 
 -- #region - Peakaboo
 
-    vim.api.nvim_set_var('peekaboo_window', 'vert bo 80new')
+    -- vim.api.nvim_set_var('peekaboo_window', 'vert bo 80new')
 
 -- #endregion
 

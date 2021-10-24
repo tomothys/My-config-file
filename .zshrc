@@ -5,9 +5,9 @@ zstyle ":completion:*" menu select
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 
 zstyle ":completion:*" verbose yes
-zstyle ":completion:*:descriptions" format $"\n%F{yellow} Tab-completion%f"
+zstyle ":completion:*:descriptions" format $'\n%F{yellow} Tab-completion%f'
 zstyle ":completion:*:messages" format "%d"
-zstyle ":completion:*:warnings" format $"%F{red}No matches for:%f %d"
+zstyle ":completion:*:warnings" format $'%F{red}No matches for:%f %d'
 zstyle ":completion:*:corrections" format "%B%d (errors: %e)%b"
 zstyle ":completion:*" group-name ""
 
@@ -36,7 +36,7 @@ function git_branch_name() {
     fi
 }
 
-PROMPT=$"\n%F{green}%n%f  %F{yellow}  %~%f  %F{red} $(nvm current)%f $(git_branch_name)\n ﬌ 👾 "
+PROMPT=$'\n%F{blue}%n%f  %F{yellow}  %~%f  %F{green} $(nvm current)%f $(git_branch_name)\n ﬌ 👾 '
 
 #-------------------------------
 # fd - cd to selected directory
