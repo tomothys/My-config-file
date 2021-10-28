@@ -177,7 +177,11 @@ EOF
 "------------------------------------
 " ------ Import my own PlugIn ------
 "------------------------------------
-source ~/AppData/Local/nvim/own_plugins/register_peek.vim
+if has('win32')
+    source ~/AppData/Local/nvim/own_plugins/register_peek.vim
+else
+    source ~/.config/nvim/own_plugins/register_peek.vim
+endif
 
 "------------------------------------
 " -------- General settings --------
