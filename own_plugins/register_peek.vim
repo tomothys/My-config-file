@@ -1,6 +1,6 @@
-function! g:Submit_register_peek() abort
+function! s:submit_register_peek() abort
     let l:selected_register = matchstr(getline('.'), '\%2c.')
-    call feedkeys(":bw!\<Cr>\"" . l:selected_register)
+    call feedkeys(":bd!\<Cr>\"" . l:selected_register)
 endfunc
 
 function! g:Open_register_peek() abort
@@ -54,7 +54,7 @@ function! g:Open_register_peek() abort
     nnoremap <buffer> j j0
     nnoremap <buffer> k k0
     nnoremap <buffer> <Esc> :bw!<Cr>
-    nnoremap <buffer> <Cr> <cmd>call g:Submit_register_peek()<Cr>
+    nnoremap <buffer> <Cr> <cmd>call <SID>s:submit_register_peek()<Cr>
 endfunc
 
-nnoremap " <cmd>call g:Submit_register_peek()<Cr>
+nnoremap g3 <cmd>call g:Open_register_peek()<Cr>

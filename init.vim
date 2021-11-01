@@ -279,22 +279,6 @@ inoremap <expr> <silent> <Space> g:IsCursorWrappedBy('""', "''", '()', '[]', '{}
 inoremap <expr> <silent> <Bs> g:IsCursorWrappedBy('""', "''", '()', '[]', '{}', '  ') ? '<Left><Del><Del>' : '<Bs>'
 inoremap <expr> <silent> <Cr> g:IsCursorWrappedBy('{}') ? '<Right><Bs><Cr>}<C-o>O' : '<Cr>'
 
-" Make writing those pairs and special characters more convenient # test with 'fj' completion
-inoremap efj =
-inoremap afj !
-inoremap dfj ""<Left>
-inoremap tfj ``<Left>
-inoremap dofj $
-inoremap bfj []<Left>
-inoremap andfj &
-inoremap sfj /
-cnoremap bsfj /
-inoremap 8fj ()<Left>
-inoremap 9fj {}<Left>
-inoremap sdfj ''<Left>
-inoremap hfj <><Left>
-inoremap qfj ?
-
 " Remap gf to get to relative file
 nnoremap gf <Esc>yi":e %:h/<C-r>0<Cr>
 
@@ -322,6 +306,21 @@ inoremap fj <C-]>
 " Toggle between relative line numbers
 nnoremap + :set rnu!<Cr>
 vnoremap + <Esc>:set rnu!<Cr>gv
+
+" Make writing those pairs and special characters more convenient # test with 'fj' completion
+inoremap g0 =
+inoremap g1 !
+inoremap g2 ""<Left>
+inoremap g+ ``<Left>
+inoremap g4 $
+inoremap g5 []<Left>
+inoremap g6 &
+inoremap g7 /
+inoremap g8 ()<Left>
+inoremap g9 {}<Left>
+inoremap g# ''<Left>
+inoremap g< <><Left>
+inoremap gß ?
 
 "------------------------------------
 " --------- Abbr / Snippets --------
