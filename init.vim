@@ -18,8 +18,6 @@ Plug 'folke/tokyonight.nvim'
 
 " Add support for syntax-highlighting
 Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'posva/vim-vue'
-" Plug 'evanleck/vim-svelte'
 
 " Lsp and auto-complete
 Plug 'neovim/nvim-lspconfig'
@@ -40,7 +38,9 @@ highlight EndOfBuffer guifg=#565f89
 highlight StatusLine guibg=#9ece6a guifg=#1f2335
 highlight StatusLineNC guibg=#565f89 guifg=#24283b
 highlight LineNr guifg=#ff9e64
-highlight VertSplit guifg=#c0caf5
+highlight VertSplit guifg=#1f2335
+highlight CursorLine guibg=#1f2335
+highlight CursorLineNr guibg=#ff9e64 guifg=#000000
 
 lua << EOF
 -- --------------
@@ -191,11 +191,10 @@ set wildignore+=**/node_modules/**
 syntax enable                           " Enable syntax highlighting
 set nocompatible                        " Turn off vi-compatible mode and make vim shine
 filetype plugin on                      " Turn on builtin plugins
-runtime macros/matchit.vim              " Jump between pairs like html-tags with %
 set hidden                              " Make vim able to open new buffer without saving currently open buffer first
 set nowrap                              " Dont make lines wrap
 set number                              " Enable linenumbers
-set relativenumber                      " Enable relative linenumbers
+set norelativenumber                      " Enable relative linenumbers
 set ignorecase                          " Ignore case while searching etc.
 set timeoutlen=500                      " Timeout for keymappings
 set nobackup                            " Don't create any backup files
@@ -212,6 +211,8 @@ set noshowmode                          " Don't show mode when in visual-mode
 set signcolumn=number                   " Show sign-column in linenumber-column
 set scrolloff=3                         " Minimal number of screen lines to keep above and below the cursor
 set completeopt+=menuone,noselect       " Use the popup menu also when there is only one match. Useful when there is additional info. And don't select the first match until the user selects a match.
+set cursorline
+set numberwidth=6
 
 augroup highlight_yank
     autocmd!
@@ -249,6 +250,12 @@ nnoremap <silent> <Esc> <Esc>:nohl<Cr>
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
 
+" Jump to buffer
+nnoremap <expr> <silent> <Bs> ":b" . v:count . "<Cr>"
+
+" Go to mark
+nnoremap <silent> gm `
+
 " Reselect after indentation in visual mode
 vnoremap < <gv
 vnoremap > >gv
@@ -263,7 +270,7 @@ nnoremap s /
 
 " Tigger command-mode
 nnoremap <Leader>c :
-vnoremap <Leader>c :
+vnoremap . :
 
 " Highlight word in document without cursor 'jumping' around
 nnoremap # mzyiw0k/<C-r>0<Cr>`z
@@ -272,23 +279,24 @@ inoremap <expr> <silent> <Space> g:IsCursorWrappedBy('""', "''", '()', '[]', '{}
 inoremap <expr> <silent> <Bs> g:IsCursorWrappedBy('""', "''", '()', '[]', '{}', '  ') ? '<Left><Del><Del>' : '<Bs>'
 inoremap <expr> <silent> <Cr> g:IsCursorWrappedBy('{}') ? '<Right><Bs><Cr>}<C-o>O' : '<Cr>'
 
-" Make writing those pairs and special characters more convenient
-inoremap g0 =
-inoremap g1 !
-inoremap g2 ""<Left>
-inoremap g+ ``<Left>
-inoremap g4 $
-inoremap g5 []<Left>
-inoremap g6 &
-inoremap g7 /
-inoremap g8 ()<Left>
-inoremap g9 {}<Left>
-inoremap g# ''<Left>
-inoremap g< <><Left>
-inoremap gß ?
+" Make writing those pairs and special characters more convenient # test with 'fj' completion
+inoremap efj =
+inoremap afj !
+inoremap dfj ""<Left>
+inoremap tfj ``<Left>
+inoremap dofj $
+inoremap bfj []<Left>
+inoremap andfj &
+inoremap sfj /
+cnoremap bsfj /
+inoremap 8fj ()<Left>
+inoremap 9fj {}<Left>
+inoremap sdfj ''<Left>
+inoremap hfj <><Left>
+inoremap qfj ?
 
 " Remap gf to get to relative file
-inoremap gf <Esc>yi":e %:h/<C-r>0<Cr>
+nnoremap gf <Esc>yi":e %:h/<C-r>0<Cr>
 
 " Scroll one line with Ctrl+j and Ctrl+k instead of Ctrl+e and Ctrl+y
 nnoremap <C-j> <C-e>
@@ -301,37 +309,49 @@ inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
 " Lsp
-nnoremap <Leader>lf <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <Leader>lh <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <Leader>ls <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <Leader>lr <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <Leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <Leader>lf <cmd>lua vim.lsp.buf.definition()<Cr>
+nnoremap <Leader>lh <cmd>lua vim.lsp.buf.hover()<Cr>
+nnoremap <Leader>ls <cmd>lua vim.lsp.buf.signature_help()<Cr>
+nnoremap <Leader>lr <cmd>lua vim.lsp.buf.rename()<Cr>
+nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<Cr>
+nnoremap <Leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Cr>
+
+" Trigger abbr
+inoremap fj <C-]>
+
+" Toggle between relative line numbers
+nnoremap + :set rnu!<Cr>
+vnoremap + <Esc>:set rnu!<Cr>gv
 
 "------------------------------------
 " --------- Abbr / Snippets --------
 "------------------------------------
 " General JavaScript Snippets
 augroup javascript_abbrevs
-    autocmd FileType javascript,typescript,svelte,vue :inoreab afunc ()<C-o>ma => {<CR>}<C-o>O
-    autocmd FileType javascript,typescript,svelte,vue :inoreab nfunc <ESC>bdeifunction <C-r>"()<C-o>ma {<CR>}<C-o>O
-    autocmd FileType javascript,typescript,svelte,vue :inoreab meth ()<C-o>ma {<CR>}<C-o>O
-    autocmd FileType javascript,typescript,svelte,vue :inoreab log console.log()<Left>
-    autocmd FileType javascript,typescript,svelte,vue :inoreab vlog <ESC>bdeiconsole.log("<C-o>P", <C-o>P)
-    autocmd FileType javascript,typescript,svelte,vue :inoreab if if ()<C-o>ma {<CR>}<C-o>O
-    autocmd FileType javascript,typescript,svelte,vue :inoreab else <ESC>/}<CR>a else {<CR>}<C-o>O
-    autocmd FileType javascript,typescript,svelte,vue :inoreab elseif <ESC>/}<CR>a else if ()<C-o>ma {<CR>}<C-o>O
+    autocmd FileType javascript,typescript,svelte,vue :inoreab afunc ()<C-o>ma => {}<C-o>`a
+    autocmd FileType javascript,typescript,svelte,vue :inoreab nfunc function ()<C-o>ma {<CR>}<C-o>O//<C-o>`a
+    autocmd FileType javascript,typescript,svelte,vue :inoreab meth ()<C-o>ma {<CR>}<C-o>O//<C-o>`a
+    autocmd FileType javascript,typescript,svelte,vue :inoreab log console.log("")<Left><Left>
+    autocmd FileType javascript,typescript,svelte,vue :inoreab vlog <Bs><Esc>bdeaconsole.log("<C-r>"", <C-r>")
+    autocmd FileType javascript,typescript,svelte,vue :inoreab if if ()<C-o>ma {<CR>}<C-o>O//<C-o>`a
+    autocmd FileType javascript,typescript,svelte,vue :inoreab else <ESC>/}<CR><C-o>:nohl<Cr>a else {<CR>}<C-o>O
+    autocmd FileType javascript,typescript,svelte,vue :inoreab elseif <ESC>/}<CR><C-o>:nohl<Cr>a else if ()<C-o>ma {<CR>}<C-o>O//<C-o>`a
+    autocmd FileType javascript,typescript,svelte,vue :inoreab import import {<C-o>mi} from ""<Left>
+    autocmd FileType javascript,typescript,svelte,vue :inoreab script <script lang="ts"><Cr></script><C-o>O
+    autocmd FileType javascript,typescript,svelte,vue :inoreab style <style lang="scss"><Cr></style><C-o>O
 augroup END
 
 " Vue Snippets
 augroup vue_abbrevs
-    autocmd FileType javascript,typescript,vue :inoreab vcomp <Esc>bdeiimport Vue from "vue";<CR><CR>interface <C-o>pData {}<CR><CR>export const <C-o>p = Vue.extend({<CR>});<C-o>Oname: "<C-o>p",<CR>template: "",<CR>data(): <C-o>pData {<CR>return {};<CR>},<CR>components: {<CR>},<C-o>?"<CR>
-    autocmd FileType javascript,typescript,vue :inoreab vimport <Esc>bdeiimport {<C-o>p } from "<ESC>mza/components/<C-o>p";<ESC>/components:<CR>/}<CR>O<C-R>",<ESC>`za
+    autocmd FileType javascript,typescript,vue :inoreab vcomp <Bs><Esc>bdeaimport Vue from "vue";<CR><CR>interface <C-r>"Data {}<CR><CR>export const <C-r>" = Vue.extend({<CR>});<C-o>Oname: "<C-r>"",<CR>template: "<C-o>mn",<Cr>components: {<C-o>mc},<CR>data(): <C-r>"Data {<CR>return {<C-o>md};<CR>},
+    autocmd FileType javascript,typescript,vue :inoreab vimport <Bs><Esc>bdeaimport { <C-r>" } from "/components/<C-r>"<C-o>mi";<ESC>/components:<CR>/{<Cr>:nohl<Cr>a<Cr><C-r>",
 augroup END
 
 " Svelte Snippets
 augroup svelte_abbrevs
-    autocmd FileType svelte :inoreab sif {#if <C-o>ma}<CR>{/if}<C-o>`a
-    autocmd FileType svelte :inoreab selse <C-o>/{\/if}<CR><C-o>O{:else}<CR>
-    autocmd FileType svelte :inoreab rlog <ESC>bdei$: console.log("<C-o>p"= <C-o>p)
+    autocmd FileType svelte :inoreab sif {#if }<C-o>ma<Cr>{/if}<C-o>`a
+    autocmd FileType svelte :inoreab selse <C-o>/{\/if}<Cr><C-o>:nohl<Cr><C-o>O{:else}<CR>
+    autocmd FileType svelte :inoreab selseif <C-o>/{\(\/\\|:\)\(if\\|else\).<Cr><C-o>:nohl<Cr><C-o>O{:else if }<Left>
+    autocmd FileType svelte :inoreab rlog <Bs><ESC>bdea$: console.log("<C-r>"", <C-r>")
 augroup END
+

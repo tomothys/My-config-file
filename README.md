@@ -42,4 +42,4 @@ You might want to install the following parser:
 
 ## TODO
 * [x] lua-fy neovim-configuration properly
-* [ ] I'm thinking to revert everything back to a .vim file. Lua-fying the configuration seems not to improve anything. It's just more verbose.
+* [x] I'm thinking to revert everything back to a .vim file. Lua-fying the configuration seems not to improve anything. It's just more verbose.

@@ -1,3 +1,5 @@
+export TERM=screen
+
 #-----------------
 # Auto-completion
 #-----------------
@@ -43,9 +45,8 @@ PROMPT=$'\n%F{blue}%n%f  %F{yellow}  %~%f  %F{green} $(nvm current)%
 # FZF needs to be installed
 #-------------------------------
 fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) && cd "$dir"
 }
 
 #------------------------------------------------------------------
@@ -53,17 +54,25 @@ fd() {
 # FZF needs to be installed
 #------------------------------------------------------------------
 fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+    eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
 #-------
 # ALIAS
 #-------
 alias ls=exa
-alias cat=bat
+alias ll="exa -l"
+alias q=exit
+alias d=mkdir
+alias c=touch
+alias v=nvim
+alias r="rm -rf"
+alias lg=lazygit
 
 #--------------
 # Key bindings
 #--------------
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
