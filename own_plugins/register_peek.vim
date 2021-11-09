@@ -49,8 +49,8 @@ function! s:open_register_peek() abort
     nnoremap <buffer> + :bw!<Cr>"+
     nnoremap <buffer> / :bw!<Cr>"/
 
-    nnoremap <buffer> j j0l
-    nnoremap <buffer> k k0l
+    nnoremap <buffer> j j^
+    nnoremap <buffer> k k^
     nnoremap <buffer> <Esc> :bw!<Cr>
     nnoremap <buffer> <Cr> <cmd>call <SID>submit_register_peek()<Cr>
 
