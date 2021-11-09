@@ -1,7 +1,11 @@
 "------------------------------------
 " ------------ Vim-Plug ------------
 "------------------------------------
-call plug#begin('~/AppData/Local/nvim/plugged')
+if has('win32')
+    call plug#begin('~/AppData/Local/nvim/plugged')
+else
+    call plug#begin('~/.config/nvim/plugged')
+endif
 
 " List of plug-ins
 Plug 'tpope/vim-commentary'
@@ -171,7 +175,7 @@ EOF
 "let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
 let g:fzf_preview_window = []
-let g:fzf_layout = {'window': { 'width': 0.4, 'height': 0.5, 'border': 'rounded', 'yoffset': 0.2 }}
+let g:fzf_layout = {'window': { 'width': 0.6, 'height': 0.6, 'border': 'rounded' }}
 
 "------------------------------------
 " ------ Import my own PlugIn ------
