@@ -175,7 +175,13 @@ EOF
 "let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
 let g:fzf_preview_window = []
-let g:fzf_layout = {'window': { 'width': 0.6, 'height': 0.6, 'border': 'rounded' }}
+" let g:fzf_layout = {'window': { 'width': 0.6, 'height': 0.6, 'border': 'rounded' }}
+let g:fzf_layout = { 'right': '40%' }
+
+" ------------
+"  Vim-Rooter 
+" ------------
+let g:rooter_patterns = ['.git']
 
 "------------------------------------
 " ------ Import my own PlugIn ------
