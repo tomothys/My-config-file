@@ -1,18 +1,21 @@
 # My config files
 
 ## Contains
+
 * zsh (`.zshrc`)
-* neovim (`init.lua`)
+* neovim (`nvim/*`)
+* vim (`vim/*`)
 * (neo-)vim for vscode-extension (`vscode_init.vim`)
 * colorscheme file for iterms (`iterm_toykonight_night.itermcolors`)
 * tmux (`tmux.conf`)
 
-My neovim config might look messy at first but I like to keep my vim-config in just one file and organize it with fold-markers.
-
 ### .zshrc
-Just copy the `.zshrc` file into your home directory. No `.oh-my-zsh` needed but I'm using `fzf`, `bat`, and `exa`. If you don't want to use either of them you might want to delete the functions and aliases.
 
-#### Features:
+Just copy the `.zshrc` file into your home directory. No `.oh-my-zsh` needed but I'm using `fzf`, `bat`, and `exa`.
+If you don't want to use either of them you might want to delete the functions and aliases.
+
+#### Features
+
 * Auto-completion enabled.
 * `fd` let's you `cd` into a directory while using `fzf` to search for the folder/path. 
 * `fh` let's you search in the command-history and use found command.
@@ -20,8 +23,14 @@ Just copy the `.zshrc` file into your home directory. No `.oh-my-zsh` needed but
 * Shows current git-branch and current node version in prompt.
 
 ### Neovim
-#### Language-Server:
+
+Copy the contents of the `nvim` folder to `~/.config/nvim` (macos, linux distro) or to `~/AppData/Local/nvim/` (windows).
+You might need to install vim-plug yourself.
+
+#### Language-Server
+
 You have to install the following language-server:
+
 * `npm i -g bash-language-server`
 * `npm i -g vscode-langservers-extracted`
 * `npm i -g dockerfile-language-server-nodejs`
@@ -37,9 +46,11 @@ You have to install the following language-server:
 `npm i -g bash-language-server vscode-langservers-extracted dockerfile-language-server-nodejs dot-language-server emmet-ls graphql-language-service-cli svelte-language-server typescript typescript-language-server vim-language-server @volar/server vls`
 
 #### Tree-Sitter
+
 You might want to install the following parser:
 `:TSInstall html css scss javascript typescript vue svelte`
 
-## TODO
-* [x] lua-fy neovim-configuration properly
-* [x] I'm thinking to revert everything back to a .vim file. Lua-fying the configuration seems not to improve anything. It's just more verbose.
+### Vim
+
+Copy the contents of the `vim` folder into your home folder.
+You might need to install vim-plug yourself.
