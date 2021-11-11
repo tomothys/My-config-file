@@ -16,6 +16,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'gfanto/fzf-lsp.nvim'
 Plug 'prettier/vim-prettier'
 Plug 'airblade/vim-rooter'
+Plug 'mbbill/undotree'
 
 " Colorscheme
 Plug 'folke/tokyonight.nvim'
