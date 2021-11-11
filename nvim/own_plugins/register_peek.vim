@@ -1,40 +1,55 @@
 function! s:submit_register_peek() abort
-    let l:selected_register = matchstr(getline('.'), '\%2c.')
+    let l:selected_register = matchstr(getline('.'), '\%3c.')
     call feedkeys(":bw!\<Cr>\"" . l:selected_register, "t")
 endfunc
 
 function! s:open_register_peek() abort
-    " open a new split
-    vert 60new \"Register\"
+    let buffer = nvim_create_buf(v:true, v:true)
+    let ui = nvim_list_uis()[0]
+
+    let win = nvim_open_win(buffer, 1, {
+                \ 'relative': 'editor',
+                \ 'width': 100,
+                \ 'height': ui.height - 8,
+                \ 'row': 2,
+                \ 'col': ui.width - 2,
+                \ 'anchor': 'NE',
+                \ 'style': 'minimal',
+                \ 'border': ['┌', '─', '┐', '│', '┘', '─', '└', '│'],
+                \})
 
     " write the registers content
     call append(0,[
-        \ "\" ----------",
-        \ "\"  Register",
-        \ "\" ----------",
+        \ " ┌────────────────────────────────────────────────────────────────────────────────────────────────┐",
+        \ " │                                           Register                                             │",
+        \ " └────────────────────────────────────────────────────────────────────────────────────────────────┘",
         \ "",
-        \ "Numbers:",
-        \ " 0: " . getreg("0"),
-        \ " 1: " . getreg("1"),
-        \ " 2: " . getreg("2"),
-        \ " 3: " . getreg("3"),
-        \ " 4: " . getreg("4"),
-        \ " 5: " . getreg("5"),
-        \ " 6: " . getreg("6"),
-        \ " 7: " . getreg("7"),
-        \ " 8: " . getreg("8"),
-        \ " 9: " . getreg("9"),
+        \ " Numbers:",
+        \ "  0: " . getreg("0"),
+        \ "  1: " . getreg("1"),
+        \ "  2: " . getreg("2"),
+        \ "  3: " . getreg("3"),
+        \ "  4: " . getreg("4"),
+        \ "  5: " . getreg("5"),
+        \ "  6: " . getreg("6"),
+        \ "  7: " . getreg("7"),
+        \ "  8: " . getreg("8"),
+        \ "  9: " . getreg("9"),
         \ "",
-        \ "Special:",
-        \ " +: " . getreg("+"),
-        \ " /: " . getreg("/"),
+        \ " Special:",
+        \ "  +: " . getreg("+"),
+        \ "  /: " . getreg("/"),
     \ ])
 
     " set this buffer up
     setl nowrap
-    setl nonu
-    setl nornu
+    setl nonumber
+    setl norelativenumber
     setl cursorline
+    setl buftype=nofile
+    setl bufhidden=hide
+    setl noswapfile
+    setl nobuflisted
 
     nnoremap <buffer> 0 :bw!<Cr>"0
     nnoremap <buffer> 1 :bw!<Cr>"1
@@ -49,12 +64,14 @@ function! s:open_register_peek() abort
     nnoremap <buffer> + :bw!<Cr>"+
     nnoremap <buffer> / :bw!<Cr>"/
 
-    nnoremap <buffer> j j^
-    nnoremap <buffer> k k^
-    nnoremap <buffer> <Esc> :bw!<Cr>
-    nnoremap <buffer> <Cr> <cmd>call <SID>submit_register_peek()<Cr>
+    nnoremap <silent> <buffer> j /^  \zs.\ze<Cr>:nohl<Cr>
+    nnoremap <silent> <buffer> k ?^  \zs.\ze<Cr>:nohl<Cr>
+    nnoremap <buffer> h <Nop>
+    nnoremap <buffer> l <Nop>
+    nnoremap <silent> <buffer> <Esc> :bw!<Cr>
+    nnoremap <silent> <buffer> <Cr> <cmd>call <SID>submit_register_peek()<Cr>
 
-    call cursor(6,2)
+    call cursor(6,3)
 endfunc
 
 nnoremap " <cmd>call <SID>open_register_peek()<Cr>
