@@ -173,7 +173,7 @@ EOF
 " -----
 "  FZF 
 " -----
-"let $FZF_DEFAULT_OPTS='--layout=reverse'
+let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
 let g:fzf_preview_window = []
 let g:fzf_layout = {'window': { 'width': 0.6, 'height': 0.6, 'border': 'rounded' }}
@@ -224,6 +224,7 @@ set scrolloff=3                         " Minimal number of screen lines to keep
 set completeopt+=menuone,noselect       " Use the popup menu also when there is only one match. Useful when there is additional info. And don't select the first match until the user selects a match.
 set cursorline
 set numberwidth=6
+set laststatus=2
 
 augroup highlight_yank
     autocmd!
