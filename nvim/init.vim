@@ -176,8 +176,7 @@ EOF
 "let $FZF_DEFAULT_OPTS='--layout=reverse'
 let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
 let g:fzf_preview_window = []
-" let g:fzf_layout = {'window': { 'width': 0.6, 'height': 0.6, 'border': 'rounded' }}
-let g:fzf_layout = { 'right': '40%' }
+let g:fzf_layout = {'window': { 'width': 0.6, 'height': 0.6, 'border': 'rounded' }}
 
 " ------------
 "  Vim-Rooter 
@@ -218,7 +217,7 @@ set mouse=a                             " Enable mouse in [a]ll modes
 set expandtab                           " Use the appropriate number of spaces to insert a <Tab>
 set splitright                          " Make new splits open on the right
 set noshowmode                          " Don't show mode when in visual-mode
-set signcolumn=number                   " Show sign-column in linenumber-column
+set signcolumn=yes                      " Show sign-column in linenumber-column
 set scrolloff=3                         " Minimal number of screen lines to keep above and below the cursor
 set completeopt+=menuone,noselect       " Use the popup menu also when there is only one match. Useful when there is additional info. And don't select the first match until the user selects a match.
 set cursorline
@@ -331,6 +330,9 @@ inoremap g9 {}<Left>
 inoremap g# ''<Left>
 inoremap g< <><Left>
 inoremap gß ?
+
+" Open register_peek window
+nnoremap <silent> <Leader>sr :ToggleRegisterPeek<Cr>
 
 "------------------------------------
 " --------- Abbr / Snippets --------
