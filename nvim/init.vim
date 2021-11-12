@@ -13,7 +13,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
 Plug 'junegunn/fzf.vim'
-Plug 'gfanto/fzf-lsp.nvim'
 Plug 'prettier/vim-prettier'
 Plug 'airblade/vim-rooter'
 Plug 'mbbill/undotree'
@@ -24,12 +23,8 @@ Plug 'folke/tokyonight.nvim'
 " Add support for syntax-highlighting
 Plug 'nvim-treesitter/nvim-treesitter'
 
-" Lsp and auto-complete
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'onsails/lspkind-nvim'
+" LSP
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install'}
 
 call plug#end()
 
@@ -48,112 +43,6 @@ highlight CursorLine guibg=#1f2335
 highlight CursorLineNr guibg=#ff9e64 guifg=#000000
 
 lua << EOF
--- --------------
--- lanuageserver
--- --------------
--- Bash
-require'lspconfig'.bashls.setup{}
-
--- ESLint
-require'lspconfig'.eslint.setup{}
-
--- GraphQL
-require'lspconfig'.graphql.setup{}
-
--- HTML
-require'lspconfig'.html.setup{}
-
--- CSS/SCSS
-require'lspconfig'.cssls.setup{}
-
--- JSON
-require'lspconfig'.jsonls.setup {
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
-    }
-}
-
--- SQL
-require'lspconfig'.sqls.setup{}
-
--- Svelte
-require'lspconfig'.svelte.setup{}
-
--- TypeScript
-require'lspconfig'.tsserver.setup{}
-
--- VIM
-require'lspconfig'.vimls.setup{}
-
--- Graphviz
-require'lspconfig'.dotls.setup{}
-
--- Vue 2
-require'lspconfig'.vuels.setup{}
-
--- Vue 3
--- Don't use vuels and volar at the same time
--- With additional configuration you can run volar on Vue 2 projects too
--- -> https://github.com/johnsoncodehk/volar#using
--- require'lspconfig'.volar.setup{}
-
--- --------
--- LspKind
--- --------
-local lspkind = require('lspkind')
-
--- ---------
--- Nvim-Cmp
--- ---------
-local cmp = require'cmp'
-
-cmp.setup {
-    mapping = {
-        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-        ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<Tab>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-    },
-    sources = {
-        { name = 'nvim_lsp' },
-        { name = 'treesitter' },
-        { name = 'buffer', opts = {
-           get_bufnr = function()
-                return vim.api.nvim_list_bufs()
-            end,
-        }},
-        { name = 'path' },
-    },
-    formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = string.format("%s %s", lspkind.presets.default[vim_item.kind], vim_item.kind)
-            vim_item.menu = ({
-                nvim_lsp = "",
-                nvim_lua = "",
-                treesitter = "",
-                path = "",
-                buffer = "﬘",
-                zsh = "ﲵ",
-                spell = "暈",
-            })[entry.source.name]
-
-            return vim_item
-        end
-    },
-    documentation = {
-        border = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
-    },
-}
-
 -- ---------------
 --  Treesitter
 -- ---------------
@@ -169,6 +58,36 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 EOF
+
+" ---------------------
+"  CoC Language Server 
+" ---------------------
+let g:coc_global_extensions = [
+            \ 'coc-vetur',
+            \ '@yaegassy/coc-volar',
+            \ 'coc-yaml',
+            \ 'coc-yank',
+            \ 'coc-markdownlint',
+            \ 'coc-powershell',
+            \ 'coc-prettier',
+            \ 'coc-sh',
+            \ 'coc-stylelint',
+            \ 'coc-sql',
+            \ 'coc-svelte',
+            \ 'coc-svg',
+            \ 'coc-vimlsp',
+            \ 'coc-explorer',
+            \ 'coc-css',
+            \ 'coc-graphql',
+            \ 'coc-html',
+            \ 'coc-lists',
+            \ 'coc-html-css-support',
+            \ 'coc-cssmodules',
+            \ 'coc-eslint',
+            \ 'coc-tsserver',
+            \ 'coc-json',
+            \ 'coc-git'
+            \ ]
 
 " -----
 "  FZF 
@@ -189,9 +108,11 @@ let g:rooter_patterns = ['.git']
 if has('win32')
     source ~/AppData/Local/nvim/own_plugins/register_peek.vim
     source ~/AppData/Local/nvim/own_plugins/help_window.vim
+    source ~/AppData/Local/nvim/own_plugins/buffer_peek.vim
 else
     source ~/.config/nvim/own_plugins/register_peek.vim
     source ~/.config/nvim/own_plugins/help_window.vim
+    source ~/.config/nvim/own_plugins/buffer_peek.vim
 endif
 
 "------------------------------------
@@ -201,7 +122,7 @@ set path+=**
 set wildignore+=**/node_modules/**
 syntax enable                           " Enable syntax highlighting
 set nocompatible                        " Turn off vi-compatible mode and make vim shine
-filetype plugin on                      " Turn on builtin plugins
+filetype plugin indent on               " Turn on builtin plugins
 set hidden                              " Make vim able to open new buffer without saving currently open buffer first
 set nowrap                              " Dont make lines wrap
 set number                              " Enable linenumbers
@@ -225,6 +146,9 @@ set completeopt+=menuone,noselect       " Use the popup menu also when there is 
 set cursorline
 set numberwidth=6
 set laststatus=2
+set modelines=0
+set list
+set listchars=tab:▸\ ,
 
 augroup highlight_yank
     autocmd!
@@ -333,6 +257,9 @@ inoremap g9 {}<Left>
 inoremap g# ''<Left>
 inoremap g< <><Left>
 inoremap gß ?
+
+" Open coc-explorer
+nnoremap <Leader>e <Cmd>CocCommand explorer<Cr>
 
 " Open register_peek window
 nnoremap <silent> <Leader>sr :ToggleRegisterPeek<Cr>

@@ -30,66 +30,61 @@ function! s:toggle_register_peek() abort
         let win = nvim_open_win(buffer, 1, {
                     \ 'relative': 'editor',
                     \ 'width': windowWidth,
-                    \ 'height': ui.height - 8,
-                    \ 'row': 2,
+                    \ 'height': ui.height - 6,
+                    \ 'row': 1,
                     \ 'col': ui.width - 2,
                     \ 'anchor': 'NE',
                     \ 'style': 'minimal',
                     \ 'border': ['┌', '─', '┐', '│', '┘', '─', '└', '│'],
-                    \})
+                    \ })
 
         " write the registers content
-        call append(0,[
-            \ " ┌" . repeat("─", windowWidth - 4) . "┐",
-            \ " │" . repeat(" ", ((windowWidth - 4) / 2) - 4) . "Register" . repeat(" ", ((windowWidth - 4) / 2) - 4) . "│",
-            \ " └" . repeat("─", windowWidth - 4) . "┘",
-            \ "",
-            \ " Numbers:",
-            \ "  0: " . getreg("0"),
-            \ "  1: " . getreg("1"),
-            \ "  2: " . getreg("2"),
-            \ "  3: " . getreg("3"),
-            \ "  4: " . getreg("4"),
-            \ "  5: " . getreg("5"),
-            \ "  6: " . getreg("6"),
-            \ "  7: " . getreg("7"),
-            \ "  8: " . getreg("8"),
-            \ "  9: " . getreg("9"),
-            \ "",
-            \ " Special:",
-            \ "  +: " . getreg("+"),
-            \ "  /: " . getreg("/"),
-        \ ])
+        let stringList = [
+                    \ " ┌" . repeat("─", windowWidth - 4) . "┐",
+                    \ " │" . repeat(" ", ((windowWidth - 4) / 2) - 4) . "Register" . repeat(" ", ((windowWidth - 4) / 2) - 4) . "│",
+                    \ " └" . repeat("─", windowWidth - 4) . "┘",
+                    \ "",
+                    \ " Numbers:",
+                    \ "  0: " . getreg("0"),
+                    \ "  1: " . getreg("1"),
+                    \ "  2: " . getreg("2"),
+                    \ "  3: " . getreg("3"),
+                    \ "  4: " . getreg("4"),
+                    \ "  5: " . getreg("5"),
+                    \ "  6: " . getreg("6"),
+                    \ "  7: " . getreg("7"),
+                    \ "  8: " . getreg("8"),
+                    \ "  9: " . getreg("9"),
+                    \ "",
+                    \ " Special:",
+                    \ "  +: " . getreg("+"),
+                    \ "  /: " . getreg("/"),
+                    \ ]
+
+        call nvim_buf_set_lines(buffer, 0, len(stringList), 0, stringList)
 
         " set this buffer up
-        setl nowrap
-        setl nonumber
-        setl norelativenumber
-        setl cursorline
-        setl buftype=nofile
-        setl bufhidden=hide
-        setl noswapfile
-        setl nobuflisted
+        call nvim_buf_set_option(buffer, 'buftype', 'nofile')
 
-        nnoremap <buffer> 0 :bw!<Cr>"0
-        nnoremap <buffer> 1 :bw!<Cr>"1
-        nnoremap <buffer> 2 :bw!<Cr>"2
-        nnoremap <buffer> 3 :bw!<Cr>"3
-        nnoremap <buffer> 4 :bw!<Cr>"4
-        nnoremap <buffer> 5 :bw!<Cr>"5
-        nnoremap <buffer> 6 :bw!<Cr>"6
-        nnoremap <buffer> 7 :bw!<Cr>"7
-        nnoremap <buffer> 8 :bw!<Cr>"8
-        nnoremap <buffer> 9 :bw!<Cr>"9
-        nnoremap <buffer> + :bw!<Cr>"+
-        nnoremap <buffer> / :bw!<Cr>"/
+        call nvim_buf_set_keymap(buffer, 'n', '0', ':bw!<Cr>"0', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '1', ':bw!<Cr>"1', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '2', ':bw!<Cr>"2', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '3', ':bw!<Cr>"3', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '4', ':bw!<Cr>"4', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '5', ':bw!<Cr>"5', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '6', ':bw!<Cr>"6', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '7', ':bw!<Cr>"7', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '8', ':bw!<Cr>"8', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '9', ':bw!<Cr>"9', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '+', ':bw!<Cr>"+', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '/', ':bw!<Cr>"/', { 'noremap': v:true, 'silent': v:true })
 
-        nnoremap <silent> <buffer> j /^  \zs.\ze<Cr>:nohl<Cr>
-        nnoremap <silent> <buffer> k ?^  \zs.\ze<Cr>:nohl<Cr>
-        nnoremap <buffer> h <Nop>
-        nnoremap <buffer> l <Nop>
-        nnoremap <silent> <buffer> <Esc> :bw!<Cr>
-        nnoremap <silent> <buffer> <Cr> <cmd>call <SID>submit_register_peek()<Cr>
+        call nvim_buf_set_keymap(buffer, 'n', 'j', '/^  \zs.\ze<Cr>:nohl<Cr>', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', 'k', '?^  \zs.\ze<Cr>:nohl<Cr>', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', 'h', '', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', 'l', '', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '<Esc>', ':bw!<Cr>', { 'noremap': v:true, 'silent': v:true })
+        call nvim_buf_set_keymap(buffer, 'n', '<Cr>', '<cmd>call <SID>submit_register_peek()<Cr>', { 'noremap': v:true, 'silent': v:true })
 
         call cursor(6,3)
     endif
