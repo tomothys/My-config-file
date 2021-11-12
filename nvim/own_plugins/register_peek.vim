@@ -22,13 +22,14 @@ function! s:toggle_register_peek() abort
     if g:Is_register_peek_open()
         call <SID>close_register_peek()
     else
-        let buffer = nvim_create_buf(v:true, v:true)
-        let ui = nvim_list_uis()[0]
+        let buffer = nvim_create_buf(v:false, v:true)
         call nvim_buf_set_name(buffer, s:register_peek_buf_name)
+        let ui = nvim_list_uis()[0]
 
+        let windowWidth = 100
         let win = nvim_open_win(buffer, 1, {
                     \ 'relative': 'editor',
-                    \ 'width': 100,
+                    \ 'width': windowWidth,
                     \ 'height': ui.height - 8,
                     \ 'row': 2,
                     \ 'col': ui.width - 2,
@@ -39,9 +40,9 @@ function! s:toggle_register_peek() abort
 
         " write the registers content
         call append(0,[
-            \ " ┌────────────────────────────────────────────────────────────────────────────────────────────────┐",
-            \ " │                                           Register                                             │",
-            \ " └────────────────────────────────────────────────────────────────────────────────────────────────┘",
+            \ " ┌" . repeat("─", windowWidth - 4) . "┐",
+            \ " │" . repeat(" ", ((windowWidth - 4) / 2) - 4) . "Register" . repeat(" ", ((windowWidth - 4) / 2) - 4) . "│",
+            \ " └" . repeat("─", windowWidth - 4) . "┘",
             \ "",
             \ " Numbers:",
             \ "  0: " . getreg("0"),
