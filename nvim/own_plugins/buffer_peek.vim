@@ -88,10 +88,7 @@ function! s:toggle_buffer_peek() abort
 endfunc
 
 function! g:Rerender_buffer_peek(timer) abort
-    " Since autocmd BufEnter resets buf lines
-    " this will reset the buffer peek list
-    " simple BufDelete autocmd is not doing the job
-    execute 'wincmd w | wincmd p'
+    call <SID>set_buf_lines()
 endfunc
 
 command! ToggleBufferPeek call <SID>toggle_buffer_peek()
@@ -99,6 +96,6 @@ command! RerenderBufferPeek call Rerender_buffer_peek()
 
 augroup buffer_peek
     autocmd!
-    autocmd BufEnter * call <SID>set_buf_lines()
+    autocmd BufEnter * call Rerender_buffer_peek()
     autocmd BufDelete * call timer_start(0, 'Rerender_buffer_peek')
 augroup END
