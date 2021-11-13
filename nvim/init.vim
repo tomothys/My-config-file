@@ -264,11 +264,14 @@ nnoremap <Leader>e <Cmd>CocCommand explorer<Cr>
 " Open register_peek window
 nnoremap <silent> <Leader>sr :ToggleRegisterPeek<Cr>
 
+nnoremap <silent> <Leader>b :ToggleBufferPeek<Cr>
+
 "------------------------------------
 " --------- Abbr / Snippets --------
 "------------------------------------
 " General JavaScript Snippets
 augroup javascript_abbrevs
+    autocmd!
     autocmd FileType javascript,typescript,svelte,vue :inoreab afunc ()<C-o>ma => {}<C-o>`a
     autocmd FileType javascript,typescript,svelte,vue :inoreab nfunc function ()<C-o>ma {<CR>}<C-o>O//<C-o>`a
     autocmd FileType javascript,typescript,svelte,vue :inoreab meth ()<C-o>ma {<CR>}<C-o>O//<C-o>`a
@@ -284,15 +287,16 @@ augroup END
 
 " Vue Snippets
 augroup vue_abbrevs
+    autocmd!
     autocmd FileType javascript,typescript,vue :inoreab vcomp <Bs><Esc>bdeaimport Vue from "vue";<CR><CR>interface <C-r>"Data {}<CR><CR>export const <C-r>" = Vue.extend({<CR>});<C-o>Oname: "<C-r>"",<CR>template: "<C-o>mn",<Cr>components: {<C-o>mc},<CR>data(): <C-r>"Data {<CR>return {<C-o>md};<CR>},
     autocmd FileType javascript,typescript,vue :inoreab vimport <Bs><Esc>bdeaimport { <C-r>" } from "/components/<C-r>"<C-o>mi";<ESC>/components:<CR>/{<Cr>:nohl<Cr>a<Cr><C-r>",
 augroup END
 
 " Svelte Snippets
 augroup svelte_abbrevs
+    autocmd!
     autocmd FileType svelte :inoreab sif {#if }<C-o>ma<Cr>{/if}<C-o>`a
     autocmd FileType svelte :inoreab selse <C-o>/{\/if}<Cr><C-o>:nohl<Cr><C-o>O{:else}<CR>
     autocmd FileType svelte :inoreab selseif <C-o>/{\(\/\\|:\)\(if\\|else\).<Cr><C-o>:nohl<Cr><C-o>O{:else if }<Left>
     autocmd FileType svelte :inoreab rlog <Bs><ESC>bdea$: console.log("<C-r>"", <C-r>")
 augroup END
-
