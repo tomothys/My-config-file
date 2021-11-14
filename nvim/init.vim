@@ -261,6 +261,10 @@ inoremap gß ?
 " Open coc-explorer
 nnoremap <Leader>e <Cmd>CocCommand explorer<Cr>
 
+" vim-fugitive mappings
+nnoremap <Leader>gs :G<Cr>
+nnoremap <Leader>gc :G commit<Cr>
+
 " Open register_peek window
 nnoremap <silent> <Leader>sr :ToggleRegisterPeek<Cr>
 
