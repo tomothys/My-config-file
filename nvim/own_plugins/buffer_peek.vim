@@ -92,10 +92,10 @@ function! g:Rerender_buffer_peek(timer) abort
 endfunc
 
 command! ToggleBufferPeek call <SID>toggle_buffer_peek()
-command! RerenderBufferPeek call Rerender_buffer_peek()
+command! RerenderBufferPeek call Rerender_buffer_peek(0)
 
 augroup buffer_peek
     autocmd!
-    autocmd BufEnter * call Rerender_buffer_peek()
+    autocmd BufEnter * call Rerender_buffer_peek(0)
     autocmd BufDelete * call timer_start(0, 'Rerender_buffer_peek')
 augroup END
