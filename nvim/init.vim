@@ -108,11 +108,11 @@ let g:rooter_patterns = ['.git']
 if has('win32')
     source ~/AppData/Local/nvim/own_plugins/register_peek.vim
     source ~/AppData/Local/nvim/own_plugins/help_window.vim
-    source ~/AppData/Local/nvim/own_plugins/buffer_peek.vim
+    luafile ~/AppData/Local/nvim/own_plugins/buffer_peek.lua
 else
     source ~/.config/nvim/own_plugins/register_peek.vim
     source ~/.config/nvim/own_plugins/help_window.vim
-    source ~/.config/nvim/own_plugins/buffer_peek.vim
+    luafile ~/.config/nvim/own_plugins/buffer_peek.lua
 endif
 
 "------------------------------------
