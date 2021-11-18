@@ -107,11 +107,9 @@ let g:rooter_patterns = ['.git']
 "------------------------------------
 if has('win32')
     source ~/AppData/Local/nvim/own_plugins/register_peek.vim
-    source ~/AppData/Local/nvim/own_plugins/help_window.vim
     luafile ~/AppData/Local/nvim/own_plugins/buffer_peek.lua
 else
     source ~/.config/nvim/own_plugins/register_peek.vim
-    source ~/.config/nvim/own_plugins/help_window.vim
     luafile ~/.config/nvim/own_plugins/buffer_peek.lua
 endif
 
@@ -229,12 +227,12 @@ inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
 " Lsp
-nnoremap <Leader>lf <cmd>lua vim.lsp.buf.definition()<Cr>
-nnoremap <Leader>lh <cmd>lua vim.lsp.buf.hover()<Cr>
-nnoremap <Leader>ls <cmd>lua vim.lsp.buf.signature_help()<Cr>
-nnoremap <Leader>lr <cmd>lua vim.lsp.buf.rename()<Cr>
-nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<Cr>
-nnoremap <Leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Cr>
+" nnoremap <Leader>lf <cmd>lua vim.lsp.buf.definition()<Cr>
+" nnoremap <Leader>lh <cmd>lua vim.lsp.buf.hover()<Cr>
+" nnoremap <Leader>ls <cmd>lua vim.lsp.buf.signature_help()<Cr>
+" nnoremap <Leader>lr <cmd>lua vim.lsp.buf.rename()<Cr>
+" nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<Cr>
+" nnoremap <Leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Cr>
 
 " Trigger abbr
 inoremap fj <C-]>
