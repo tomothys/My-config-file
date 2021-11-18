@@ -203,7 +203,7 @@ vnoremap v <Esc>
 nnoremap s /
 
 " Tigger command-mode
-nnoremap <Leader>c :
+nnoremap . :
 vnoremap . :
 
 " Highlight word in document without cursor 'jumping' around
@@ -225,14 +225,6 @@ inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-
-" Lsp
-" nnoremap <Leader>lf <cmd>lua vim.lsp.buf.definition()<Cr>
-" nnoremap <Leader>lh <cmd>lua vim.lsp.buf.hover()<Cr>
-" nnoremap <Leader>ls <cmd>lua vim.lsp.buf.signature_help()<Cr>
-" nnoremap <Leader>lr <cmd>lua vim.lsp.buf.rename()<Cr>
-" nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<Cr>
-" nnoremap <Leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Cr>
 
 " Trigger abbr
 inoremap fj <C-]>
