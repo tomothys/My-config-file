@@ -16,6 +16,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'prettier/vim-prettier'
 Plug 'airblade/vim-rooter'
 Plug 'mbbill/undotree'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 
 " Colorscheme
 Plug 'folke/tokyonight.nvim'
@@ -24,7 +26,11 @@ Plug 'folke/tokyonight.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 
 " LSP
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind-nvim'
 
 call plug#end()
 
@@ -43,6 +49,142 @@ highlight CursorLine guibg=#1f2335
 highlight CursorLineNr guibg=#ff9e64 guifg=#000000
 
 lua << EOF
+-- --------------
+-- lanuageserver
+-- --------------
+-- Bash
+require'lspconfig'.bashls.setup{}
+
+-- ESLint
+require'lspconfig'.eslint.setup{}
+
+-- GraphQL
+require'lspconfig'.graphql.setup{}
+
+-- Docker
+require'lspconfig'.dockerls.setup{}
+
+-- HTML
+require'lspconfig'.html.setup{}
+
+-- CSS/SCSS
+require'lspconfig'.cssls.setup{}
+
+-- JSON
+require'lspconfig'.jsonls.setup {
+    commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
+}
+
+-- SQL
+require'lspconfig'.sqls.setup{}
+
+-- Svelte
+require'lspconfig'.svelte.setup{}
+
+-- TypeScript
+require'lspconfig'.tsserver.setup{}
+
+-- VIM
+require'lspconfig'.vimls.setup{}
+
+-- Graphviz
+require'lspconfig'.dotls.setup{}
+
+-- Vue 2
+require'lspconfig'.vuels.setup{}
+
+-- Vue 3
+-- Don't use vuels and volar at the same time
+-- With additional configuration you can run volar on Vue 2 projects too
+-- -> https://github.com/johnsoncodehk/volar#using
+-- require'lspconfig'.volar.setup{}
+
+-- --------
+-- LspKind
+-- --------
+local lspkind = require('lspkind')
+
+-- ---------
+-- Nvim-Cmp
+-- ---------
+local cmp = require'cmp'
+
+cmp.setup {
+    mapping = {
+        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<Tab>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'treesitter' },
+        { name = 'buffer', option = {
+           get_bufnr = function()
+                return vim.api.nvim_list_bufs()
+            end,
+        }},
+        { name = 'path' },
+    },
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.kind = string.format("%s %s", lspkind.presets.default[vim_item.kind], vim_item.kind)
+            vim_item.menu = ({
+                nvim_lsp = "",
+                nvim_lua = "",
+                treesitter = "",
+                path = "",
+                buffer = "﬘",
+                zsh = "ﲵ",
+                spell = "暈",
+            })[entry.source.name]
+
+            return vim_item
+        end
+    },
+    documentation = {
+        border = { '╔', '═', '╗', '║', '╝', '═', '╚', '║' }
+    },
+}
+
+-- ----------
+--  NvimTree 
+-- ----------
+require'nvim-tree'.setup {
+    diagnostics = {
+        enable = false,
+    },
+    disable_netrw = true,
+    hijack_netrw = true,
+    open_on_setup = false,
+    ignore_ft_on_setup = {},
+    auto_close = false,
+    open_on_tab = false,
+    update_cwd = false,
+    update_focused_file = {
+        enable = true,
+        ignore_list = {}
+    },
+    view = {
+        width = 40,
+        side = 'left',
+        mappings = {
+            list = {}
+        }
+    }
+}
+
 -- ---------------
 --  Treesitter
 -- ---------------
@@ -58,36 +200,6 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 EOF
-
-" ---------------------
-"  CoC Language Server 
-" ---------------------
-let g:coc_global_extensions = [
-            \ 'coc-vetur',
-            \ '@yaegassy/coc-volar',
-            \ 'coc-yaml',
-            \ 'coc-yank',
-            \ 'coc-markdownlint',
-            \ 'coc-powershell',
-            \ 'coc-prettier',
-            \ 'coc-sh',
-            \ 'coc-stylelint',
-            \ 'coc-sql',
-            \ 'coc-svelte',
-            \ 'coc-svg',
-            \ 'coc-vimlsp',
-            \ 'coc-explorer',
-            \ 'coc-css',
-            \ 'coc-graphql',
-            \ 'coc-html',
-            \ 'coc-lists',
-            \ 'coc-html-css-support',
-            \ 'coc-cssmodules',
-            \ 'coc-eslint',
-            \ 'coc-tsserver',
-            \ 'coc-json',
-            \ 'coc-git'
-            \ ]
 
 " -----
 "  FZF 
@@ -258,9 +370,6 @@ inoremap g# ''<Left>
 inoremap g< <><Left>
 inoremap gß ?
 
-" Open coc-explorer
-nnoremap <Leader>e <Cmd>CocCommand explorer<Cr>
-
 " vim-fugitive mappings (fugitive needed)
 nnoremap <Leader>gs :G<Cr>
 nnoremap <Leader>gc :G commit<Cr>
@@ -270,7 +379,15 @@ nnoremap <Leader>gl :G pull<Cr>
 " Open register_peek window
 nnoremap <silent> <Leader>sr :ToggleRegisterPeek<Cr>
 
+" Open buffer_peek window
 nnoremap <silent> <Leader>b :ToggleBufferPeek<Cr>
+
+" Open fuzzy file search window
+nnoremap <silent> <Leader>p <cmd>Files<CR>
+
+" Open File tree window
+nnoremap <Leader>e <Cmd>NvimTreeToggle<Cr>
+nnoremap <Leader>r <Cmd>NvimTreeRefresh<Cr>
 
 "------------------------------------
 " --------- Abbr / Snippets --------
