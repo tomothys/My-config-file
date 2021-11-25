@@ -4,10 +4,9 @@
 
 * zsh (`.zshrc`)
 * neovim (`nvim/*`)
-* vim (`vim/*`)
 * (neo-)vim for vscode-extension (`vscode_init.vim`)
 * colorscheme file for iterms (`iterm_toykonight_night.itermcolors`)
-* tmux (`tmux.conf`)
+* tmux (`.tmux.conf`)
 
 ### .zshrc
 
