@@ -314,10 +314,6 @@ vnoremap v <Esc>
 " Search by pressing s. It's a simple substition for plugin like 'Easymotion'.
 nnoremap s /
 
-" Tigger command-mode
-nnoremap . :
-vnoremap . :
-
 " Highlight word in document without cursor 'jumping' around
 nnoremap # mzyiw0k/<C-r>0<Cr>`z
 
