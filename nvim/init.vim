@@ -56,7 +56,7 @@ lua << EOF
 require'lspconfig'.bashls.setup{}
 
 -- ESLint
-require'lspconfig'.eslint.setup{}
+-- require'lspconfig'.eslint.setup{}
 
 -- GraphQL
 require'lspconfig'.graphql.setup{}
@@ -232,7 +232,7 @@ set path+=**
 set wildignore+=**/node_modules/**
 syntax enable                           " Enable syntax highlighting
 set nocompatible                        " Turn off vi-compatible mode and make vim shine
-filetype plugin indent on               " Turn on builtin plugins
+filetype on
 set hidden                              " Make vim able to open new buffer without saving currently open buffer first
 set nowrap                              " Dont make lines wrap
 set number                              " Enable linenumbers
@@ -335,7 +335,10 @@ inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
 " Trigger abbr
-inoremap fj <C-]>
+inoremap fk <C-]>
+
+" Enter command-mode
+nnoremap <Leader>c :
 
 " Toggle between relative line numbers
 nnoremap + :set rnu!<Cr>
@@ -363,17 +366,28 @@ nnoremap <Leader>gp :G push<Cr>
 nnoremap <Leader>gl :G pull<Cr>
 
 " Open register_peek window
-nnoremap <silent> <Leader>sr :ToggleRegisterPeek<Cr>
+nnoremap <Leader>sr <cmd>ToggleRegisterPeek<Cr>
 
 " Open buffer_peek window
-nnoremap <silent> <Leader>b :ToggleBufferPeek<Cr>
+nnoremap <Leader>bb <cmd>ToggleBufferPeek<Cr>
+" Wipe buffer
+nnoremap <silent> <Leader>bw :bw!<Cr>
 
 " Open fuzzy file search window
-nnoremap <silent> <Leader>p <cmd>Files<CR>
+nnoremap <Leader>fp <cmd>Files<Cr>
+nnoremap <C-p> <cmd>Files<Cr>
 
 " Open File tree window
 nnoremap <Leader>e <Cmd>NvimTreeToggle<Cr>
 nnoremap <Leader>r <Cmd>NvimTreeRefresh<Cr>
+
+" Lsp
+nnoremap <Leader>lf <cmd>lua vim.lsp.buf.definition()<Cr>
+nnoremap <Leader>lh <cmd>lua vim.lsp.buf.hover()<Cr>
+nnoremap <Leader>ls <cmd>lua vim.lsp.buf.signature_help()<Cr>
+nnoremap <Leader>lr <cmd>lua vim.lsp.buf.rename()<Cr>
+nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<Cr>
+nnoremap <Leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Cr>
 
 "------------------------------------
 " --------- Abbr / Snippets --------
