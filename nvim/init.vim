@@ -71,15 +71,29 @@ require'lspconfig'.html.setup{}
 require'lspconfig'.cssls.setup{}
 
 -- JSON
-require'lspconfig'.jsonls.setup {
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
+if vim.fn.has('win32') then
+    require'lspconfig'.jsonls.setup {
+        cmd = { "vscode-json-language-server.cmd", "--stdio" },
+        erver.cmd", "--stdio" },
+        commands = {
+            Format = {
+                function()
+                    vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+                end
+            }
+        }
     }
-}
+else
+    require'lspconfig'.jsonls.setup {
+        commands = {
+            Format = {
+                function()
+                    vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+                end
+            }
+        }
+    }
+end
 
 -- SQL
 require'lspconfig'.sqls.setup{}
