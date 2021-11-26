@@ -55,45 +55,11 @@ lua << EOF
 -- Bash
 require'lspconfig'.bashls.setup{}
 
--- ESLint
--- require'lspconfig'.eslint.setup{}
-
 -- GraphQL
 require'lspconfig'.graphql.setup{}
 
 -- Docker
 require'lspconfig'.dockerls.setup{}
-
--- HTML
-require'lspconfig'.html.setup{}
-
--- CSS/SCSS
-require'lspconfig'.cssls.setup{}
-
--- JSON
-if vim.fn.has('win32') then
-    require'lspconfig'.jsonls.setup {
-        cmd = { "vscode-json-language-server.cmd", "--stdio" },
-        erver.cmd", "--stdio" },
-        commands = {
-            Format = {
-                function()
-                    vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-                end
-            }
-        }
-    }
-else
-    require'lspconfig'.jsonls.setup {
-        commands = {
-            Format = {
-                function()
-                    vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-                end
-            }
-        }
-    }
-end
 
 -- SQL
 require'lspconfig'.sqls.setup{}
@@ -118,6 +84,43 @@ require'lspconfig'.vuels.setup{}
 -- With additional configuration you can run volar on Vue 2 projects too
 -- -> https://github.com/johnsoncodehk/volar#using
 -- require'lspconfig'.volar.setup{}
+
+-- HTML, CSS, ESLint, JSON
+local json_commands = {
+    Format = {
+        function()
+            vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+    }
+}
+-- WINDOWS
+if vim.fn.has('win32') then
+    require'lspconfig'.html.setup {
+        cmd = { "vscode-html-language-server.cmd", "--stdio" },
+    }
+
+    require'lspconfig'.cssls.setup {
+        cmd = { "vscode-css-language-server.cmd", "--stdio" },
+    }
+
+    require'lspconfig'.eslint.setup {
+        cmd = { "vscode-eslint-language-server.cmd", "--stdio" },
+    }
+
+    require'lspconfig'.jsonls.setup {
+        cmd = { "vscode-json-language-server.cmd", "--stdio" },
+        commands = json_commands
+    }
+-- EVERY BEHAVING OS
+else
+    require'lspconfig'.html.setup {}
+    require'lspconfig'.cssls.setup {}
+    require'lspconfig'.eslint.setup {}
+    require'lspconfig'.jsonls.setup {
+        commands = json_commands
+    }
+end
+
 
 -- --------
 -- LspKind
