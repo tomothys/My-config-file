@@ -265,6 +265,13 @@ augroup highlight_yank
     au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=300 }
 augroup END
 
+"--------------------------------
+" -------- GUI settings --------
+"--------------------------------
+if exists('g:GuiLoaded') == 1
+    set guifont=FiraCode_NF:h10
+endif
+
 "------------------------------------
 " ----------- Functions ------------
 "------------------------------------
