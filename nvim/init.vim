@@ -8,6 +8,7 @@ else
 endif
 
 " List of plug-ins
+Plug 'nvim-lua/plenary.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -18,6 +19,7 @@ Plug 'airblade/vim-rooter'
 Plug 'mbbill/undotree'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'hoschi/yode-nvim'
 
 " Colorscheme
 Plug 'folke/tokyonight.nvim'
@@ -27,6 +29,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
@@ -68,10 +71,14 @@ require'lspconfig'.sqls.setup{}
 require'lspconfig'.svelte.setup{}
 
 -- TypeScript
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{
+    cmd = { 'typescript-language-server', '--stdio' }
+}
 
 -- VIM
-require'lspconfig'.vimls.setup{}
+require'lspconfig'.vimls.setup{
+    cmd = { 'vim-language-server', '--stdio' }
+}
 
 -- Graphviz
 require'lspconfig'.dotls.setup{}
@@ -93,33 +100,13 @@ local json_commands = {
         end
     }
 }
--- WINDOWS
-if vim.fn.has('win32') then
-    require'lspconfig'.html.setup {
-        cmd = { "vscode-html-language-server.cmd", "--stdio" },
-    }
 
-    require'lspconfig'.cssls.setup {
-        cmd = { "vscode-css-language-server.cmd", "--stdio" },
-    }
-
-    require'lspconfig'.eslint.setup {
-        cmd = { "vscode-eslint-language-server.cmd", "--stdio" },
-    }
-
-    require'lspconfig'.jsonls.setup {
-        cmd = { "vscode-json-language-server.cmd", "--stdio" },
-        commands = json_commands
-    }
--- EVERY BEHAVING OS
-else
-    require'lspconfig'.html.setup {}
-    require'lspconfig'.cssls.setup {}
-    require'lspconfig'.eslint.setup {}
-    require'lspconfig'.jsonls.setup {
-        commands = json_commands
-    }
-end
+require'lspconfig'.html.setup {}
+require'lspconfig'.cssls.setup {}
+require'lspconfig'.eslint.setup {}
+require'lspconfig'.jsonls.setup {
+    commands = json_commands
+}
 
 
 -- --------
@@ -230,6 +217,14 @@ let g:fzf_layout = {'window': { 'width': 0.6, 'height': 0.6, 'border': 'rounded'
 "  Vim-Rooter 
 " ------------
 let g:rooter_patterns = ['.git']
+
+" -----------
+"  Yode-Nvim
+" -----------
+lua require('yode-nvim').setup({})
+
+" Commands
+command! -range FocusBuffer vsp | <line1>,<line2>YodeCreateSeditorReplace
 
 "------------------------------------
 " ------ Import my own PlugIn ------
@@ -406,12 +401,13 @@ nnoremap <Leader>e <Cmd>NvimTreeToggle<Cr>
 nnoremap <Leader>r <Cmd>NvimTreeRefresh<Cr>
 
 " Lsp
-nnoremap <Leader>lf <cmd>lua vim.lsp.buf.definition()<Cr>
+nnoremap <Leader>ld <cmd>lua vim.lsp.buf.definition()<Cr>
 nnoremap <Leader>lh <cmd>lua vim.lsp.buf.hover()<Cr>
 nnoremap <Leader>ls <cmd>lua vim.lsp.buf.signature_help()<Cr>
 nnoremap <Leader>lr <cmd>lua vim.lsp.buf.rename()<Cr>
 nnoremap <Leader>la <cmd>lua vim.lsp.buf.code_action()<Cr>
-nnoremap <Leader>ld <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Cr>
+nnoremap <Leader>ll <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<Cr>
+nnoremap <Leader>lf <cmd>lua vim.lsp.buf.references()<Cr>
 
 "------------------------------------
 " --------- Abbr / Snippets --------
